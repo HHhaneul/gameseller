@@ -9,6 +9,6 @@ class ProjectApplicationTests {
 	/* 테스트 */
 	@Test
 	void contextLoads() {
-	}
 
+	}
 }
