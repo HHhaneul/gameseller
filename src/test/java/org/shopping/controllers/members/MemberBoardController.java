@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.shopping.commons.libs.libs.JavaScript.alertBack;
+import static org.shopping.commons.libs.JavaScript.alertBack;
 
 @Controller
 @RequestMapping("/board")

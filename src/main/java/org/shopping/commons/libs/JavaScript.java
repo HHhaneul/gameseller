@@ -1,4 +1,4 @@
-package org.shopping.commons.libs.libs;
+package org.shopping.commons.libs;
 
 import org.springframework.stereotype.Component;
 
