@@ -11,9 +11,10 @@ import java.util.UUID;
         @Index(name="idx_boarddata_category", columnList = "category DESC"),
         @Index(name="idx_boarddata_createAt", columnList = "createdAt DESC")
 })
-public class BoardData extends BaseEntity {
+public class MemberBoardData extends BaseEntity {
     @Id @GeneratedValue
     private Long id;
+
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="bId")
     private Board board;

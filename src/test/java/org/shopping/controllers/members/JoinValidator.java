@@ -2,9 +2,10 @@ package org.shopping.controllers.members;
 
 import lombok.RequiredArgsConstructor;
 import org.shopping.commons.validators.*;
-import org.shopping.repositories.MemberRepository;
+import org.shopping.repositories.member.MemberRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.*;
+import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor

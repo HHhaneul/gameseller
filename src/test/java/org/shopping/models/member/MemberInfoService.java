@@ -3,7 +3,7 @@ package org.shopping.models.member;
 
 import lombok.RequiredArgsConstructor;
 import org.shopping.entities.Member;
-import org.shopping.repositories.MemberRepository;
+import org.shopping.repositories.member.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;

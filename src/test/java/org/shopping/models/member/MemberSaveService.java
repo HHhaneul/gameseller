@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.shopping.commons.constants.Role;
 import org.shopping.controllers.members.JoinForm;
 import org.shopping.entities.Member;
-import org.shopping.repositories.MemberRepository;
+import org.shopping.repositories.member.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

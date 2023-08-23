@@ -1,4 +1,4 @@
-package org.shopping.repositories;
+package org.shopping.repositories.member;
 
 
 import org.shopping.entities.Member;
