@@ -26,7 +26,7 @@ public class MemberBoardSaveService {
         validator.check(memberBoardForm);
 
         MemberBoardData memberBoardData = null;
-        // 게시글 수정
+        /* 게시글 수정 */
         String mode = memberBoardForm.getMode();
         Long id = memberBoardForm.getId();
         if (mode != null && mode.equals("update") && id != null) {
@@ -34,8 +34,8 @@ public class MemberBoardSaveService {
             memberBoardData.setSubject(memberBoardForm.getSubject());
             memberBoardData.setContent(memberBoardForm.getContent());
         }
-
-        if (memberBoardData == null) { // 게시글 추가
+        /* 게시글 추가 */
+        if (memberBoardData == null) {
             memberBoardData = MemberBoardForm.of(memberBoardForm);
         }
 

@@ -13,6 +13,7 @@ public class MemberBoardTest {
     @Test
     void test(){
 
+
     }
 
 }
