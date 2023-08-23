@@ -10,8 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.io.IOException;
-
 @Configuration
 public class SecurityConfig {
     @Bean
@@ -47,7 +45,7 @@ public class SecurityConfig {
                 String URI = req.getRequestURI();
                 /* mypage -> login */
                 if (URI.indexOf("/mypage") != -1){
-                    resp.sendRedirect(req.getContextPath() + "member/login");
+                    resp.sendRedirect(req.getContextPath() + "/member/login");
                     /* admin -> 401error */
                 } else if (URI.indexOf("/admin") != -1) {
                     resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "NOT AUTHORZIED");
@@ -59,7 +57,7 @@ public class SecurityConfig {
 
     /** Security 설정 배제 */
     public WebSecurityCustomizer webSecurityCustomizer(){
-        return w -> w.ignoring().requestMatchers("/css/**", "/js/**", "/images/**");
+        return w -> w.ignoring().requestMatchers("/static/css/**", "/js/**", "/images/**");
     }
 
     @Bean

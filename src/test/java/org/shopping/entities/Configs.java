@@ -6,10 +6,11 @@ import lombok.Data;
 @Entity @Data
 public class Configs {
 
-    @Id @Column(length=45)
+    @Id @Column(name="_code", length=45)
     private String code;
 
     @Lob
+    @Column(name="_value")
     private String value;
 
 }
