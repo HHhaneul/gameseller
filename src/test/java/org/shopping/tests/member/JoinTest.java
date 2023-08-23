@@ -51,16 +51,33 @@ public class JoinTest {
         ObjectMapper om = new ObjectMapper();
         String json = om.writeValueAsString(join);
 
-        mockMvc.perform(post("/api/member/join")
+        mockMvc.perform(post("/member/join")
                         .contentType("application/json")
                         .content(json)
                         .with(csrf().asHeader()))
                 .andDo(print())
-                .andExpect(status().isCreated());
-        /*
-        mockMvc.perform(get("/api/member/join"))
-                .andExpect(status().isOk()).andDo(print())
-                .andReturn().getResponse().getContentAsString(Charset.forName("UTF-8"));
-                */
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void test2() throws Exception {
+        JoinForm join = JoinForm.builder()
+                .userId("user01")
+                .userPw("")
+                .userPwRe("_aA123456")
+                .userNm("사용자01")
+                .email("user01@test.org")
+                .mobile("01000000000")
+                .build();
+
+        ObjectMapper om = new ObjectMapper();
+        String json = om.writeValueAsString(join);
+
+        mockMvc.perform(post("/member/join")
+                        .contentType("application/json")
+                        .content(json)
+                        .with(csrf().asHeader()))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 }

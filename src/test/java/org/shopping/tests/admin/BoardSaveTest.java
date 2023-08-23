@@ -65,14 +65,14 @@ public class BoardSaveTest {
 
     private MemberBoardForm getGuestBoardForm() {
 
-        return MemberBoardForm.builder()
-                .bId(board.getBId())
-                .guestPw("12345678")
-                .poster("비회원")
-                .subject("제목!")
-                .content("내용!")
-                .category(board.getCategories() == null ? null : board.getCategories()[0])
-                .build();
+            return MemberBoardForm.builder()
+                    .bId(board.getBId())
+                    .guestPw("12345678")
+                    .poster("비회원")
+                    .subject("제목!")
+                    .content("내용!")
+                    .category(board.getCategories() == null ? null : board.getCategories()[0])
+                    .build();
 
     }
 
@@ -86,8 +86,6 @@ public class BoardSaveTest {
                 .category(board.getCategories() == null ? null : board.getCategories()[0])
                 .build();
     }
-
-
     @Test
     void test(){
 
