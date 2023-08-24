@@ -18,6 +18,9 @@ public class MvcConfig implements WebMvcConfigurer {
     @Value("${file.upload.path}")
     private String fileUploadPath;
 
+    @Value("${file.upload.url}")
+    private String fileUploadUrl;
+
     /* 사이트 설정 유지 인터셉터 */
     private final SiteConfigInterceptor siteConfigInterceptor;
 
@@ -27,9 +30,10 @@ public class MvcConfig implements WebMvcConfigurer {
                 .setViewName("main/index");
     }
 
+    /* 파일 업로드 경로 설정 */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/uploads/**")
+        registry.addResourceHandler(fileUploadUrl + "**")
                 .addResourceLocations("file:///" + fileUploadPath);
     }
 

@@ -1,0 +1,151 @@
+package org.shopping.models.files;
+
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.*;
+import org.shopping.entities.FileInfo;
+import org.shopping.repositories.FileInfoRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class FileInfoService {
+
+    @Value("${file.upload.path}")
+    private String uploadPath;
+
+    @Value("${file.upload.url}")
+    private String uploadUrl;
+
+    private final HttpServletRequest request;
+
+    private final FileInfoRepository repository;
+
+    /**
+     * 파일 등록번호로 개별 조회
+     * @param id
+     * @return
+     */
+    public FileInfo get(Long id){
+        FileInfo item = repository.findById(id).orElseThrow(FileNotFoundException::new);
+        addFileInfo(item);
+        return item;
+    }
+
+    public List<FileInfo> getList(Options opts){
+        List<FileInfo> items = repository.getFiles(opts.getGid(), opts.getLocation(), opts.getMode().name());
+        items.stream().forEach(this::addFileInfo);
+        return items;
+    }
+
+    public List<FileInfo> getListAll(String gid, String location){
+        Options opts = Options.builder()
+                .gid(gid)
+                .location(location)
+                .mode(SearchMode.ALL)
+                .build();
+        return getList(opts);
+    }
+
+    public List<FileInfo> getListAll(String gid){
+        return getListAll(gid, null);
+    }
+
+    public List<FileInfo> getListDone(String gid, String location){
+        Options opts = Options.builder()
+                .gid(gid)
+                .location(location)
+                .mode(SearchMode.DONE)
+                .build();
+        return getList(opts);
+    }
+
+    public List<FileInfo> getListDone(String gid){
+        return getListDone(gid, null);
+    }
+
+    /**
+     * - 파일 업로드 서버 경로 (filePath)
+     * - 파일 서버 접속 URL (fileUrl)
+     * - 썸네일 경로(thumbsPath), 썸네일 URL(thumbsUrl)
+     * @param item
+     */
+
+    public void addFileInfo(FileInfo item) {
+        long id = item.getId();
+        String extension = item.getExtension();
+        String fileName = getFileName(id, extension);
+        long folder = id % 10L;
+
+        /* 파일 업로드 서버 경로 */
+        String fileDir = uploadPath + folder;
+        String filePath = fileDir + "/" + fileName;
+        File _fileDir = new File(fileDir);
+        if (!_fileDir.exists()){
+            _fileDir.mkdir();
+        }
+
+        /* 파일 서버 접속 URL */
+        String fileUrl = request.getContextPath() + uploadUrl + folder + "/" + fileName;
+
+        /* 썸네일 경로(thumbsPath) */
+        String thumbPath = getUploadThumbsPath() + folder;
+        File thumbDir = new File(thumbPath);
+        if (!thumbDir.exists()){
+            thumbDir.mkdir();
+        }
+
+        String[] thumbsPath = thumbDir.list((dir, name) -> name.indexOf("_" + fileName) != -1);
+        String[] thumbsUrl = Arrays.stream(thumbsPath)
+                .map(s -> s.replace(uploadPath, request.getContextPath() + uploadUrl))
+                .toArray(String[]::new);
+
+        item.setFilePath(filePath);
+        item.setFileUrl(fileUrl);
+        item.setThumbsPath(thumbsPath);
+        item.setThumbsUrl(thumbsUrl);
+    }
+
+    private String getUploadThumbsPath(){
+        /* thumbs/folder/가로_세로_파일명 */
+        return uploadPath + "thumbs/";
+    }
+
+    private String getUploadThumbsUrl(){
+        return uploadUrl + "thumbs/";
+    }
+
+    public String getThumbUrl(long id, String extension, int width, int height){
+        long folder = id % 10L;
+        String url = String.format(getUploadThumbsUrl() + folder + "/%d_%d_%s", width, height, getFileName(id, extension));
+        return url;
+    }
+
+    public String getThumbPath(long id, String extension, int width, int height){
+        long folder = id % 10L;
+
+        return String.format(getUploadThumbsPath() + folder + "/%d_%d_%s", width, height, getFileName(id, extension));
+    }
+
+    /* 파일 이름 설정 */
+    private String getFileName(long id, String extension){
+        return extension == null || extension.isBlank() ? "" + id : id + "." + extension;
+    }
+
+    @Data @Builder
+    static class Options{
+        private String gid;
+        private String location;
+        private SearchMode mode = SearchMode.ALL;
+    }
+
+    static enum SearchMode{
+        ALL,
+        DONE,
+        UNDONE
+    }
+}

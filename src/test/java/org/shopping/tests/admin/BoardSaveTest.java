@@ -1,11 +1,9 @@
 package org.shopping.tests.admin;
 
 import org.junit.jupiter.api.*;
-import org.shopping.controllers.members.JoinForm;
-import org.shopping.controllers.members.MemberBoardForm;
+import org.shopping.controllers.members.*;
 import org.shopping.entities.Board;
-import org.shopping.models.board.config.BoardConfigInfoService;
-import org.shopping.models.board.config.BoardConfigSaveService;
+import org.shopping.models.board.config.*;
 import org.shopping.models.member.MemberSaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
