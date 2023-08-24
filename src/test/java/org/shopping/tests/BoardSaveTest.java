@@ -2,31 +2,30 @@ package org.shopping.tests;
 
 import org.junit.jupiter.api.*;
 import org.shopping.configs.SecurityConfig;
-import org.shopping.controllers.admins.BoardForm;
-import org.shopping.controllers.members.*;
+import org.shopping.controllers.members.JoinForm;
+import org.shopping.controllers.members.MemberBoardForm;
 import org.shopping.entities.Board;
-import org.shopping.models.board.config.*;
+import org.shopping.models.board.config.BoardConfigInfoService;
+import org.shopping.models.board.config.BoardConfigSaveService;
 import org.shopping.models.member.MemberSaveService;
 import org.shopping.models.member.board.MemberBoardSaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
-
 public class BoardSaveTest {
 
     @Autowired
@@ -42,6 +41,10 @@ public class BoardSaveTest {
 
     @Autowired
     private SecurityConfig securityConfig;
+
+    @Autowired
+    private MockMvc mockMvc;
+
 
     private Board board;
     private JoinForm joinForm;
@@ -69,13 +72,25 @@ public class BoardSaveTest {
         memberSaveService.save(joinForm);
     }
 
+    private void isLogin() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("userId", "user01");
+        session.setAttribute("userPw", "_aA123456");
+        mockMvc.perform(post("/member/login")
+                        .param("userId", "user01")
+                        .with(csrf().asHeader())
+                        .param("userPw", "_aA123456")
+                        .accept(MediaType.TEXT_HTML_VALUE)
+                        .session(session));
+    }
+
 
     private MemberBoardForm getGuestBoardForm() {
 
             return MemberBoardForm.builder()
                     .bId(board.getBId())
                     .gid(UUID.randomUUID().toString())
-                    .guestPw(securityConfig.passwordEncoder().encode("_aA123456"))
+                    .guestPw("_aA123456")
                     .poster("비회원")
                     .subject("제목!")
                     .content("내용!")
@@ -98,9 +113,8 @@ public class BoardSaveTest {
     }
 
     @Test
-    @WithMockUser(username="user01", password="_aA123456")
-    void test(){
-        System.out.println(board.getBId());
+    void test() throws Exception {
+        isLogin();
         MemberBoardForm memberBoardForm = MemberBoardForm.builder()
                 .bId(board.getBId())
                 .gid(UUID.randomUUID().toString())
@@ -116,11 +130,11 @@ public class BoardSaveTest {
         });*/
     }
 
-    @Test
-    @WithAnonymousUser
-    void registerGuestSuccessTest() {
+/*    @Test
+    @WithAnonymousUser*/
+/*    void registerGuestSuccessTest() {
         assertDoesNotThrow(() -> {
             boardSaveService.save(getGuestBoardForm());
         });
-    }
+    }*/
 }

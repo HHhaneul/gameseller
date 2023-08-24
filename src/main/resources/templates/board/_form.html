@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/front/main}">
+<main layout:fragment="content">
+    <form th:object="${memberBoardForm}" method="post" th:action="@{/submit}">
+        <input type="file" id="file" multiple>
+        <dl>
+            <dt>작업 제목</dt>
+            <dd>
+                <input type="text" name="subject" th:field="*{subject}">
+            </dd>
+        </dl>
+        <dl>
+            <dt>작업 내용</dt>
+            <dd>
+                <textarea name="content" id="content" class="ckeditor" th:field="*{content}"></textarea>
+                <button type="button" class="fileUpload image">이미지 추가</button>
+            </dd>
+        </dl>
+        <dl>
+            <dt>파일첨부</dt>
+            <dd>
+                <button type="submit" class="fileUpload">업로드</button>
+            </dd>
+        </dl>
+    </form>
+</main>
+</html>
