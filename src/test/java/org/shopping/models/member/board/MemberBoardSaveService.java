@@ -35,12 +35,11 @@ public class MemberBoardSaveService {
             String ip = request.getRemoteAddr();
             String ua = request.getHeader("User-Agent");
             memberBoardData = memberBoardData.builder()
-                    .gid(memberBoardData.getGid())
-                    .board(board)
-                    .category(memberBoardData.getCategory())
-                    .poster(memberBoardData.getPoster())
-                    .subject(memberBoardData.getSubject())
-                    .content(memberBoardData.getContent())
+                    .gid(memberBoardForm.getGid())
+                    .category(memberBoardForm.getCategory())
+                    .poster(memberBoardForm.getPoster())
+                    .subject(memberBoardForm.getSubject())
+                    .content(memberBoardForm.getContent())
                     .ip(ip)
                     .ua(ua)
                     .build();

@@ -1,53 +1,42 @@
 package org.shopping.controllers.members;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.modelmapper.ModelMapper;
-import org.shopping.entities.Member;
-import org.shopping.entities.MemberBoardData;
+import org.shopping.entities.*;
+
+import java.util.UUID;
 
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class MemberBoardForm {
+    private Long id; // 게시글 번호
 
-
-    /* 게시글 번호 */
-    @Id @GeneratedValue
-    private Long id;
-
-    private String mode;
-
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="bId")
+    @NotBlank
     private String bId;
 
-    private String gid;
+    @NotBlank
+    private String gid = UUID.randomUUID().toString();
 
     /* 작성자 */
+    @NotBlank
     private String poster;
 
-    // 비회원 비밀번호
+    /* 비회원 비밀번호 */
     private String guestPw;
-    // 게시판 분류
+
+    /* 게시판 분류 */
     private String category;
-    // 제목
+
+    /* 제목 */
+    @NotBlank
     private String subject;
-    // 내용
+
+    /* 내용 */
+    @NotBlank
     private String content;
-    // 조회수
-    private int hit;
-    // User-Agent : 브라우저 정보
-    private String ua;
-    // 작성자 IP
-    private String ip;
-    // 댓글 수
-    private int commentCnt;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="userNo")
-    private Member member; // 작성 회원
-
-    public static MemberBoardData of(MemberBoardForm memberBoardForm) {
-        return new ModelMapper().map(memberBoardForm, MemberBoardData.class);
-    }
+    /* 회원번호 */
+    private Long userNo;
 }

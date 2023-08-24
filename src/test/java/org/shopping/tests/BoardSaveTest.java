@@ -1,6 +1,7 @@
 package org.shopping.tests;
 
 import org.junit.jupiter.api.*;
+import org.shopping.configs.SecurityConfig;
 import org.shopping.controllers.admins.BoardForm;
 import org.shopping.controllers.members.*;
 import org.shopping.entities.Board;
@@ -10,6 +11,7 @@ import org.shopping.models.member.board.MemberBoardSaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
+
 public class BoardSaveTest {
 
     @Autowired
@@ -36,6 +39,9 @@ public class BoardSaveTest {
     private MemberBoardSaveService boardSaveService;
     @Autowired
     private MemberSaveService memberSaveService;
+
+    @Autowired
+    private SecurityConfig securityConfig;
 
     private Board board;
     private JoinForm joinForm;
@@ -53,8 +59,8 @@ public class BoardSaveTest {
         // 회원 가입 추가
         joinForm = JoinForm.builder()
                 .userId("user01")
-                .userPw("aA!123456")
-                .userPwRe("aA!123456")
+                .userPw("_aA123456")
+                .userPwRe("_aA123456")
                 .email("user01@test.org")
                 .userNm("사용자01")
                 .mobile("01000000000")
@@ -68,7 +74,8 @@ public class BoardSaveTest {
 
             return MemberBoardForm.builder()
                     .bId(board.getBId())
-                    .guestPw("12345678")
+                    .gid(UUID.randomUUID().toString())
+                    .guestPw(securityConfig.passwordEncoder().encode("_aA123456"))
                     .poster("비회원")
                     .subject("제목!")
                     .content("내용!")
@@ -77,7 +84,7 @@ public class BoardSaveTest {
 
     }
 
-/*    @WithMockUser(username="user01", password="aA!123456")
+    @WithMockUser(username="user01", password="aA!123456")
     private MemberBoardForm getCommonBoardForm() {
         System.out.println(board.getBId());
         return MemberBoardForm.builder()
@@ -88,11 +95,12 @@ public class BoardSaveTest {
                 .content("내용!")
                 .category(board.getCategories() == null ? null : board.getCategories()[0])
                 .build();
-    }*/
+    }
 
     @Test
-    @WithMockUser(username="user01", password="aA!123456")
+    @WithMockUser(username="user01", password="_aA123456")
     void test(){
+        System.out.println(board.getBId());
         MemberBoardForm memberBoardForm = MemberBoardForm.builder()
                 .bId(board.getBId())
                 .gid(UUID.randomUUID().toString())
@@ -106,5 +114,13 @@ public class BoardSaveTest {
         /*assertDoesNotThrow(() -> {
             boardSaveService.save(getGuestBoardForm());
         });*/
+    }
+
+    @Test
+    @WithAnonymousUser
+    void registerGuestSuccessTest() {
+        assertDoesNotThrow(() -> {
+            boardSaveService.save(getGuestBoardForm());
+        });
     }
 }

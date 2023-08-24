@@ -14,7 +14,6 @@ import java.util.UUID;
         @Index(name = "idx_fileInfo_gid_location", columnList = "gid, location")
 })
 public class FileInfo extends BaseMemberEntity {
-
     @Id @GeneratedValue
     private Long id;
 
