@@ -8,8 +8,8 @@ import java.util.UUID;
 @Entity @Data @Builder
 @AllArgsConstructor @NoArgsConstructor
 @Table(indexes={
-        @Index(name="idx_boarddata_category", columnList = "category DESC"),
-        @Index(name="idx_boarddata_createAt", columnList = "createdAt DESC")
+        @Index(name="idx_boardData_category", columnList = "category DESC"),
+        @Index(name="idx_boardData_createAt", columnList = "createdAt DESC")
 })
 public class MemberBoardData extends BaseEntity {
     @Id @GeneratedValue

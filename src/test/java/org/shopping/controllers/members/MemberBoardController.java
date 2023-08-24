@@ -49,9 +49,8 @@ public class MemberBoardController {
     // 게시글 작성 및 수정 처리
     @PostMapping("/save")
     public String save(@Valid MemberBoardForm memberBoardform, Errors errors) {
-
         try {
-            saveService.save(memberBoardform, errors);
+            saveService.save(memberBoardform);
         } catch (Exception e) {
             errors.reject("boardSaveErr", e.getMessage());
         }
@@ -64,7 +63,6 @@ public class MemberBoardController {
                 return "board/update";
             }
         }
-
         return "redirect:/board/list";
     }
 

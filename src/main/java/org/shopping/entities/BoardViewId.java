@@ -5,8 +5,7 @@ import lombok.*;
 import java.io.Serializable;
 
 @EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 public class BoardViewId implements Serializable {
     private Long id;
     private String uid;
