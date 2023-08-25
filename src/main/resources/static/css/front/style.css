@@ -1,22 +1,40 @@
 /** 사이트 공통 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
-* { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: #000; outline: none; }
+* { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: white;; outline: none; }
 html { font-size: 13px; }
 ul, ol { list-style: none; margin:0; padding:0; }
 dl, dt, dd { margin:0; padding: 0; }
 a { text-decoration: none; }
-body { margin: 0; }
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    max-width: 1000px;
+    min-width: 1000px;
+    margin: 0 auto;
+    background-color: #1b2838;
+    }
+
 img { border: 0; }
 
 /** 기준 너비 */
-.layout_width { max-width: 1300px; min-width: 1100px; margin: 0 auto; padding: 0 10px; }
+.layout_width { max-width: 1300px;
+    min-width: 1100px;
+    margin: 0 auto;
+    padding: 0 10px;
+    }
 
 /** 기본 스타일 - 입력 */
 input[type='text'],
 input[type='number'],
 input[type='password'],
 input[type='email'],
-input[type='date'] { border: 1px solid #d5d5d5; width: 100%; height: 45px; padding: 0 10px; border-radius: 3px; }
+input[type='date'] { border: 1px solid #d5d5d5;
+    width: 100%;
+    height: 45px;
+    padding: 0 10px;
+    border-radius: 3px;
+    }
 
 /** 기본 스타일 - 체크박스, 라디오 버튼 */
 input[type='checkbox'] { display: none; }
@@ -31,3 +49,205 @@ input[type='radio']:checked+label { background:url("../../images/radio-on.png") 
 
 /** 기본 약관 스타일 */
 .terms { height: 200px; overflow-y: scroll; border: 1px solid #d5d5d5; padding: 10px; border-radius: 3px; word-break: break-all; }
+
+
+
+/** 기본 메세지 상자 스타일 */
+.message {
+    box-shadow: 2px 2px 5px #36466d;
+    padding: 15px 25px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #1b2838;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/** 기본 제목 스타일 */
+h1 { font-size: 30px; font-weight: bold; margin: 0; margin-bottom: 35px; line-height: 1; padding: 0; }
+h2 { font-size: 18px; font-weight: bold; margin: 25px 0 10px; line-height: 1; }
+
+/** 기본 테이블 스타일 */
+.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
+.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; }
+.table-cols td { background: #fff; padding: 10px 15px; }
+.table-cols th,
+.table-cols td { border-bottom: 1px solid #d5d5d5; }
+
+/** 공통 서브 메뉴 */
+nav.submenus { background: #fff; box-shadow: 1px 1px 5px #cdced5; margin-bottom: 30px; display: flex; height: 60px; }
+nav.submenus a.on { background: #596b99; color: #fff; }
+nav.submenus a { line-height: 60px; padding: 0 40px; font-size: 18px; }
+
+/* 폼 스타일 */
+form {
+    margin-top: 20px;
+    border: 1px solid #555;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+dl {
+    margin-bottom: 10px;
+}
+
+dt {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+
+select {
+    width: 150px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+
+button[type="reset"],
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+button[type="reset"] {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* 파일 업로드 버튼 스타일 */
+.fileUpload {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+/* 이미지 추가 버튼 스타일 */
+.image {
+    background-color: #28a745;
+}
+
+/* 파일 선택 입력 필드 스타일 */
+#file {
+    display: none;
+}
+
+/* 작성일 스타일 */
+.date {
+    font-size: 14px;
+    color: #777;
+}
+
+/* 테이블 스타일 */
+.table-rows {
+    width: 100%;
+    border-spacing: 0;
+    padding: 0;
+    border-top: 3px solid #333;
+    margin-bottom: 20px;
+}
+
+.table-rows th,
+.table-rows td {
+    padding: 10px 15px;
+    text-align: center;
+    border-bottom: 1px solid #555;
+}
+
+/* 테이블 액션 버튼 스타일 */
+.table-action {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.sbtn {
+    background-color: #1b2838;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.sbtn.blue {
+    background-color: #007bff;
+    color: white;
+}
+
+/* 검색 폼 스타일 */
+form[name="frmSearch"] {
+    background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+    }
+/* 검색 버튼 스타일 */
+form[name="frmSearch"] button[type="submit"] {
+    background-color: #000000;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ /* 폼 안의 글씨 색상 */
+ form[name="frmSearch"] input[type="text"],
+ form[name="frmSearch"] select {
+ color: #000000;
+ }
+
+/* 게시판 리스트 테이블 스타일 */
+table.table-rows {
+     width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #333; margin-bottom: 20px; }
+
+table.table-rows th,
+table.table-rows td {
+    padding: 10px 15px;
+    text-align: center;
+    border-bottom: 1px solid #555;
+    }
+
+/* 테이블 액션 버튼 스타일 */
+div.table-action {
+    margin-top: 10px;
+    text-align: center;
+    }
+
+button.sbtn {
+
+    background-color: #1b2838;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    }
+
+button.sbtn.blue {
+    background-color: #007bff;
+    color: white;
+    }

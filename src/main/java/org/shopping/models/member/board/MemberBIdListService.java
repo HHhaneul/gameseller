@@ -12,13 +12,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 import static org.springframework.data.domain.Sort.Order.desc;
 
 @Service
 @RequiredArgsConstructor
-public class MemberBoardListService {
+public class MemberBIdListService {
 
     private final BoardDataRepository boardDataRepository;
 
@@ -52,16 +50,14 @@ public class MemberBoardListService {
                 andBuilder.and(memberBoardData.board.bId.contains(skey));
 
                 /* 게시판명 subject */
-            } else if (sopt.equals("subject")) {
+            } else if (sopt.equals("bName")) {
                 andBuilder.and(memberBoardData.subject.contains(skey));
             }
         }
         /** 검색 조건 처리 E */
-        if (bId != null){
-            andBuilder.and((memberBoardData.board.bId.contains(bId)));
-        }
 
         Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
+
         Page<MemberBoardData> data = boardDataRepository.findAll(andBuilder, pageable);
 
         return data;

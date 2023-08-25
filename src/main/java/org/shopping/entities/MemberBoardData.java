@@ -15,6 +15,7 @@ public class MemberBoardData extends BaseEntity {
     /* 게시글 번호 */
     @Id @GeneratedValue
     private Long id;
+
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="bId")
     private Board board;

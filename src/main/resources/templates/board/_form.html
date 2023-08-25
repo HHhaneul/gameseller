@@ -2,28 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
-<th:block layout:fragment="memberBoardForm" th:object="${memberBoardForm}" >
+    <th:block layout:fragment="memberBoardForm" th:object="${memberBoardForm}" >
         <input type="file" id="file" multiple>
-        <dl>
-            <dt>작업 제목</dt>
-            <dd>
-                <input type="text" name="subject" th:field="*{subject}">
-            </dd>
-        </dl>
-    <dl>
-        <dt>작성자</dt>
-        <dd>
-            <input type="text" name=poster th:field="*{poster}">
-        </dd>
-    </dl>
-
-        <dl>
-            <dt>작업 내용</dt>
-            <dd>
-                <textarea name="content" class="form-control" id="p_content" th:field="*{content}"></textarea>
-                <button type="button" class="fileUpload image">이미지 추가</button>
-            </dd>
-        </dl>
-
-</th:block>
+        <input type="hidden" name=poster th:field="*{poster}">
+        <input type="hidden" name="bId" th:field="*{bId}">
+        <div class="message" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+            <dl>
+                <dt>작업 제목</dt>
+                <dd>
+                    <input type="text" name="subject" th:field="*{subject}">
+                </dd>
+            </dl>
+            <dl>
+                <dt>작업 내용</dt>
+                <dd>
+                    <textarea name="content" class="form-control" id="p_content" th:field="*{content}"></textarea>
+                    <button type="button" class="fileUpload image">이미지 추가</button>
+                </dd>
+            </dl>
+    </th:block>
 </html>

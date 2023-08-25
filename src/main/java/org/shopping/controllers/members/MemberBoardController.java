@@ -1,16 +1,24 @@
 package org.shopping.controllers.members;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.commons.MemberUtil;
+import org.shopping.commons.MenuDetail;
+import org.shopping.commons.Menus;
+import org.shopping.controllers.admins.BoardSearch;
 import org.shopping.entities.Board;
+import org.shopping.entities.Member;
 import org.shopping.entities.MemberBoardData;
+import org.shopping.entities.QMemberBoardData;
 import org.shopping.models.board.config.BoardConfigInfoService;
 import org.shopping.models.member.board.MemberBoardDeleteService;
 import org.shopping.models.member.board.MemberBoardInfoService;
 import org.shopping.models.member.board.MemberBoardListService;
 import org.shopping.models.member.board.MemberBoardSaveService;
+import org.shopping.repositories.member.BoardDataRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -32,6 +40,8 @@ public class MemberBoardController {
     private final BoardConfigInfoService configInfoService;
     private final MemberBoardDeleteService deleteService;
     private final MemberUtil memberUtil;
+    private final HttpServletRequest request;
+    private final BoardDataRepository repository;
 
     private Board board;
 
@@ -65,9 +75,20 @@ public class MemberBoardController {
     }
     @PostMapping("/save")
     public String save(@Valid MemberBoardForm memberBoardform, Errors errors) {
-        System.out.println("1111111");
-        System.out.println(memberBoardform);
+        try {
             saveService.save(memberBoardform);
+        } catch (Exception e) {
+            errors.reject("boardSaveErr", e.getMessage());
+        }
+
+        if (errors.hasErrors()) {
+            Long id = memberBoardform.getId();
+            if (id == null) {
+                return "board/write";
+            } else {
+                return "board/update";
+            }
+        }
         return "redirect:/board/list";
     }
 
@@ -81,11 +102,27 @@ public class MemberBoardController {
     }
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<MemberBoardData> list = listService.gets();
-        model.addAttribute("list", list);
-        return "board/list";
+    public String list(@ModelAttribute MemberBoardSearch memberBoardSearch, Model model) {
+
+        search(model, "전체 게시판");
+
+        Page<MemberBoardData> data = listService.gets(memberBoardSearch, null);
+        model.addAttribute("items", data.getContent());
+
+        return "board/index";
     }
+
+    @GetMapping("/{bId}")
+    public String list(@ModelAttribute MemberBoardSearch memberBoardSearch, @PathVariable String bId, Model model) {
+
+        search(model, bId);
+
+        Page<MemberBoardData> data = listService.gets(memberBoardSearch, bId);
+        model.addAttribute("items", data.getContent());
+
+        return "board/index";
+    }
+
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
@@ -129,11 +166,23 @@ public class MemberBoardController {
             }
             addScript.add("board/form");
         }
-
         /* 공통 필요 속성 추가 */
         model.addAttribute("board", board); // 게시판 설정
         model.addAttribute("addCss", addCss); // CSS 설정
         model.addAttribute("addScript", addScript); // JS 설정
+    }
 
+    private void search(Model model, String title){
+
+        String URI = request.getRequestURI();
+        // 서브 메뉴 처리
+        String subMenuCode = Menus.getSubMenuCode(request);
+        model.addAttribute("subMenuCode", subMenuCode);
+
+        List<MenuDetail> submenus = Menus.gets("board");
+        model.addAttribute("submenus", submenus);
+
+        model.addAttribute("pageTitle", title);
+        model.addAttribute("title", title);
     }
 }

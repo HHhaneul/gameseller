@@ -4,8 +4,3 @@ window.addEventListener("DOMContentLoaded", function(){
     });
 });
 
-        ClassicEditor
-            .create(document.querySelector('#p_content'))
-            .catch(error => {
-                console.error(error);
-            });

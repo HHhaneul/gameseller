@@ -4,7 +4,6 @@
       layout:decorate="~{layouts/front/main}">
 <main>
     <form name="memberBoardForm" id="memberBoardForm" th:object="${memberBoardForm}" method="post" th:action="@{/board/save}" autocomplete="off">
-        <input type="hidden" name="mode" value="update">
         <input type="text" name="bid" value="*{bid}">
         <div layout:replace="~{board/_form :: content}"></div>
         <div class="btns">
