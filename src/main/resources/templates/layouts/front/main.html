@@ -15,6 +15,7 @@
     <th:block layout:fragment="addCss"></th:block>
 
     <script th:src="@{/js/front/common.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>
+    <script th:src="@{/js/front/ckeditor/ckeditor.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>
     <script th:each="jsFile : ${addScript}"
             th:src="@{/js/front/{jsFile}.js?v={v}(jsFile=${jsFile}, v=${@siteConf.get('cssJsVersion')})}"></script>
     <th:block layout:fragment="addScript"></th:block>
@@ -25,5 +26,4 @@
 <footer th:replace="~{outlines/front/footer::common}"></footer>
 <iframe name="ifrmProcess" class="dn"></iframe>
 </body>
-
 </html>

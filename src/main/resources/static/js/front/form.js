@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", function(){
-    CKEDITOR.replace("content", {
+    CKEDITOR.replace("form-control", {
         height: 350
     });
 });

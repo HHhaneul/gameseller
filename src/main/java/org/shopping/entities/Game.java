@@ -11,7 +11,7 @@ import java.util.UUID;
         @Index(name="idx_boarddata_category", columnList = "category DESC"),
         @Index(name="idx_boarddata_createAt", columnList = "createdAt DESC")
 })
-public class MemberBoardData extends BaseEntity {
+public class Game extends BaseEntity {
     /* 게시글 번호 */
     @Id @GeneratedValue
     private Long id;
@@ -56,6 +56,10 @@ public class MemberBoardData extends BaseEntity {
 
     /* 댓글 수 */
     private int commentCnt;
+
+    /* 상품 설명 */
+    @Lob
+    private String description;
 
     /* 작성 회원 */
     @ManyToOne(fetch=FetchType.LAZY)

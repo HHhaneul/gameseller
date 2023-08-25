@@ -8,7 +8,6 @@
             <a th:href="@{/member/logout}" th:text="#{member.logout}"></a>
 
             <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}" th:text="#{adminPage}"></a>
-
         </th:block>
         <th:block sec:authorize="isAnonymous()">
             <a th:href="@{/member/join}" th:text="#{member.join}"></a>

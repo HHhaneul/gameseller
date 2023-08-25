@@ -2,17 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
-<section layout:fragment="content">
+<main>
     <form name="memberBoardForm" id="memberBoardForm" th:object="${memberBoardForm}" method="post" th:action="@{/board/save}" autocomplete="off">
-        <input type="hidden" name="mode" value="write">
-        <input type="hidden" name="bId" th:field="*{bId}">
-        <th:block layout:replace="~{board/_form::memberBoardForm}"></th:block>
+        <input type="hidden" name="mode" value="update">
+        <input type="text" name="bid" value="*{bid}">
+        <div layout:replace="~{board/_form :: content}"></div>
         <div class="btns">
             <button type="reset">다시작성</button>
             <button type="submit">
-                <th:block>등록하기</th:block>
+                <th:block>수정하기</th:block>
             </button>
         </div>
     </form>
-</section>
+</main>
 </html>

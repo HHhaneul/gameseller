@@ -4,12 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.commons.MemberUtil;
-import org.shopping.controllers.admins.BoardForm;
 import org.shopping.entities.Board;
-import org.shopping.entities.Member;
 import org.shopping.entities.MemberBoardData;
 import org.shopping.models.board.config.BoardConfigInfoService;
-import org.shopping.models.board.config.BoardConfigSaveService;
 import org.shopping.models.member.board.MemberBoardDeleteService;
 import org.shopping.models.member.board.MemberBoardInfoService;
 import org.shopping.models.member.board.MemberBoardListService;
@@ -38,17 +35,19 @@ public class MemberBoardController {
 
     private Board board;
 
-    // 게시글 작성 양식
+    /* 게시글 작성 양식 */
     @GetMapping("/write/{bId}")
     public String write(@PathVariable String bId, @ModelAttribute MemberBoardForm memberBoardForm, Model model) {
         commonProcess(bId, "write", model);
 
         memberBoardForm = new MemberBoardForm();
-        memberBoardForm.setBId(bId);
+        System.out.println("board.getBId="+board.getBId());
+        memberBoardForm.setBId(board.getBId());
         if (memberUtil.isLogin()) {
             memberBoardForm.setPoster(memberUtil.getMember().getUserNm());
         }
         model.addAttribute("memberBoardForm", memberBoardForm);
+        model.addAttribute("addScript", new String[]{"ckeditor/ckeditor", "form"});
 
         return "board/write";
     }
@@ -66,20 +65,9 @@ public class MemberBoardController {
     }
     @PostMapping("/save")
     public String save(@Valid MemberBoardForm memberBoardform, Errors errors) {
-        try {
+        System.out.println("1111111");
+        System.out.println(memberBoardform);
             saveService.save(memberBoardform);
-        } catch (Exception e) {
-            errors.reject("boardSaveErr", e.getMessage());
-        }
-
-        if (errors.hasErrors()) {
-            Long id = memberBoardform.getId();
-            if (id == null) {
-                return "board/write";
-            } else {
-                return "board/update";
-            }
-        }
         return "redirect:/board/list";
     }
 
@@ -95,19 +83,15 @@ public class MemberBoardController {
     @GetMapping("/list")
     public String list(Model model) {
         List<MemberBoardData> list = listService.gets();
-
         model.addAttribute("list", list);
-
         return "board/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         deleteService.delete(id);
-
         return "redirect:/board/list";
     }
-
 
     @ExceptionHandler(Exception.class)
     public String errorHandler(Exception e, Model model) {
@@ -128,24 +112,25 @@ public class MemberBoardController {
          *                    - 관리자는 다 가능
          *
          */
-
         board = configInfoService.get(bId, action);
         List<String> addCss = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
 
-        // 공통 스타일 CSS
+        /* 공통 스타일 CSS */
         addCss.add("board/style");
         addCss.add(String.format("board/%s_style", board.getSkin()));
 
-        // 글 작성, 수정시 필요한 자바스크립트
+        /* 글 작성, 수정시 필요한 자바스크립트 */
         if (action.equals("write") || action.equals("update")) {
-            if (board.isUseEditor()) { // 에디터 사용 경우
+
+            /* 에디터 사용 경우 */
+            if (board.isUseEditor()) {
                 addScript.add("ckeditor/ckeditor");
             }
             addScript.add("board/form");
         }
 
-        // 공통 필요 속성 추가
+        /* 공통 필요 속성 추가 */
         model.addAttribute("board", board); // 게시판 설정
         model.addAttribute("addCss", addCss); // CSS 설정
         model.addAttribute("addScript", addScript); // JS 설정
