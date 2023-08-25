@@ -60,6 +60,8 @@ public class BoardConfigListService {
         /** 검색 조건 처리 E */
 
         Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
+
+        System.out.println("뭘까" + andBuilder);
         Page<Board> data = boardRepository.findAll(andBuilder, pageable);
 
         return data;

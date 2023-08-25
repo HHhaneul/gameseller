@@ -16,10 +16,14 @@ public class MemberBoardInfoService {
     private final MemberUtil memberUtil;
 
     public MemberBoardData get(Long id) {
-        return get(id, "view");
+        return get(id, null, "view");
     }
 
     public MemberBoardData get(Long id, String location) {
+        return get(id, null, location);
+    }
+
+    public MemberBoardData get(Long id, String bId, String location) {
 
         MemberBoardData boardData = boardDataRepository.findById(id).orElseThrow(MemberBoardDataNotExistsException::new);
 

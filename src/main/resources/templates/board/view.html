@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/front/main}">
+    <body>
+        <div layout:fragment="content">
+            <h2 th:text="${memberBoardData.subject}"></h2>
+            <dl>
+                <dt th:text="${memberBoardData.content}"></dt>
+            </dl>
+            <div class="author-info">
+                작성자: <span th:text="${memberBoardData.poster}"></span>
+                작성일: <span th:text="${#temporals.format(memberBoardData.createdAt, 'MM/dd')}"></span>
+            </div>
+        </div>
+    </body>
+</html>

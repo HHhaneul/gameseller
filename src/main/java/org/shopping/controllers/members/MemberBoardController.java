@@ -101,26 +101,25 @@ public class MemberBoardController {
         return "board/view";
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public String list(@ModelAttribute MemberBoardSearch memberBoardSearch, Model model) {
 
         search(model, "전체 게시판");
 
-        Page<MemberBoardData> data = listService.gets(memberBoardSearch, null);
+        Page<MemberBoardData> data = listService.gets(memberBoardSearch);
         model.addAttribute("items", data.getContent());
 
-        return "board/index";
+        return "board/_index";
     }
 
     @GetMapping("/{bId}")
     public String list(@ModelAttribute MemberBoardSearch memberBoardSearch, @PathVariable String bId, Model model) {
 
         search(model, bId);
-
         Page<MemberBoardData> data = listService.gets(memberBoardSearch, bId);
         model.addAttribute("items", data.getContent());
-
-        return "board/index";
+        model.addAttribute("bId", bId);
+        return "board/_index";
     }
 
 
