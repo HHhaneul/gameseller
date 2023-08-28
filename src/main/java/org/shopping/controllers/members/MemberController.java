@@ -85,30 +85,30 @@ public class MemberController {
         existingMember.setEmail(updatedMember.getEmail());
         existingMember.setMobile(updatedMember.getMobile());
         saveService.save(existingMember);
-        return "redirect:/"; // Redirect to member list page
+        return "redirect:/";
     }
     @GetMapping("/changePassword")
     public String showChangePasswordForm(Model model) {
         PasswordChangeForm passwordChangeForm = new PasswordChangeForm();
-        passwordChangeForm.setUserId(getLoggedInUserId()); // Get the logged-in user's ID
+        passwordChangeForm.setUserId(getLoggedInUserId());
         model.addAttribute("passwordChangeForm", passwordChangeForm);
         return "member/changePassword";
     }
 
     @PostMapping("/updatePassword")
     public String updatePassword(@Valid PasswordChangeForm passwordChangeForm, Errors errors, Model model) {
-        // Validate the form fields (e.g., new password and confirmation match)
+
         if (errors.hasErrors()) {
             return "member/changePassword";
         }
 
-        // Retrieve the current user from the repository
+
         Member currentMember = saveService.findById(passwordChangeForm.getUserId());
         if (currentMember == null) {
-            return "redirect:/"; // Handle accordingly
+            return "redirect:/";
         }
 
-        // Check if the current password matches
+
         if (!passwordEncoder.matches(passwordChangeForm.getCurrentPassword(), currentMember.getUserPw())) {
             errors.rejectValue("currentPassword", "password.invalid", "현재 비밀번호가 올바르지 않습니다.");
             return "member/changePassword";
@@ -118,10 +118,9 @@ public class MemberController {
         currentMember.setUserPw(passwordEncoder.encode(passwordChangeForm.getNewPassword()));
         saveService.save(currentMember);
 
-        return "redirect:/member/logout"; // Redirect to appropriate page
+        return "redirect:/member/logout";
     }
 
-    // Utility method to get the logged-in user's ID
     private String getLoggedInUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
