@@ -1,7 +1,7 @@
 package org.shopping.models.member;
 
 
-import jakarta.persistence.EntityNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.commons.constants.Role;

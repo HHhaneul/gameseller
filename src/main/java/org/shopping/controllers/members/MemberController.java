@@ -80,7 +80,6 @@ public class MemberController {
         if (existingMember == null) {
             return "redirect:/member/updateMember";
         }
-        existingMember.setUserId(updatedMember.getUserId());
         existingMember.setUserNm(updatedMember.getUserNm());
         existingMember.setEmail(updatedMember.getEmail());
         existingMember.setMobile(updatedMember.getMobile());
