@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>ID Lookup Result</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <body>
-<h1>ID Lookup Result</h1>
-<p>Your ID: <span th:text="${foundId}"></span></p>
+1
+<h1>아이디 찾기 결과</h1>
+
+<form method="POST" th:object="${info}" autocomplete="off">
+    사용자 이름과 휴대폰 번호로 검색한 결과입니다:
+    이름: <span th:text="${userNm}"></span><br>
+    아이디: <span th:text="${userId}"></span>
+</form>
 </body>
 </html>
