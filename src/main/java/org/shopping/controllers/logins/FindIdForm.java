@@ -17,4 +17,5 @@ public class FindIdForm {
 
     @NotBlank
     private String mobile;
+    private String foundUserId;
 }
