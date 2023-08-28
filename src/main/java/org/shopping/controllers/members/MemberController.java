@@ -43,6 +43,11 @@ public class MemberController {
         return "member/login";
     }
 
+    @RequestMapping("/idlookup-form")
+    public String find_Id() {
+        return "member/idlookup-form";
+    }
+
     private void commonProcess(Model model) {
         model.addAttribute("pageTitle", "회원가입");
     }
