@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Find ID</title>
-</head>
+
 <body>
-<h2>Find Your ID</h2>
+<h2>아이디 찾기</h2>
 
 <form th:action="@{/member/findId}" th:object="${findIdForm}" method="post">
     <div>
-        <label>User Name:</label>
+        <label>회원명 :</label>
         <input type="text" th:field="*{userNm}" required>
     </div>
     <div>
-        <label>Mobile:</label>
+        <label>휴대전화번호 :</label>
         <input type="text" th:field="*{mobile}" required>
     </div>
-    <button type="submit">Find ID</button>
+    <button type="submit">아이디 찾기</button>
 </form>
 
 <div th:if="${findIdForm.foundUserId}">
-    <p>Your ID is: <strong th:text="${findIdForm.foundUserId}"></strong></p>
+    <p>아이디 : <strong th:text="${findIdForm.foundUserId}"></strong></p>
 </div>
+<div th:text="${error}"></div>
 </body>
 </html>

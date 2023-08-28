@@ -69,7 +69,7 @@ public class MemberController {
         if (member != null) {
             findIdForm.setFoundUserId(member.getUserId());
         } else {
-            model.addAttribute("error", "User not found");
+            model.addAttribute("error", "이름 또는 휴대전화번호를 다시 확인해주세요.");
         }
 
         return "member/findId";
