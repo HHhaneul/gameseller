@@ -15,8 +15,12 @@
   <th:block layout:fragment="addCss"></th:block>
 
   <script th:src="@{/js/admin/common.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>
+  <script th:src="@{/common/js/ckeditor/ckeditor.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>
+  <script th:src="@{/common/js/fileManager.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>
+  <script th:src="@{/common/js/common.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>
   <script th:each="jsFile : ${addScript}"
           th:src="@{/js/admin/{jsFile}.js?v={v}(jsFile=${jsFile}, v=${@siteConf.get('cssJsVersion')})}"></script>
+
   <th:block layout:fragment="addScript"></th:block>
 </head>
 <body>

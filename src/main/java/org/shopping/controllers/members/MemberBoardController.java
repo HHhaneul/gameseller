@@ -4,19 +4,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.shopping.commons.MemberUtil;
-import org.shopping.commons.MenuDetail;
-import org.shopping.commons.Menus;
-import org.shopping.controllers.admins.BoardSearch;
+import org.shopping.commons.*;
 import org.shopping.entities.Board;
-import org.shopping.entities.Member;
 import org.shopping.entities.MemberBoardData;
-import org.shopping.entities.QMemberBoardData;
 import org.shopping.models.board.config.BoardConfigInfoService;
-import org.shopping.models.member.board.MemberBoardDeleteService;
-import org.shopping.models.member.board.MemberBoardInfoService;
-import org.shopping.models.member.board.MemberBoardListService;
-import org.shopping.models.member.board.MemberBoardSaveService;
+import org.shopping.models.member.board.*;
 import org.shopping.repositories.member.BoardDataRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -51,7 +43,6 @@ public class MemberBoardController {
         commonProcess(bId, "write", model);
 
         memberBoardForm = new MemberBoardForm();
-        System.out.println("board.getBId="+board.getBId());
         memberBoardForm.setBId(board.getBId());
         if (memberUtil.isLogin()) {
             memberBoardForm.setPoster(memberUtil.getMember().getUserNm());
