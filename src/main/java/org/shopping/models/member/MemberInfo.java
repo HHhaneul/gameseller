@@ -14,6 +14,7 @@ public class MemberInfo implements UserDetails {
 
     private Long userNo;
     private String userId;
+    private String gId;
     private String userPw;
     private String userNm;
     private String email;

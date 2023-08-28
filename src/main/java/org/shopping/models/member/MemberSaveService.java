@@ -1,6 +1,7 @@
 package org.shopping.models.member;
 
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.commons.constants.Role;
@@ -9,6 +10,7 @@ import org.shopping.entities.Member;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 /**
  * 회원 정보 추가, 수정
@@ -31,5 +33,11 @@ public class MemberSaveService {
         memberRepository.saveAndFlush(member);
 
     }
+    public Member findById(String userId) {
+        return memberRepository.findByUserId(userId);
+    }
 
+    public void save(Member member) {
+        memberRepository.save(member);
+    }
 }
