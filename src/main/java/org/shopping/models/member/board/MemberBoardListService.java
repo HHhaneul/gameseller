@@ -66,4 +66,8 @@ public class MemberBoardListService {
 
         return data;
     }
+    public Page<MemberBoardData> gets(MemberBoardSearch memberBoardSearch) {
+        return gets(memberBoardSearch, null);
+    }
+
 }

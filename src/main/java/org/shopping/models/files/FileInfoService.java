@@ -108,7 +108,9 @@ public class FileInfoService {
             thumbDir.mkdirs();
         }
 
-        String[] thumbsPath = thumbDir.list((dir,name) -> name.indexOf("_" + fileName) != -1);
+        String[] thumbsPath = Arrays.stream(thumbDir.list((dir,name) -> name.indexOf("_" + fileName) != -1))
+                .map(n -> thumbPath + "/" + n).toArray(String[]::new);
+
 
         // 썸네일 URL(thumbsUrl)
         String[] thumbsUrl = Arrays.stream(thumbsPath)

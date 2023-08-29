@@ -12,7 +12,7 @@ public enum GameStatus {
     STOP; // 판매중지
 
     public String getString() {
-        return Utils.getMessage("BookStatus." + name(), "common");
+        return Utils.getMessage("GameStatus." + name(), "common");
     }
 
     public static List<String[]> getList() {

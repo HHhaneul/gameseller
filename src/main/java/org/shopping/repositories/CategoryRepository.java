@@ -16,7 +16,7 @@ public interface CategoryRepository extends JpaRepository<Category, String>, Que
     default List<Category> getList(String mode) {
         QCategory category = QCategory.category;
         BooleanBuilder builder = new BooleanBuilder();
-        //** 전체 조회가 아니면 사용중인 분류만 조회 *//*
+        /** 전체 조회가 아니면 사용중인 분류만 조회 */
         if (!mode.equals("all")) builder.and(category.use.eq(true));
         List<Category> items = (List<Category>)findAll(builder, Sort.by(desc("listOrder"), asc("createdAt")));
 
@@ -25,7 +25,6 @@ public interface CategoryRepository extends JpaRepository<Category, String>, Que
 
     /**
      * 분류 전체목록 조회
-     *
      *
      */
     default List<Category> getListAll() {

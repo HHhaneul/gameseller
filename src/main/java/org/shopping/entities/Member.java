@@ -33,7 +33,6 @@ public class Member extends BaseEntity {
     private String termsAgree;
 
     @Enumerated(EnumType.STRING)
-
     @Column(length=10, nullable = false)
     private Role roles = Role.USER;
 }

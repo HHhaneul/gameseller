@@ -6,18 +6,23 @@ import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
 import org.shopping.commons.*;
 import org.shopping.commons.constants.GameStatus;
-import org.shopping.controllers.admins.CategoryForm;
-import org.shopping.entities.*;
-import org.shopping.models.categories.*;
-import org.shopping.models.games.*;
+import org.shopping.entities.Category;
+import org.shopping.entities.Game;
+import org.shopping.models.categories.CategoryDeleteService;
+import org.shopping.models.categories.CategoryInfoService;
+import org.shopping.models.categories.CategorySaveService;
+import org.shopping.models.games.GameInfoService;
+import org.shopping.models.games.GameSaveService;
+import org.shopping.models.games.GameSearch;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Controller("_adminGameController")
+@Controller("adminGameController")
 @RequestMapping("/admin/game")
 @RequiredArgsConstructor
 public class GameController implements CommonProcess, ScriptExceptionProcess {
@@ -33,16 +38,14 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     private final HttpServletRequest request;
 
     /**
-     * 게임 목록
+     * 도서 목록
      *
      * @return
      */
     @GetMapping
     public String index(@ModelAttribute GameSearch search, Model model) {
         commonProcess(model, "list");
-        search.setLimit(3);
         ListData<Game> data = infoService.getList(search);
-
         model.addAttribute("items", data.getContent());
         model.addAttribute("pagination", data.getPagination());
 
@@ -50,7 +53,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     }
 
     /**
-     * 게임 목록 수정, 삭제
+     * 도서 목록 수정, 삭제
      *
      */
     @PostMapping
@@ -60,11 +63,11 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
 
         String script = "parent.location.reload();";
         model.addAttribute("script", script);
-        return "commons/_execute_script";
+        return "common/_execute_script";
     }
 
     /**
-     * 게임 등록
+     * 도서 등록
      *
      */
     @GetMapping("/add")
@@ -74,7 +77,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     }
 
     /**
-     * 게임 수정
+     * 도서 수정
      *
      */
     @GetMapping("/edit/{gameNo}")
@@ -87,11 +90,11 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     }
 
     /**
-     * 게임 등록/수정 처리
+     * 도서 등록/수정 처리
      *
      */
     @PostMapping("/save")
-    public String GameSave(@Valid GameForm gameForm, Errors errors, Model model) {
+    public String gameSave(@Valid GameForm gameForm, Errors errors, Model model) {
         commonProcess(model, "save");
 
         String mode = gameForm.getMode();
@@ -104,6 +107,9 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         return "redirect:/admin/game";
     }
 
+    /**
+     * 도서분류 목록
+     */
     @GetMapping("/category")
     public String category(Model model) {
         commonProcess(model, "category");
@@ -114,7 +120,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     }
 
     /**
-     * 게임분류 추가, 수정, 삭제 처리
+     * 도서분류 추가, 수정, 삭제 처리
      *
      */
     @PostMapping("/category")
@@ -124,37 +130,37 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         String mode = form.getMode();
         mode = mode == null || mode.isBlank() ? "add" : mode;
         try {
-            if (mode.equals("add")) {
+            if (mode.equals("add")) { // 등록
                 categorySaveService.save(form);
 
-            } else if (mode.equals("edit")) {
+            } else if (mode.equals("edit")) { // 수정
                 categorySaveService.saveList(form);
 
-            } else if (mode.equals("delete")) {
+            } else if (mode.equals("delete")) { // 삭제
                 categoryDeleteService.deleteList(form);
             }
         } catch (CommonException e) {
             e.printStackTrace();
-            /* 자바스크립트 alert 형태로 에러 출력 */
-            throw new AlertException(e.getMessage());
+            throw new AlertException(e.getMessage()); // 자바스크립트 alert 형태로 에러 출력
         }
 
         String script = "parent.location.reload();";
         model.addAttribute("script", script);
-        return "commons/_execute_script";
+        return "common/_execute_script";
+
     }
 
     @Override
     public void commonProcess(Model model, String mode) {
 
 
-        String pageTitle = "게임 목록";
+        String pageTitle = "도서 목록";
         if (mode.equals("add")) {
-            pageTitle = "게임 등록";
+            pageTitle = "도서 등록";
         } else if (mode.equals("edit")) {
-            pageTitle = "게임 수정";
+            pageTitle = "도서 수정";
         } else if (mode.equals("category")) {
-            pageTitle = "게임 분류";
+            pageTitle = "도서 분류";
         }
 
         CommonProcess.super.commonProcess(model, pageTitle);
@@ -167,18 +173,20 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
             addScript.add("game/form");
             model.addAttribute("categories", categoryInfoService.getListAll());
         } else if (mode.equals("list")) {
+            model.addAttribute("categories", categoryInfoService.getListAll());
             model.addAttribute("statusList", GameStatus.getList());
+
         }
 
         model.addAttribute("menuCode", "game");
         model.addAttribute("addCommonScript", addCommonScript);
         model.addAttribute("addScript", addScript);
 
-        /* 서브 메뉴 처리 */
+        // 서브 메뉴 처리
         String subMenuCode = GameMenus.getSubMenuCode(request);
         model.addAttribute("subMenuCode", subMenuCode);
 
-        /* 서브 메뉴 조회 */
+        // 서브 메뉴 조회
         List<MenuDetail> submenus = GameMenus.gets("game");
         model.addAttribute("submenus", submenus);
     }

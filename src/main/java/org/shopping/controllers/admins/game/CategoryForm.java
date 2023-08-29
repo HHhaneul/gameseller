@@ -1,4 +1,4 @@
-package org.shopping.controllers.admins;
+package org.shopping.controllers.admins.game;
 
 import lombok.Data;
 

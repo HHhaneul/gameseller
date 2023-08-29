@@ -3,7 +3,7 @@ package org.shopping.models.categories;
 import lombok.RequiredArgsConstructor;
 import org.shopping.commons.Utils;
 import org.shopping.commons.validators.RequiredValidator;
-import org.shopping.controllers.admins.CategoryForm;
+import org.shopping.controllers.admins.game.CategoryForm;
 import org.shopping.entities.Category;
 import org.shopping.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;

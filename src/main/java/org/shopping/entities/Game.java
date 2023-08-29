@@ -13,6 +13,10 @@ public class Game extends BaseEntity {
     @Id @GeneratedValue
     private Long gameNo;
 
+    @ToString.Exclude
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="cateCd", nullable = false)
+    private Category category;
 
     @Column(length=45, nullable = false)
     private String gid;
@@ -23,7 +27,7 @@ public class Game extends BaseEntity {
     private int stock;
 
     @Enumerated(EnumType.STRING)
-    @Column(length=25, nullable = false, name = "_status")
+    @Column(length=25, nullable = false)
     private GameStatus status = GameStatus.READY;
 
     @Lob
@@ -31,31 +35,14 @@ public class Game extends BaseEntity {
 
     private long listOrder;
 
-    /* 상품 메인 이미지 */
     @Transient
-    private List<FileInfo> mainImages;
+    private List<FileInfo> mainImages; // 상품 메인 이미지
 
-    /* 목록 이미지 */
     @Transient
-    private List<FileInfo> listImages;
+    private List<FileInfo> listImages; // 목록 이미지
 
-    /* 에디터 이미지 */
     @Transient
-    private List<FileInfo> editorImages;
+    private List<FileInfo> editorImages; // 에디터 이미지
 
-    /* 개발자 */
-    private List<String> developer;
-
-    /* 배급사 */
-    private List<String> publisher;
-    
-    /* 출시일 */
-    @Column(updatable = false)
-    private LocalDateTime releaseDate;
-
-    @ToString.Exclude
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="cateCd")
-    private Category category;
 
 }

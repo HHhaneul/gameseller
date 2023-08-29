@@ -97,7 +97,7 @@ public class MemberBoardController {
 
         search(model, "전체 게시판");
 
-        Page<MemberBoardData> data = listService.gets(memberBoardSearch, null);
+        Page<MemberBoardData> data = listService.gets(memberBoardSearch);
         model.addAttribute("items", data.getContent());
 
         return "board/index";
