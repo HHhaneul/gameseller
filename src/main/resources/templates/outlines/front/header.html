@@ -3,6 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="common">
     <section>
+        <a href="/" class="logo_img"></a>
         <th:block sec:authorize="isAuthenticated()">
             <span th:text="${#messages.msg('member.login.msg', session.memberInfo.userNm, session.memberInfo.userId)}"></span>
             <a th:href="@{/member/logout}" th:text="#{member.logout}"></a>

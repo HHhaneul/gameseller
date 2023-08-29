@@ -71,14 +71,14 @@ public class MemberController {
         }
         model.addAttribute("member", member);
         model.addAttribute("userId", userId);
-        return "member/updateMember";
+        return "member/update";
     }
 
     @PostMapping("/update")
     public String updateMember(@ModelAttribute Member updatedMember) {
         Member existingMember = saveService.findById(updatedMember.getUserId());
         if (existingMember == null) {
-            return "redirect:/member/updateMember";
+            return "redirect:/";
         }
         existingMember.setUserNm(updatedMember.getUserNm());
         existingMember.setEmail(updatedMember.getEmail());
