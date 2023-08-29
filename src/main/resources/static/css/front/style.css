@@ -58,7 +58,7 @@ input[type='radio']:checked+label { background:url("../../images/radio-on.png") 
     margin-bottom: 10px;
     border-radius: 5px;
     text-align: center;
-    background-color: #1b2838;
+    background-color: #FFFFFF;
     font-size: 18px;
     font-weight: bold;
 }
