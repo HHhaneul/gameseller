@@ -14,7 +14,6 @@ body {
     background-color: #f0f0f0;
     }
 
-.logo_img { border: 0; width=160; height=45; background:url("../../../static/images/logo.png") no-repeat left center; }
 
 /** 기준 너비 */
 .layout_width { max-width: 1300px;
@@ -250,3 +249,11 @@ button.sbtn.blue {
     background-color: #007bff;
     color: white;
     }
+
+.logo_img {
+    display: flex;
+    margin: 0;
+    width: 160;
+    height: 45;
+    background: url("/images/logo.png") left center no-repeat;
+}
