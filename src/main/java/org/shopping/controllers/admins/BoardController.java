@@ -101,10 +101,10 @@ public class BoardController {
 
         String URI = request.getRequestURI();
         // 서브 메뉴 처리
-        String subMenuCode = Menus.getSubMenuCode(request);
+        String subMenuCode = GameMenus.getSubMenuCode(request);
         model.addAttribute("subMenuCode", subMenuCode);
 
-        List<MenuDetail> submenus = Menus.gets("board");
+        List<MenuDetail> submenus = GameMenus.gets("board");
         model.addAttribute("submenus", submenus);
 
         model.addAttribute("pageTitle", "전체 게시판");
@@ -120,10 +120,10 @@ public class BoardController {
         String URI = request.getRequestURI();
 
         // 서브 메뉴 처리
-        String subMenuCode = Menus.getSubMenuCode(request);
+        String subMenuCode = GameMenus.getSubMenuCode(request);
         model.addAttribute("subMenuCode", subMenuCode);
 
-        List<MenuDetail> submenus = Menus.gets("board");
+        List<MenuDetail> submenus = GameMenus.gets("board");
         model.addAttribute("submenus", submenus);
 
         model.addAttribute("pageTitle", title);

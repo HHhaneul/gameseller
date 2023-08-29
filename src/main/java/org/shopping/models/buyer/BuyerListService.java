@@ -16,23 +16,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BuyerListService {
 
-    private final HttpServletRequest request;
-
     private final BuyerListRepository repository;
 
 
-    // buyerNo의 buyer entity를 get
+    /* buyerNo의 buyer entity를 get */
     public Buyer get(Long buyerNo) {
         Buyer buyer = repository.findById(buyerNo).orElseThrow(BuyerNotFoundException::new);
 
         return buyer;
     }
 
-    // buyer entity를 BuyerForm으로 반환
+    /* buyer entity를 BuyerForm으로 반환 */
     public BuyerForm getBuyerForm(Long buyerNo) {
         Buyer buyer = get(buyerNo);
         BuyerForm form = new ModelMapper().map(buyer, BuyerForm.class);
-        //  form.setStatus(book.getStatus().name());
 
         return form;
     }
@@ -46,7 +43,7 @@ public class BuyerListService {
 
     }
 
-    // SerchMode=DONE 인 list만 반환
+    /* SerchMode=DONE 인 list만 반환 */
     public List<Buyer> getBuyerDone() {
 
         Options opts = Options.builder()
@@ -61,6 +58,7 @@ public class BuyerListService {
     static class Options {
         private String gid;
         private SearchMode mode;
+
     }
 
     enum SearchMode {

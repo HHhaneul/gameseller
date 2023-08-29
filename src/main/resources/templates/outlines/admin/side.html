@@ -20,6 +20,12 @@
                 게임 관리
             </a>
         </li>
+        <li>
+            <a th:href="@{/admin/buyer/list}" th:classappend="${menuCode} == 'buyer' ? 'on'">
+                <i class="xi-view-list"></i>
+                주문 관리
+            </a>
+        </li>
     </ul>
 </aside>
 </html>

@@ -38,7 +38,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     private final HttpServletRequest request;
 
     /**
-     * 도서 목록
+     * 게임 목록
      *
      * @return
      */
@@ -53,7 +53,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     }
 
     /**
-     * 도서 목록 수정, 삭제
+     * 게임 목록 수정, 삭제
      *
      */
     @PostMapping
@@ -63,11 +63,11 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
 
         String script = "parent.location.reload();";
         model.addAttribute("script", script);
-        return "common/_execute_script";
+        return "commons/_execute_script";
     }
 
     /**
-     * 도서 등록
+     * 게임 등록
      *
      */
     @GetMapping("/add")
@@ -77,7 +77,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     }
 
     /**
-     * 도서 수정
+     * 게임 수정
      *
      */
     @GetMapping("/edit/{gameNo}")
@@ -90,7 +90,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     }
 
     /**
-     * 도서 등록/수정 처리
+     * 게임 등록/수정 처리
      *
      */
     @PostMapping("/save")
@@ -108,7 +108,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     }
 
     /**
-     * 도서분류 목록
+     * 게임분류 목록
      */
     @GetMapping("/category")
     public String category(Model model) {
@@ -120,7 +120,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     }
 
     /**
-     * 도서분류 추가, 수정, 삭제 처리
+     * 게임분류 추가, 수정, 삭제 처리
      *
      */
     @PostMapping("/category")
@@ -146,7 +146,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
 
         String script = "parent.location.reload();";
         model.addAttribute("script", script);
-        return "common/_execute_script";
+        return "commons/_execute_script";
 
     }
 
@@ -154,13 +154,13 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     public void commonProcess(Model model, String mode) {
 
 
-        String pageTitle = "도서 목록";
+        String pageTitle = "게임 목록";
         if (mode.equals("add")) {
-            pageTitle = "도서 등록";
+            pageTitle = "게임 등록";
         } else if (mode.equals("edit")) {
-            pageTitle = "도서 수정";
+            pageTitle = "게임 수정";
         } else if (mode.equals("category")) {
-            pageTitle = "도서 분류";
+            pageTitle = "게임 분류";
         }
 
         CommonProcess.super.commonProcess(model, pageTitle);

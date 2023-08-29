@@ -3,13 +3,16 @@ package org.shopping.controllers.buyer;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
+import org.shopping.commons.GameMenus;
 import org.shopping.commons.MenuDetail;
 import org.shopping.commons.libs.JavaScript;
+import org.shopping.controllers.admins.BoardSearch;
 import org.shopping.entities.Buyer;
 import org.shopping.models.buyer.BuyerListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +22,7 @@ import java.util.List;
 @Controller("BuyerController")
 @RequestMapping("/admin/buyer")
 @RequiredArgsConstructor
-public class BuyerController implements CommonProcess {/*
+public class BuyerController implements CommonProcess {
 
     private final BuyerListService listService;
 
@@ -29,7 +32,7 @@ public class BuyerController implements CommonProcess {/*
 
     // 주문 목록 조회
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(@ModelAttribute BoardSearch boardSearch, Model model) {
 
         commonProcess(model, "list");
 
@@ -88,5 +91,5 @@ public class BuyerController implements CommonProcess {/*
         List<MenuDetail> submenus = GameMenus.gets("buyer");
         model.addAttribute("submenus", submenus);
     }
-*/
+
 }

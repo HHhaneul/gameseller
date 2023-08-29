@@ -4,7 +4,7 @@
         <input type="file" id="file" class="dn" multiple>
         <table class="table-cols">
             <tr>
-                <th>도서분류</th>
+                <th>게임분류</th>
                 <td>
                     <th:block th:each="category, status : ${categories}">
                         <input type="radio" name="cateCd" th:value="${category.cateCd}" th:field="*{cateCd}" th:id="${'cateCd_' + status.index}">
@@ -27,7 +27,7 @@
                 </td>
             </tr>
             <tr>
-                <th>도서명</th>
+                <th>게임명</th>
                 <td>
                     <input type="text" name="gameNm" th:field="*{gameNm}">
                     <div class="errors" th:each="err : ${#fields.errors('gameNm')}" th:text="${err}"></div>
@@ -55,7 +55,7 @@
                 </td>
             </tr>
             <tr>
-                <th>도서 이미지(상세)</th>
+                <th>게임 이미지(상세)</th>
                 <td>
                     <div class="uploaded_images" id="game_main_images">
                         <div th:if="*{mainImages != null}" th:each="file : *{mainImages}" th:object="${file}" class="file_images" th:id="*{'file_' + id}">
@@ -69,7 +69,7 @@
                 </td>
             </tr>
             <tr>
-                <th>도서 이미지(목록)</th>
+                <th>게임 이미지(목록)</th>
                 <td>
                     <div class="uploaded_images" id="game_list_images">
                         <div th:if="*{listImages != null}" th:each="file : *{listImages}" th:object="${file}" class="file_images" th:id="*{'file_' + id}">

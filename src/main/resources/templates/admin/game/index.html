@@ -7,7 +7,7 @@
     <form method="get" th:action="@{/admin/game}" th:object="${gameSearch}">
         <table class="table-cols">
             <tr>
-                <th>도서분류</th>
+                <th>게임분류</th>
                 <td colspan="3">
                     <span th:each="category, status : ${categories}">
                         <input type="checkbox" name="cateCds" th:value="${category.cateCd}" th:field="*{cateCds}" th:id="${'cateCds_' + status.index}">
@@ -25,7 +25,7 @@
                 </td>
             </tr>
             <tr>
-                <th>도서번호</th>
+                <th>게임번호</th>
                 <td>
                     <input type="text" name="gameNo" th:field="*{gameNo}">
                 </td>
@@ -34,8 +34,8 @@
                     <div class="input_grp">
                         <select name="sopt" th:field="*{sopt}">
                             <option value="all">통합검색</option>
-                            <option value="gameNm">도서명</option>
-                            <option value="gameNo">도서번호</option>
+                            <option value="gameNm">게임명</option>
+                            <option value="gameNo">게임번호</option>
                         </select>
                         <input type="text" name="skey" th:field="*{skey}" placeholder="검색어 입력">
                     </div>
@@ -48,7 +48,7 @@
     </form>
 
 
-    <h2>도서 목록</h2>
+    <h2>게임 목록</h2>
     <form name="frmList" method="post" th:action="@{/admin/game}" target="ifrmProcess" autocomplete="off">
         <input type="hidden" name="mode" value="edit">
         <table class="table-rows">
@@ -58,10 +58,10 @@
                         <input type="checkbox" class="checkall" id="checkall" data-target-name="chkNo">
                         <label for="checkall" class="standalone"></label>
                     </th>
-                    <th width="100">도서번호</th>
+                    <th width="100">게임번호</th>
                     <th width="150">분류</th>
                     <th width="150">판매상태</th>
-                    <th>도서명</th>
+                    <th>게임명</th>
                     <th width="150">판매가</th>
                     <th width="150">재고</th>
                     <th width="150">진열가중치</th>
@@ -100,8 +100,8 @@
             </tbody>
         </table>
         <div class="table-action" th:if="${items != null && items.size() > 0}">
-            <button type="button" class="form_action sbtn" data-mode="delete" data-target-name="frmList">선택 도서 삭제</button>
-            <button type="button" class="form_action sbtn blue" data-mode="edit" data-target-name="frmList">선택 도서 수정</button>
+            <button type="button" class="form_action sbtn" data-mode="delete" data-target-name="frmList">선택 게임 삭제</button>
+            <button type="button" class="form_action sbtn blue" data-mode="edit" data-target-name="frmList">선택 게임 수정</button>
         </div>
     </form>
     <th:block th:if="${pagination != null}" th:replace="~{commons/_pagination::pagination}"></th:block>
