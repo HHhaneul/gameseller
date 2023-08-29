@@ -34,4 +34,7 @@ public class MemberSaveService {
     public Member findById(String userId) {
         return memberRepository.findByUserId(userId);
     }
+    public void save(Member member) {
+        memberRepository.save(member);
+    }
 }
