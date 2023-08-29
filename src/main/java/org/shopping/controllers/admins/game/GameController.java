@@ -3,6 +3,7 @@ package org.shopping.controllers.admins.game;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.shopping.CommonProcess;
 import org.shopping.commons.*;
 import org.shopping.commons.constants.GameStatus;
@@ -26,6 +27,7 @@ import java.util.List;
 @RequestMapping("/admin/game")
 @RequiredArgsConstructor
 public class GameController implements CommonProcess, ScriptExceptionProcess {
+
 
     private String tplCommon = "admin/game/";
     private final GameSaveService saveService;
@@ -83,7 +85,20 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     @GetMapping("/edit/{gameNo}")
     public String edit(@PathVariable Long gameNo, Model model) {
         commonProcess(model, "edit");
-        GameForm gameForm = infoService.getGameForm(gameNo);
+        Game game = infoService.get(gameNo);
+        GameForm gameForm = new ModelMapper().map(game, GameForm.class);
+        gameForm.setMode("edit");
+        gameForm.setCateCd(game.getCategory().getCateCd());
+        gameForm.setStatus(game.getStatus().toString());
+        gameForm.setGameNm(game.getGameNm());
+        gameForm.setPrice(game.getPrice());
+        gameForm.setStock(game.getStock());
+        gameForm.setListOrder(game.getListOrder());
+        gameForm.setDescription(game.getDescription());
+        gameForm.setMainImages(game.getMainImages());
+        gameForm.setEditorImages(game.getEditorImages());
+
+
         model.addAttribute("gameForm", gameForm);
 
         return tplCommon + "edit";
@@ -190,4 +205,5 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         List<MenuDetail> submenus = GameMenus.gets("game");
         model.addAttribute("submenus", submenus);
     }
+
 }

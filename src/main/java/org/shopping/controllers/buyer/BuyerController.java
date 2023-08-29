@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
 import org.shopping.commons.GameMenus;
 import org.shopping.commons.MenuDetail;
+import org.shopping.commons.ScriptExceptionProcess;
 import org.shopping.commons.libs.JavaScript;
 import org.shopping.controllers.admins.BoardSearch;
 import org.shopping.entities.Buyer;
@@ -22,7 +23,7 @@ import java.util.List;
 @Controller("BuyerController")
 @RequestMapping("/admin/buyer")
 @RequiredArgsConstructor
-public class BuyerController implements CommonProcess {
+public class BuyerController implements CommonProcess, ScriptExceptionProcess {
 
     private final BuyerListService listService;
 
@@ -37,6 +38,7 @@ public class BuyerController implements CommonProcess {
         commonProcess(model, "list");
 
         List<Buyer> buyersDone = listService.getBuyerDone();
+        System.out.println(buyersDone);
         model.addAttribute("items", buyersDone);
 
         return tplCommon + "list";

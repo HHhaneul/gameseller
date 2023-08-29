@@ -23,4 +23,9 @@ public class Cart extends BaseEntity {
 
     /* 주문한 상품의 수량 */
     private Long buyerCnt;
+
+    /* 사용자 연동 */
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="userNo", nullable = false)
+    private Member member;
 }

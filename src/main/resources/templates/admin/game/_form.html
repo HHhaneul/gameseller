@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="form" th:object="${gameForm}">
+        <input th:if="*{mode != null}" type="hidden" name="mode" th:field="*{mode}">
         <input type="file" id="file" class="dn" multiple>
         <table class="table-cols">
             <tr>

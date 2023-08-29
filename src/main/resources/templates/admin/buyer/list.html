@@ -28,20 +28,30 @@
         <input type="hidden" name="mode" value="list">
         <form name='frmList' method="post" th:action="@{/admin/buyer/list}" autocomplete="off" target="ifrmProcess">
         <table class="table-rows">
+            <thead>
             <tr>
-                <th th:text="#{buyer.buyerNo}"></th>
-                <th th:text="#{buyer.buyerNm}"></th>
-                <th th:text="#{buyer.status}"></th>
-                <th th:text="#{buyer.gid}"></th>
+                <th width="40">
+                    <input type="checkbox" class="checkall" id="checkall" data-target-name="bId">
+                    <label for="checkall"></label>
+                </th>
+                <th width="150" th:text="#{buyer.buyerNo}"></th>
+                <th width="150" th:text="#{buyer.buyerNm}"></th>
+                <th width="150" th:text="#{buyer.status}"></th>
+                <th width="150" th:text="#{buyer.gid}"></th>
                 <th width="150" th:text="#{buyer.buyerCnt}"></th>
-                <th th:text="#{buyer.sumPrice}"></th>
-                <th th:text="#{buyer.createdAt}"></th>
+                <th width="150" th:text="#{buyer.sumPrice}"></th>
+                <th width="150" th:text="#{buyer.createdAt}"></th>
             </tr>
+            </thead>
 
             <tbody>
 
             <th:block th:if="${items != null && items.size() > 0}">
             <tr th:each="item, status : ${items}" th:object="${item}">
+                <td align="center">
+                    <input type="checkbox" name="buyerNo" th:value="*{buyerNo}" th:id="${'buyerNo_' + status.index}">
+                    <label th:for="${'buyerNo_' + status.index}"></label>
+                </td>
                 <td>
                     <a th:href="@{/admin/buyer/view/{id}(id=*{buyerNo})}" th:text="*{buyerNo}"></a>
                 </td>
