@@ -67,37 +67,13 @@ public class MemberController {
 
         Member member = memberRepository.findByUserNmAndMobile(findIdForm.getUserNm(), findIdForm.getMobile());
         if (member != null) {
-            findIdForm.setFoundUserId(member.getUserId());
+            findIdForm.setFoundUserId(member.getUserId().substring(0,member.getUserId().length()-3)+"***");
         } else {
             model.addAttribute("error", "이름 또는 휴대전화번호를 다시 확인해주세요.");
         }
 
         return "member/findId";
     }
-    /*@GetMapping("/idlookup-form")
-    public String findId(@ModelAttribute FindIdForm findIdForm, Member member, Model model, String mobile) {
-
-        return "member/idlookup-form";
-    }
-    @GetMapping("/idlookup-result")
-    public String findIdView(@Valid FindIdForm findIdForm, MemberInfo info, Model model, String mobile){
-
-        if (findIdForm.getMobile().equals(mobile)) {
-            info = (MemberInfo) infoService.loadUserByUsername(findIdForm.getUserNm());
-        }
-        System.out.println("인포" + info);
-        return "member/idlookup-result";
-    }
-
-    @GetMapping("/idlookup-result/{userId}")
-    public String findIdview(@PathVariable("userId") String userId, Model model) {
-        Member member = memberRepository.findByUserId(userId);
-        if (member == null) {
-            return "redirect:/member/join";
-        }
-        model.addAttribute("member", member);
-        return "member/idlookup-form";
-    }*/
 
 
     private void commonProcess(Model model) {
