@@ -66,8 +66,11 @@ public class MemberController {
         }
 
         Member member = memberRepository.findByUserNmAndMobile(findIdForm.getUserNm(), findIdForm.getMobile());
+
         if (member != null) {
-            findIdForm.setFoundUserId(member.getUserId().substring(0,member.getUserId().length()-3)+"***");
+            String userId = member.getUserId().substring(0,member.getUserId().length()-3)+"***";
+            findIdForm.setFoundUserId(userId);
+            model.addAttribute("message", "찾으시는 아이디는 " + userId + "입니다.");
         } else {
             model.addAttribute("error", "이름 또는 휴대전화번호를 다시 확인해주세요.");
         }

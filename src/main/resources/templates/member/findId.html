@@ -22,7 +22,7 @@
 </form>
 <dl>
 <dt th:if="${findIdForm.foundUserId}">
-    <dd>아이디 : <strong th:text="${findIdForm.foundUserId}"></strong></dd>
+    <th:block th:replace="~{admin/commons/_message::message}"></th:block>
 </dt>
 <dt th:text="${error}"></dt>
 </dl>
