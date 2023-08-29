@@ -124,7 +124,7 @@ public class MemberBoardController {
     @ExceptionHandler(Exception.class)
     public String errorHandler(Exception e, Model model) {
         model.addAttribute("scripts", alertBack(e.getMessage()));
-        return "commons/execute_script";
+        return "commons/_execute_script";
     }
 
     private void commonProcess(String bId, String action, Model model) {

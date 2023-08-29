@@ -15,10 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-@Controller("adminGameController")
+@Controller("_adminGameController")
 @RequestMapping("/admin/game")
 @RequiredArgsConstructor
 public class GameController implements CommonProcess, ScriptExceptionProcess {
@@ -47,7 +46,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         model.addAttribute("items", data.getContent());
         model.addAttribute("pagination", data.getPagination());
 
-        return "admin/game/index";
+        return tplCommon + "index";
     }
 
     /**
@@ -61,7 +60,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
 
         String script = "parent.location.reload();";
         model.addAttribute("script", script);
-        return "common/_execute_script";
+        return "commons/_execute_script";
     }
 
     /**
@@ -103,6 +102,46 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         saveService.save(gameForm);
 
         return "redirect:/admin/game";
+    }
+
+    @GetMapping("/category")
+    public String category(Model model) {
+        commonProcess(model, "category");
+        List<Category> items = categoryInfoService.getListAll();
+        model.addAttribute("items", items);
+
+        return tplCommon + "category";
+    }
+
+    /**
+     * 게임분류 추가, 수정, 삭제 처리
+     *
+     */
+    @PostMapping("/category")
+    public String categorySave(CategoryForm form, Model model) {
+        commonProcess(model, "category");
+
+        String mode = form.getMode();
+        mode = mode == null || mode.isBlank() ? "add" : mode;
+        try {
+            if (mode.equals("add")) {
+                categorySaveService.save(form);
+
+            } else if (mode.equals("edit")) {
+                categorySaveService.saveList(form);
+
+            } else if (mode.equals("delete")) {
+                categoryDeleteService.deleteList(form);
+            }
+        } catch (CommonException e) {
+            e.printStackTrace();
+            /* 자바스크립트 alert 형태로 에러 출력 */
+            throw new AlertException(e.getMessage());
+        }
+
+        String script = "parent.location.reload();";
+        model.addAttribute("script", script);
+        return "commons/_execute_script";
     }
 
     @Override
