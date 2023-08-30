@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.shopping.entities.Member;
 import org.shopping.models.member.MemberInfo;
 import org.shopping.models.member.MemberInfoService;
+import org.shopping.models.member.MemberNotFoundException;
 import org.shopping.models.member.MemberSaveService;
 
 
@@ -31,6 +32,7 @@ public class MemberController {
     private final MemberInfoService infoService;
     private final HttpSession session;
     private final PasswordEncoder passwordEncoder;
+
 
 
     @GetMapping("/join")
@@ -76,19 +78,24 @@ public class MemberController {
         }
 
         model.addAttribute("userId", userId);*/
+
         return "member/update";
     }
 
     @PostMapping("/update")
-    public String updateMember(@ModelAttribute Member updatedMember) {
-        Member existingMember = saveService.findById(updatedMember.getUserId());
-        if (existingMember == null) {
+    public String updateMember(@ModelAttribute Member updatedMember ) {
+        MemberInfo memberInfo = (MemberInfo) session.getAttribute("memberInfo");
+        Long userNo = memberInfo.getUserNo();
+        Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
+
+        if (memberInfo == null) {
             return "redirect:/";
         }
-        existingMember.setUserNm(updatedMember.getUserNm());
-        existingMember.setEmail(updatedMember.getEmail());
-        existingMember.setMobile(updatedMember.getMobile());
-        saveService.save(existingMember);
+
+        member.setUserNm(updatedMember.getUserNm());
+        member.setEmail(updatedMember.getEmail());
+        member.setMobile(updatedMember.getMobile());
+        saveService.save(member);
         return "redirect:/";
     }
 
