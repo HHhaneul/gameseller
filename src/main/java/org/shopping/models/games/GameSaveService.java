@@ -38,7 +38,6 @@ public class GameSaveService implements RequiredValidator {
             game.setGid(gid); // 그룹 ID는 처음 추가할때만 저장, 그 이후는 변경 불가
         }
 
-        String cateCd = form.getCateCd();
         game.setCategory(categoryInfoService.get(form.getCateCd()));
         game.setGameNm(form.getGameNm());
         game.setPrice(form.getPrice());
@@ -52,22 +51,6 @@ public class GameSaveService implements RequiredValidator {
         /** 파일 업로드 완료 처리 */
         fileInfoRepository.processDone(gid);
     }
-    /**
-    public void saveList(GameForm form) {
-
-        List<Integer> chks = form.getChkNo();
-        nullCheck(chks, utils.getMessage("NotSelected.edit", "validation"));
-
-        for (Integer chk : chks) {
-            String gameNo = utils.getParam("gameNo_" + chk);
-            Game item = gameRepository.findById(Long.valueOf(gameNo)).orElse(null);
-            if (item == null) continue;
-
-        }
-
-        gameRepository.flush();
-    }
-     */
     public void saveList(GameForm form) {
         List<Integer> chks = form.getChkNo();
         for (int chk : chks) {

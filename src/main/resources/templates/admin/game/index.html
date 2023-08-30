@@ -65,6 +65,7 @@
                     <th width="150">판매가</th>
                     <th width="150">재고</th>
                     <th width="150">진열가중치</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -90,6 +91,9 @@
                     </td>
                     <td>
                         <input type="number" th:name="${'listOrder_' + status.index}" th:value="*{listOrder}">
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/game/edit/{gameNo}(gameNo=*{gameNo})}" class="sbtn">게임 수정</a>
                     </td>
                 </tr>
                 </th:block>

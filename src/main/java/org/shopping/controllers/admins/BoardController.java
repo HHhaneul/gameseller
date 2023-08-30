@@ -12,6 +12,7 @@ import org.shopping.entities.MemberBoardData;
 import org.shopping.models.board.config.BoardConfigInfoService;
 import org.shopping.models.board.config.BoardConfigListService;
 import org.shopping.models.board.config.BoardConfigSaveService;
+import org.shopping.models.member.board.MemberBoardInfoService;
 import org.shopping.models.member.board.MemberBoardListService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,8 @@ public class BoardController {
     private final BoardConfigInfoService boardConfigInfoService;
     private final BoardConfigListService boardConfigListService;
 
-    private final MemberBoardListService listService;
+    private final MemberBoardListService memberBoardListService;
+    private final MemberBoardInfoService memberBoardInfoService;
 
     /**
      * 게시판 목록
@@ -110,7 +112,7 @@ public class BoardController {
         model.addAttribute("pageTitle", "전체 게시판");
         model.addAttribute("title", "전체 게시판");
 
-        Page<MemberBoardData> data = listService.gets(memberBoardSearch);
+        Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch);
         model.addAttribute("items", data.getContent());
 
         return "admin/board/posts";
@@ -127,6 +129,42 @@ public class BoardController {
         model.addAttribute("submenus", submenus);
 
         model.addAttribute("pageTitle", title);
+        model.addAttribute("title", title);
+    }
+
+    @GetMapping("/{bId}")
+    public String list(@ModelAttribute MemberBoardSearch memberBoardSearch, @PathVariable String bId, Model model) {
+        search(model, bId);
+
+        Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch, bId);
+        model.addAttribute("items", data.getContent());
+
+        return "admin/board/list";
+    }
+
+    @GetMapping("/view/{id}")
+    public String view(@PathVariable("id") Long id, Model model) {
+
+        MemberBoardData memberboardData = memberBoardInfoService.get(id);
+        model.addAttribute("memberBoardData", memberboardData);
+        model.addAttribute("pageTitle", memberboardData.getBoard().getBId());
+
+
+        return "admin/board/view";
+    }
+
+
+    private void search(Model model, String title){
+
+        String URI = request.getRequestURI();
+        // 서브 메뉴 처리
+        String subMenuCode = GameMenus.getSubMenuCode(request);
+        model.addAttribute("subMenuCode", subMenuCode);
+
+        List<MenuDetail> submenus = GameMenus.gets("board");
+        model.addAttribute("submenus", submenus);
+
+        model.addAttribute("pageTitle", "게시글 검색");
         model.addAttribute("title", title);
     }
 }
