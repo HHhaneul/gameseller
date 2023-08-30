@@ -45,4 +45,6 @@ public class Game extends BaseEntity {
     private List<FileInfo> editorImages; // 에디터 이미지
 
 
+
+
 }

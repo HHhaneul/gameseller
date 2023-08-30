@@ -6,12 +6,15 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.CommonProcess;
 import org.shopping.commons.*;
+import org.shopping.commons.configs.ConfigInfoService;
+import org.shopping.commons.configs.ConfigSaveService;
 import org.shopping.commons.constants.GameStatus;
 import org.shopping.entities.Category;
 import org.shopping.entities.Game;
 import org.shopping.models.categories.CategoryDeleteService;
 import org.shopping.models.categories.CategoryInfoService;
 import org.shopping.models.categories.CategorySaveService;
+import org.shopping.models.games.GameDeleteService;
 import org.shopping.models.games.GameInfoService;
 import org.shopping.models.games.GameSaveService;
 import org.shopping.models.games.GameSearch;
@@ -32,6 +35,10 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     private String tplCommon = "admin/game/";
     private final GameSaveService saveService;
     private final GameInfoService infoService;
+    private final GameDeleteService deleteService;
+
+    private final ConfigInfoService configInfoService;
+    private final ConfigSaveService configSaveService;
 
     private final CategoryInfoService categoryInfoService;
     private final CategorySaveService categorySaveService;
@@ -59,13 +66,35 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
      *
      */
     @PostMapping
-    public String indexPs(Model model) {
+    public String indexPs(GameForm form, Model model) {
         commonProcess(model, "list");
+
+        String mode = form.getMode();
+        mode = mode == null || mode.isBlank() ? "add" : mode;
+        try {
+            if (mode.equals("add")) {
+                System.out.println("추가");
+                saveService.save(form);
+                /* 수정 */
+            } else if (mode.equals("edit")) {
+                saveService.saveList(form);
+
+                /* 삭제 */
+            } else if (mode.equals("delete")) {
+                System.out.println("삭제");
+                deleteService.deleteList(form);
+            }
+            /* 등록 */
+        } catch (CommonException e) {
+            e.printStackTrace();
+            throw new AlertException(e.getMessage()); // 자바스크립트 alert 형태로 에러 출력
+        }
 
 
         String script = "parent.location.reload();";
         model.addAttribute("script", script);
-        return "commons/_execute_script";
+        return "common/_execute_script";
+
     }
 
     /**
@@ -127,7 +156,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
      */
     @GetMapping("/category")
     public String category(Model model) {
-        commonProcess(model, "category");
+        commonProcess(model, "분류");
         List<Category> items = categoryInfoService.getListAll();
         model.addAttribute("items", items);
 
@@ -145,20 +174,23 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         String mode = form.getMode();
         mode = mode == null || mode.isBlank() ? "add" : mode;
         try {
-            if (mode.equals("add")) { // 등록
+            if (mode.equals("add")) {
+                System.out.println("추가");
                 categorySaveService.save(form);
-
-            } else if (mode.equals("edit")) { // 수정
+            /* 수정 */
+            } else if (mode.equals("edit")) {
+                System.out.println("수정");
                 categorySaveService.saveList(form);
-
-            } else if (mode.equals("delete")) { // 삭제
+            /* 삭제 */
+            } else if (mode.equals("delete")) {
+                System.out.println("삭제");
                 categoryDeleteService.deleteList(form);
             }
+            /* 등록 */
         } catch (CommonException e) {
             e.printStackTrace();
             throw new AlertException(e.getMessage()); // 자바스크립트 alert 형태로 에러 출력
         }
-
         String script = "parent.location.reload();";
         model.addAttribute("script", script);
         return "commons/_execute_script";
@@ -171,10 +203,12 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
 
         String pageTitle = "게임 목록";
         if (mode.equals("add")) {
+            System.out.println("추가");
             pageTitle = "게임 등록";
         } else if (mode.equals("edit")) {
+            System.out.println("수정");
             pageTitle = "게임 수정";
-        } else if (mode.equals("category")) {
+        } else if (mode.equals("분류")) {
             pageTitle = "게임 분류";
         }
 
@@ -205,5 +239,6 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         List<MenuDetail> submenus = GameMenus.gets("game");
         model.addAttribute("submenus", submenus);
     }
+
 
 }

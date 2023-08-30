@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.shopping.commons.constants.GameStatus;
 import org.shopping.entities.FileInfo;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,4 +45,6 @@ public class GameForm {
 
     /* 에디터 이미지 */
     private List<FileInfo> editorImages;
+
+    private List<Integer> chkNo;
 }

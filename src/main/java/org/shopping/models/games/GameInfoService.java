@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.commons.ListData;
 import org.shopping.commons.Pagination;
+import org.shopping.commons.configs.ConfigInfoService;
 import org.shopping.commons.constants.GameStatus;
 import org.shopping.controllers.admins.game.GameForm;
 import org.shopping.entities.*;
@@ -26,6 +27,8 @@ public class GameInfoService{
     private final GameRepository gameRepository;
     private final FileInfoService fileInfoService;
     private final HttpServletRequest request;
+
+    private final ConfigInfoService configInfoService;
 
     /**
      * 도서 개별 조회
