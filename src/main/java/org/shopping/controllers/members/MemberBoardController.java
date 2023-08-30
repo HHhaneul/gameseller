@@ -18,6 +18,7 @@ import org.shopping.models.member.board.MemberBoardInfoService;
 import org.shopping.models.member.board.MemberBoardListService;
 import org.shopping.models.member.board.MemberBoardSaveService;
 import org.shopping.repositories.member.BoardDataRepository;
+import org.shopping.repositories.member.MemberRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

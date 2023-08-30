@@ -1,7 +1,10 @@
 package org.shopping.models.member;
 
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.shopping.controllers.members.JoinForm;
 import org.shopping.entities.Member;
 import org.shopping.entities.QMember;
 import org.shopping.repositories.member.MemberRepository;
@@ -64,5 +67,18 @@ public class MemberInfoService implements UserDetailsService {
 
     }
 
+    public JoinForm adminMemberUpdate(){
 
+        JoinForm joinForm = new JoinForm();
+        String aa = new String();
+
+        return null;
+    }
+
+    class Student{
+        private String stuName;
+        private Long stuNo;
+
+
+    }
 }

@@ -31,6 +31,9 @@ public class MemberSaveService {
         memberRepository.saveAndFlush(member);
 
     }
+    public void update(JoinForm joinForm){
+
+    }
     public Member findById(String userId) {
         return memberRepository.findByUserId(userId);
     }

@@ -8,8 +8,7 @@ import org.shopping.commons.constants.Role;
 @Entity
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 public class Board extends BaseMemberEntity {
     /* 게시판 ID */
     @Id

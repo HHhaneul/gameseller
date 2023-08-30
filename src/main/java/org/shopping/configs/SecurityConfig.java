@@ -35,7 +35,7 @@ public class SecurityConfig {
                     /* 회원 전용 */
                     .requestMatchers("/mypage/**").authenticated()
                     /* 관리자 전용 */
-                    .requestMatchers("/admin/**").hasAuthority("ADMIN") // 관리자만 접근 가능
+//                    .requestMatchers("/admin/**").hasAuthority("ADMIN") // 관리자만 접근 가능
                     /* 회원 / 비회원 / 관리자 접근 가능 */
                     .anyRequest().permitAll();
         });

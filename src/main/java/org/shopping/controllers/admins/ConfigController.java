@@ -29,9 +29,7 @@ public class ConfigController {
     @PostMapping
     public String configPs(ConfigForm configForm, Model model) {
         commonProcess(model);
-
         saveService.save(code, configForm);
-
         model.addAttribute("message", "설정이 저장되었습니다.");
 
         return "admin/config";
