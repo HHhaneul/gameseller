@@ -11,13 +11,13 @@
             <input type="hidden" th:field="*{userId}">
             <br>
             <label for="userNm" th:text="#{userNm}"></label>
-            <input type="text" th:field="*{userNm}">
+            <input type="text" th:name="${'userNm_'}" th:value="*{userNm}">
             <br>
             <label for="email" th:text="#{email}"></label>
-            <input type="email" th:name="${email_}" th:value="*{email}">
+            <input type="email" th:name="${'email_'}" th:value="*{email}">
             <br>
             <label for="mobile" th:text="#{mobile}"></label>
-            <input type="text" th:field="*{mobile}">
+            <input type="text" th:name="${'mobile_'}" th:value="*{mobile}">
             <br><br>
             <a th:href="@{/member/changePassword}" th:text="#{member.change.password}"></a>
             <br>

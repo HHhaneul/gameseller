@@ -99,8 +99,13 @@ public class MemberController {
         member.setEmail(updatedMember.getEmail());
         member.setMobile(updatedMember.getMobile());
         */
+        ((MemberInfo) session.getAttribute("memberInfo")).setEmail(utils.getParam("email_"));
+        ((MemberInfo) session.getAttribute("memberInfo")).setUserNm(utils.getParam("userNm_"));
+        ((MemberInfo) session.getAttribute("memberInfo")).setMobile(utils.getParam("mobile_"));
         member.setEmail(utils.getParam("email_"));
-        memberRepository.flush();
+        member.setUserNm(utils.getParam("userNm_"));
+        member.setMobile(utils.getParam("mobile_"));
+        System.out.println("이메일" + utils.getParam("email_"));
         saveService.save(member);
         return "redirect:/";
     }

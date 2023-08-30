@@ -11,7 +11,7 @@
         <th:block sec:authorize="isAuthenticated()">
             <span th:text="${#messages.msg('member.login.msg', session.memberInfo.userNm, session.memberInfo.userId)}"></span>
             <a th:href="@{/member/logout}" th:text="#{member.logout}"></a>
-            <a th:href="@{/member/edit/{userId}(userId=${session.memberInfo.userId})}" th:text="#{member.myInfo}"></a>
+            <a th:href="@{/member/edit}" th:text="#{member.myInfo}"></a>
 
             <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}" th:text="#{adminPage}"></a>
         </th:block>
