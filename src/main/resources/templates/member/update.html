@@ -14,7 +14,7 @@
             <input type="text" th:field="*{userNm}">
             <br>
             <label for="email" th:text="#{email}"></label>
-            <input type="email" th:field="*{email}">
+            <input type="email" th:name="${email_}" th:value="*{email}">
             <br>
             <label for="mobile" th:text="#{mobile}"></label>
             <input type="text" th:field="*{mobile}">

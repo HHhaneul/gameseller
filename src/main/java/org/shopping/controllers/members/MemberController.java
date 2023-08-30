@@ -4,6 +4,7 @@ import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.shopping.commons.Utils;
 import org.shopping.entities.Member;
 import org.shopping.models.member.MemberInfo;
 import org.shopping.models.member.MemberInfoService;
@@ -32,7 +33,7 @@ public class MemberController {
     private final MemberInfoService infoService;
     private final HttpSession session;
     private final PasswordEncoder passwordEncoder;
-
+    private final Utils utils;
 
 
     @GetMapping("/join")
@@ -88,13 +89,18 @@ public class MemberController {
         Long userNo = memberInfo.getUserNo();
         Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 
+
+
         if (memberInfo == null) {
             return "redirect:/";
         }
-
+        /*
         member.setUserNm(updatedMember.getUserNm());
         member.setEmail(updatedMember.getEmail());
         member.setMobile(updatedMember.getMobile());
+        */
+        member.setEmail(utils.getParam("email_"));
+        memberRepository.flush();
         saveService.save(member);
         return "redirect:/";
     }
