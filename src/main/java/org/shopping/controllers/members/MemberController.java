@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.shopping.entities.Member;
+import org.shopping.models.member.MemberInfo;
 import org.shopping.models.member.MemberInfoService;
 import org.shopping.models.member.MemberSaveService;
 
@@ -63,14 +64,18 @@ public class MemberController {
         model.addAttribute("pageTitle", "회원가입");
     }
 
-    @GetMapping("/edit/{userId}")
-    public String showUpdateForm(@PathVariable("userId") String userId, Model model) {
-        Member member = saveService.findById(userId);
+    @GetMapping("/edit")
+    public String showUpdateForm(String userId, Model model) {
+        MemberInfo memberInfo = (MemberInfo) session.getAttribute("memberInfo");
+        System.out.println(memberInfo);
+        model.addAttribute("member", memberInfo);
+
+        /*Member member = saveService.findById(userId);
         if (member == null) {
             return "redirect:/";
         }
-        model.addAttribute("member", member);
-        model.addAttribute("userId", userId);
+
+        model.addAttribute("userId", userId);*/
         return "member/update";
     }
 
@@ -86,6 +91,7 @@ public class MemberController {
         saveService.save(existingMember);
         return "redirect:/";
     }
+
     @GetMapping("/changePassword")
     public String showChangePasswordForm(Model model) {
         PasswordChangeForm passwordChangeForm = new PasswordChangeForm();
