@@ -94,22 +94,10 @@ public class MemberController {
     @GetMapping("/{userNo}/update")
     public String update(@PathVariable Long userNo,  @ModelAttribute JoinForm joinForm
     , Model model){
-        Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 
-        ObjectMapper om = new ObjectMapper();
 
-        TypeReference<Member> members = om.readValue(String.valueOf(member.getUserNo(), ))
+        joinForm = configInfoService.get(String.valueOf(userNo), JoinForm.class);
 
-        System.out.println("멤버: " + member);
-
-        joinForm = configInfoService.get(String.valueOf(member.getUserNo()), JoinForm.class, new TypeReference<JoinForm>() {
-            @Override
-            public Type getType() {
-                return super.getType();
-            }
-        });
-
-        System.out.println("조인폼: " + joinForm);
 
         model.addAttribute("joinForm", joinForm == null ? new JoinForm() : joinForm);
 
