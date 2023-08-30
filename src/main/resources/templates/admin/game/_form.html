@@ -91,7 +91,7 @@
                     <div class="errors" th:each="err : ${#fields.errors('description')}" th:text="${err}"></div>
                     <button type="button" class="sbtn upload_files mt10" data-location="editor" data-image-only="true">이미지 추가</button>
                     <div class="uploaded_images" id="game_editor_images">
-                        <span th:if="*{listImages != null}" th:each="file : *{listImages}" th:object="${file}" class="file_items" th:id="*{'file_' + id}">
+                        <span th:if="*{editorImages != null}" th:each="file : *{editorImages}" th:object="${file}" class="file_items" th:id="*{'file_' + id}">
                             <a th:href="@{/file/download/{id}(id=*{id})}" th:text="*{fileName}"></a>
                             <i class="xi-arrow-top insert_editor" th:data-url="*{fileUrl}"></i>
                             <a th:href="@{/file/delete/{id}(id=*{id})}" onclick="return confirm('정말 삭제하시겠습니까?');" target="ifrmProcess" class="remove">

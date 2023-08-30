@@ -52,7 +52,7 @@ public class GameSaveService implements RequiredValidator {
         /** 파일 업로드 완료 처리 */
         fileInfoRepository.processDone(gid);
     }
-
+    /**
     public void saveList(GameForm form) {
 
         List<Integer> chks = form.getChkNo();
@@ -63,11 +63,19 @@ public class GameSaveService implements RequiredValidator {
             Game item = gameRepository.findById(Long.valueOf(gameNo)).orElse(null);
             if (item == null) continue;
 
-            configSaveService.save(String.valueOf(item.getGameNo()), form);
+        }
 
-            System.out.println("게임: " + item);
-            System.out.println("폼: " + form);
-
+        gameRepository.flush();
+    }
+     */
+    public void saveList(GameForm form) {
+        List<Integer> chks = form.getChkNo();
+        for (int chk : chks) {
+            String gameNo = utils.getParam("gameNo_" + chk);
+            Game item = gameRepository.findById(Long.valueOf(gameNo)).orElse(null);
+            item.setStatus(GameStatus.valueOf(utils.getParam("status_" + chk)));
+            item.setStock(Integer.parseInt(utils.getParam("stock_" + chk)));
+            item.setListOrder(Long.parseLong(utils.getParam("listOrder_" + chk)));
         }
         gameRepository.flush();
     }

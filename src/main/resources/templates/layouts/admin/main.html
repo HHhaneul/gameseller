@@ -4,7 +4,9 @@
 <head>
   <meta name="_csrf" th:content="${_csrf.token}">
   <meta name="_csrf_header" th:content="${_csrf.headerName}">
+  <meta name="_ctx_path" th:content="@{/}">
   <meta name="description" th:content="${@siteConf.get('siteDescription')}">
+
   <title>
     <th:block th:if="${pageTitle != null}" th:text="${pageTitle + ' ::'}"></th:block>
     <th:block th:text="${@siteConf.get('siteTitle')}"></th:block>
