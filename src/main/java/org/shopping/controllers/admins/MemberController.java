@@ -92,11 +92,20 @@ public class MemberController {
     }
 */
     @GetMapping("/{userNo}/update")
-    public String update(@PathVariable Long userNo,  @ModelAttribute JoinForm joinForm
+    public String update(@PathVariable Long userNo, JoinForm joinForm
     , Model model){
 
+        Member member = memberRepository.findById(userNo).get();
 
-        joinForm = configInfoService.get(String.valueOf(userNo), JoinForm.class);
+        System.out.println("멤버: " + member);
+
+        member = configInfoService.get("memberCode", Member.class);
+
+        System.out.println("멤버: " + member);
+
+        System.out.println("조인폰 :" + joinForm);
+
+        model.addAttribute("joinForm", joinForm);
 
 
         model.addAttribute("joinForm", joinForm == null ? new JoinForm() : joinForm);
