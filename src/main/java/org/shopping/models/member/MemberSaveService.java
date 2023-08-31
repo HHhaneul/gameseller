@@ -31,5 +31,11 @@ public class MemberSaveService {
         memberRepository.saveAndFlush(member);
 
     }
+    public Member findById(String userId) {
+        return memberRepository.findByUserId(userId);
+    }
 
+    public void save(Member member) {
+        memberRepository.save(member);
+    }
 }

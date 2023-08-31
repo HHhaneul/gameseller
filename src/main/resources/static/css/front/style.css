@@ -1,6 +1,5 @@
-/** 사이트 공통 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
-* { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: white;; outline: none; }
+* { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: black; outline: none; }
 html { font-size: 13px; }
 ul, ol { list-style: none; margin:0; padding:0; }
 dl, dt, dd { margin:0; padding: 0; }
@@ -13,9 +12,9 @@ body {
     min-width: 1000px;
     margin: 0 auto;
     background-color: #1b2838;
+    color: #ffffff;
     }
 
-img { border: 0; }
 
 /** 기준 너비 */
 .layout_width { max-width: 1300px;
@@ -34,7 +33,6 @@ input[type='date'] { border: 1px solid #d5d5d5;
     height: 45px;
     padding: 0 10px;
     border-radius: 3px;
-    color: #000000;
     }
 
 /** 기본 스타일 - 체크박스, 라디오 버튼 */
@@ -70,9 +68,9 @@ h1 { font-size: 30px; font-weight: bold; margin: 0; margin-bottom: 35px; line-he
 h2 { font-size: 18px; font-weight: bold; margin: 25px 0 10px; line-height: 1; }
 
 /** 기본 테이블 스타일 */
-.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; color: #fff}
-.table-cols th { background: #1b2838; width: 160px; padding: 10px 20px; text-align: left; }
-.table-cols td { background: #1b2838; padding: 10px 15px; }
+.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
+.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; }
+.table-cols td { background: #fff; padding: 10px 15px; }
 .table-cols th,
 .table-cols td { border-bottom: 1px solid #d5d5d5; }
 
@@ -102,10 +100,9 @@ input[type="text"],
 textarea {
     width: 100%;
     padding: 8px;
-    border: 1px solid #000000;
+    border: 1px solid #ccc;
     border-radius: 5px;
     margin-top: 3px;
-    color: #000000;
 }
 
 select {
@@ -221,10 +218,6 @@ form[name="frmSearch"] button[type="submit"] {
  color: #000000;
  }
 
- form[name="subject"] input[type="text"] {
- color: #000000;
- }
-
 /* 게시판 리스트 테이블 스타일 */
 table.table-rows {
      width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #333; margin-bottom: 20px; }
@@ -257,3 +250,81 @@ button.sbtn.blue {
     background-color: #007bff;
     color: white;
     }
+
+.logo_img {
+    display: flex;
+    margin: 10px 16px 0px 16px;
+    width: 160;
+    height: 45;
+    background: url("/images/logo.png") left center no-repeat;
+}
+.main-header{
+    display: flex;
+    margin-left: -16;
+    margin-right: -16;
+    width:100%;
+    height:100%;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.header{
+    display:inline-flex;
+    width:100%;
+    height:100%;
+}
+
+
+div.head-right {
+    padding: 10px 16px 0px 16px;
+    min-height:1px;
+    width: 40%;
+    text-align: right;
+    display:inline-flex;
+}
+
+.search{
+    width:100%;
+    display:inline-flex;
+    text-align: right;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-Info {
+    width:22%;
+
+}
+.login{
+    padding: 5px 10px 5px 10px;
+    border: 1px;
+    width: 70%;
+}
+
+.cart {
+    padding: 5px 10px 5px 10px;
+    border: 1px;
+    width: 30%;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.btn {
+    border-radius: 2px;
+    font-weight: 700;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-default{
+    border-color: #cccccc;
+    color: #333333;
+    background: linear-gradient(#ffffff, #f2f2f2);
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.2) insert;
+}
