@@ -32,8 +32,9 @@ public class MainController implements CommonProcess {
     public String index(MemberBoardSearch memberBoardSearch, Model model){
         commonProcess(model, "main");
 
-
+        memberBoardSearch.setLimit(5);
         Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch, "notice");
+        data.getContent().stream().forEach(System.out::println);
         model.addAttribute("items", data.getContent());
         return "main/index";
     }

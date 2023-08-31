@@ -2,6 +2,7 @@ package org.shopping.models.member.board;
 
 import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
+import org.shopping.commons.Utils;
 import org.shopping.controllers.members.MemberBoardSearch;
 import org.shopping.entities.MemberBoardData;
 import org.shopping.entities.QMemberBoardData;
@@ -31,8 +32,8 @@ public class MemberBoardListService {
         int page = memberBoardSearch.getPage();
         int limit = memberBoardSearch.getLimit();
 
-        page = page < 1 ? 1 : page;
-        limit = limit < 1 ? 20 : limit;
+        page = Utils.getNumber(page, 1);
+        limit = Utils.getNumber(limit, 20);
         /** 검색 조건 처리 S */
         String sopt = memberBoardSearch.getSopt();
         String skey = memberBoardSearch.getSkey();
