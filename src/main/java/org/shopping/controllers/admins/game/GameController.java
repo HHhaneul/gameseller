@@ -9,6 +9,8 @@ import org.shopping.commons.*;
 import org.shopping.commons.configs.ConfigInfoService;
 import org.shopping.commons.configs.ConfigSaveService;
 import org.shopping.commons.constants.GameStatus;
+import org.shopping.commons.menus.GameMenus;
+import org.shopping.commons.menus.MenuDetail;
 import org.shopping.entities.Category;
 import org.shopping.entities.Game;
 import org.shopping.models.categories.CategoryDeleteService;
@@ -236,7 +238,7 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         model.addAttribute("subMenuCode", subMenuCode);
 
         // 서브 메뉴 조회
-        List<MenuDetail> submenus = GameMenus.gets("game");
+        List<MenuDetail> submenus = GameMenus.gets("adminGame");
         model.addAttribute("submenus", submenus);
     }
 
