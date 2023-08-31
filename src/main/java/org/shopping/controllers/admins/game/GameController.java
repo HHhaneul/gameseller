@@ -205,10 +205,8 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
 
         String pageTitle = "게임 목록";
         if (mode.equals("add")) {
-            System.out.println("추가");
             pageTitle = "게임 등록";
         } else if (mode.equals("edit")) {
-            System.out.println("수정");
             pageTitle = "게임 수정";
         } else if (mode.equals("분류")) {
             pageTitle = "게임 분류";
