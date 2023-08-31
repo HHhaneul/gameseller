@@ -1,15 +1,17 @@
 package org.shopping.controllers.members;
 
-import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.shopping.commons.CommonException;
+import org.shopping.commons.Utils;
 import org.shopping.entities.Member;
+import org.shopping.models.member.MemberInfo;
 import org.shopping.models.member.MemberInfoService;
+import org.shopping.models.member.MemberNotFoundException;
 import org.shopping.models.member.MemberSaveService;
-
-
 import org.shopping.repositories.member.MemberRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,8 +32,7 @@ public class MemberController {
     private final MemberInfoService infoService;
     private final HttpSession session;
     private final PasswordEncoder passwordEncoder;
-
-
+    private final Utils utils;
     @GetMapping("/join")
     public String join(@ModelAttribute JoinForm joinForm, Model model) {
         commonProcess(model);
@@ -63,65 +64,92 @@ public class MemberController {
         model.addAttribute("pageTitle", "회원가입");
     }
 
-    @GetMapping("/edit/{userId}")
-    public String showUpdateForm(@PathVariable("userId") String userId, Model model) {
-        Member member = saveService.findById(userId);
+    @GetMapping("/edit")
+    public String showUpdateForm(String userId, Model model) {
+        MemberInfo memberInfo = (MemberInfo) session.getAttribute("memberInfo");
+        System.out.println(memberInfo);
+        model.addAttribute("member", memberInfo);
+
+        /*Member member = saveService.findById(userId);
         if (member == null) {
             return "redirect:/";
         }
-        model.addAttribute("member", member);
-        model.addAttribute("userId", userId);
-        return "member/updateMember";
+
+        model.addAttribute("userId", userId);*/
+
+        return "member/update";
     }
 
     @PostMapping("/update")
-    public String updateMember(@ModelAttribute Member updatedMember) {
-        Member existingMember = saveService.findById(updatedMember.getUserId());
-        if (existingMember == null) {
-            return "redirect:/member/updateMember";
+    public String updateMember(@ModelAttribute Member updatedMember ) {
+        MemberInfo memberInfo = (MemberInfo) session.getAttribute("memberInfo");
+        Long userNo = memberInfo.getUserNo();
+        Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
+
+
+
+        if (memberInfo == null) {
+            return "redirect:/";
         }
-        existingMember.setUserId(updatedMember.getUserId());
-        existingMember.setUserNm(updatedMember.getUserNm());
-        existingMember.setEmail(updatedMember.getEmail());
-        existingMember.setMobile(updatedMember.getMobile());
-        saveService.save(existingMember);
-        return "redirect:/"; // Redirect to member list page
+        /*
+        member.setUserNm(updatedMember.getUserNm());
+        member.setEmail(updatedMember.getEmail());
+        member.setMobile(updatedMember.getMobile());
+        */
+        ((MemberInfo) session.getAttribute("memberInfo")).setEmail(utils.getParam("email_"));
+        ((MemberInfo) session.getAttribute("memberInfo")).setUserNm(utils.getParam("userNm_"));
+        ((MemberInfo) session.getAttribute("memberInfo")).setMobile(utils.getParam("mobile_"));
+        member.setEmail(utils.getParam("email_"));
+        member.setUserNm(utils.getParam("userNm_"));
+        member.setMobile(utils.getParam("mobile_"));
+        System.out.println("이메일" + utils.getParam("email_"));
+        saveService.save(member);
+        return "redirect:/";
     }
+
     @GetMapping("/changePassword")
     public String showChangePasswordForm(Model model) {
         PasswordChangeForm passwordChangeForm = new PasswordChangeForm();
-        passwordChangeForm.setUserId(getLoggedInUserId()); // Get the logged-in user's ID
+        passwordChangeForm.setUserId(getLoggedInUserId());
         model.addAttribute("passwordChangeForm", passwordChangeForm);
         return "member/changePassword";
     }
 
     @PostMapping("/updatePassword")
     public String updatePassword(@Valid PasswordChangeForm passwordChangeForm, Errors errors, Model model) {
-        // Validate the form fields (e.g., new password and confirmation match)
+
         if (errors.hasErrors()) {
             return "member/changePassword";
         }
 
-        // Retrieve the current user from the repository
+
         Member currentMember = saveService.findById(passwordChangeForm.getUserId());
         if (currentMember == null) {
-            return "redirect:/"; // Handle accordingly
+            return "redirect:/";
         }
 
-        // Check if the current password matches
+
         if (!passwordEncoder.matches(passwordChangeForm.getCurrentPassword(), currentMember.getUserPw())) {
             errors.rejectValue("currentPassword", "password.invalid", "현재 비밀번호가 올바르지 않습니다.");
             return "member/changePassword";
         }
+        if (passwordChangeForm.getCurrentPassword().equals(passwordChangeForm.getNewPassword())){
+            throw new CommonException("samePassword", HttpStatus.BAD_REQUEST);
+        }
+
+        /*
+         * 강사님에게 현재 비밀번호와 바꾸려는 비밀번호가 일치하면 오류나오는거 여쭤보기.
+         * utils.getParam() 사용해봤지만 null값이 가져와짐.
+         * 알아서 해결해버림
+         * */
 
         // Update the password
         currentMember.setUserPw(passwordEncoder.encode(passwordChangeForm.getNewPassword()));
         saveService.save(currentMember);
 
-        return "redirect:/member/logout"; // Redirect to appropriate page
+        return "redirect:/member/logout";
     }
 
-    // Utility method to get the logged-in user's ID
     private String getLoggedInUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
@@ -130,6 +158,3 @@ public class MemberController {
         return null;
     }
 }
-
-
-

@@ -1,4 +1,4 @@
-package org.shopping.commons;
+package org.shopping.commons.menus;
 
 import lombok.*;
 
