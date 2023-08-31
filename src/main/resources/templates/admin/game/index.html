@@ -76,7 +76,9 @@
                         <input type="checkbox" name="chkNo" th:value="${status.index}" th:id="${'chkNo_' + status.index}">
                         <label th:for="${'chkNo_' + status.index}" class="standalone"></label>
                     </td>
-                    <td align="center" th:text="*{#numbers.formatInteger(gameNo, 8)}"></td>
+                    <td align="center">
+                        <a th:href="@{/game/view/{no}(no=*{gameNo})}" th:text="*{#numbers.formatInteger(gameNo, 8)}" target="_blank"></a>
+                    </td>
                     <td th:if="*{category != null}" th:text="*{category.cateNm}"></td>
                     <td>
                         <select th:name="${'status_' + status.index}">

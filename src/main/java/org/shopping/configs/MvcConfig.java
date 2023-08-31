@@ -1,14 +1,21 @@
 package org.shopping.configs;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.shopping.configs.interceptors.SiteConfigInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
@@ -20,6 +27,9 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Value("${file.upload.url}")
     private String fileUploadUrl;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     /* 사이트 설정 유지 인터셉터 */
     private final SiteConfigInterceptor siteConfigInterceptor;
@@ -55,5 +65,10 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public HiddenHttpMethodFilter httpMethodFilter() {
         return new HiddenHttpMethodFilter();
+    }
+
+    @Bean
+    public JPAQueryFactory jpaQueryFactory() {
+        return new JPAQueryFactory(entityManager);
     }
 }

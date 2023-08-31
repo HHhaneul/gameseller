@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -95,5 +96,17 @@ public class Utils {
 
     public static int getNumber(int num, int defaultValue) {
         return num <= 0 ? defaultValue : num;
+    }
+
+    /**
+     * 비회원 구분 UID
+     * 비회원 구분은 IP + 브라우저 종류
+     *
+     */
+    public int guestUid() {
+        String ip = request.getRemoteAddr();
+        String ua = request.getHeader("User-Agent");
+
+        return Objects.hash(ip, ua);
     }
 }

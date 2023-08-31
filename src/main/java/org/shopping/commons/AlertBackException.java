@@ -1,9 +1,6 @@
-package org.shopping;
-
-import org.shopping.commons.AlertException;
+package org.shopping.commons;
 
 public class AlertBackException extends AlertException {
-
     public AlertBackException(String message) {
         super(message);
     }
