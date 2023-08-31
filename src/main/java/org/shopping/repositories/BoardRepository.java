@@ -2,8 +2,11 @@ package org.shopping.repositories;
 
 
 import org.shopping.entities.Board;
+import org.shopping.entities.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 public interface BoardRepository extends JpaRepository<Board, String>, QuerydslPredicateExecutor<Board> {
+
+    Board findBybId(String bId);
 }

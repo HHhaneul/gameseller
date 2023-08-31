@@ -33,10 +33,6 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
             e.printStackTrace();
             throw new AlertBackException(e.getMessage());
         }
-
-
-
-
         return "game/view";
     }
 

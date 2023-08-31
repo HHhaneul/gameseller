@@ -39,9 +39,6 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     private final GameInfoService infoService;
     private final GameDeleteService deleteService;
 
-    private final ConfigInfoService configInfoService;
-    private final ConfigSaveService configSaveService;
-
     private final CategoryInfoService categoryInfoService;
     private final CategorySaveService categorySaveService;
     private final CategoryDeleteService categoryDeleteService;

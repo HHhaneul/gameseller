@@ -214,7 +214,10 @@
                 <th:block th:if="*{mode != null && mode == 'update'}">수정하기</th:block>
                 <th:block th:unless="*{mode != null && mode == 'update'}">등록하기</th:block>
             </button>
+
         </div>
+
+        <a th:if="*{mode != null && mode == 'update'}" th:href="@{delete}">삭제하기</a>
     </form>
 </section>
 </html>
