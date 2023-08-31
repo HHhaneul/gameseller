@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -63,5 +64,11 @@ public class CartController implements CommonProcess, ScriptExceptionProcess {
     public void commonProcess(Model model, String mode) {
         String pageTitle = "장바구니";
         CommonProcess.super.commonProcess(model, pageTitle);
+        List<String> addScript = new ArrayList<>();
+        if (mode.equals("cart")) {
+            addScript.add("order/cart");
+        }
+
+        model.addAttribute("addScript", addScript);
     }
 }
