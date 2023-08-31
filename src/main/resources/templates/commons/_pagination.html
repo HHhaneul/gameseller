@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="pagination" th:object="${pagination}">
+    <div class="pagination">
+        <a th:if="*{prevFirstPage > 0}" href="?page=1">&lt;&lt;</a>
+        <a th:if="*{prevFirstPage > 0}" th:href="*{'?page=' + prevFirstPage}">&lt;</a>
+
+        <a th:each="p : *{pages}" th:href="${'?page=' + p[0]}" th:text="${p[0]}"></a>
+
+        <a th:if="*{nextFirstPage > 0}" th:href="*{'?page=' + nextFirstPage}">&gt;</a>
+        <a th:if="*{nextFirstPage > 0}" th:href="*{'?page=' + totalPages}">&gt;&gt;</a>
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin/main}">
+<section layout:fragment="content">
+    <h1 th:text="${pageTitle}"></h1>
+
+<th:block th:fragment="form" th:object="${buyerForm}">
+    <table class="table-cols">
+        <tr>
+            <th>주문번호</th>
+            <td th:text="#{buyerForm.buyerNo}"></td>
+        </tr>
+        <tr>
+            <th>주문상태</th>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <th>총 주문금액</th>
+            <td>
+                <td th:text="#{buyerForm.sumPrice}"></td>
+            </td>
+        </tr>
+        <tr>
+            <th>운송장번호</th>
+            <td>
+                <td th:text="#{buyerForm.waybillNo}"></td>
+            </td>
+        </tr>
+        <tr>
+            <th>배송지주소</th>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <th>상품내역</th>
+            <td>
+
+            </td>
+        </tr>
+
+    </table>
+
+</th:block>
+
+</section>
+</html>

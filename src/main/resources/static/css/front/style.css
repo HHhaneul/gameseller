@@ -33,6 +33,7 @@ input[type='date'] { border: 1px solid #d5d5d5;
     height: 45px;
     padding: 0 10px;
     border-radius: 3px;
+    color: #000000;
     }
 
 /** 기본 스타일 - 체크박스, 라디오 버튼 */
@@ -68,9 +69,9 @@ h1 { font-size: 30px; font-weight: bold; margin: 0; margin-bottom: 35px; line-he
 h2 { font-size: 18px; font-weight: bold; margin: 25px 0 10px; line-height: 1; }
 
 /** 기본 테이블 스타일 */
-.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
-.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; }
-.table-cols td { background: #fff; padding: 10px 15px; }
+.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; color: #fff}
+.table-cols th { background: #1b2838; width: 160px; padding: 10px 20px; text-align: left; }
+.table-cols td { background: #1b2838; padding: 10px 15px; }
 .table-cols th,
 .table-cols td { border-bottom: 1px solid #d5d5d5; }
 
@@ -100,9 +101,10 @@ input[type="text"],
 textarea {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 5px;
     margin-top: 3px;
+    color: #000000;
 }
 
 select {
@@ -215,6 +217,10 @@ form[name="frmSearch"] button[type="submit"] {
  /* 폼 안의 글씨 색상 */
  form[name="frmSearch"] input[type="text"],
  form[name="frmSearch"] select {
+ color: #000000;
+ }
+
+ form[name="subject"] input[type="text"] {
  color: #000000;
  }
 

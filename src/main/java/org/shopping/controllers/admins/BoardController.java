@@ -6,10 +6,14 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.commons.*;
+import org.shopping.controllers.members.MemberBoardSearch;
 import org.shopping.entities.Board;
+import org.shopping.entities.MemberBoardData;
 import org.shopping.models.board.config.BoardConfigInfoService;
 import org.shopping.models.board.config.BoardConfigListService;
 import org.shopping.models.board.config.BoardConfigSaveService;
+import org.shopping.models.member.board.MemberBoardInfoService;
+import org.shopping.models.member.board.MemberBoardListService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +31,9 @@ public class BoardController {
     private final BoardConfigSaveService configSaveService;
     private final BoardConfigInfoService boardConfigInfoService;
     private final BoardConfigListService boardConfigListService;
+
+    private final MemberBoardListService memberBoardListService;
+    private final MemberBoardInfoService memberBoardInfoService;
 
     /**
      * 게시판 목록
@@ -91,17 +98,73 @@ public class BoardController {
         return "redirect:/admin/board"; // 게시판 목록
     }
 
+    @GetMapping("/posts")
+    public String list(@ModelAttribute MemberBoardSearch memberBoardSearch, Model model) {
+
+        String URI = request.getRequestURI();
+        // 서브 메뉴 처리
+        String subMenuCode = GameMenus.getSubMenuCode(request);
+        model.addAttribute("subMenuCode", subMenuCode);
+
+        List<MenuDetail> submenus = GameMenus.gets("board");
+        model.addAttribute("submenus", submenus);
+
+        model.addAttribute("pageTitle", "전체 게시판");
+        model.addAttribute("title", "전체 게시판");
+
+        Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch);
+        model.addAttribute("items", data.getContent());
+
+        return "admin/board/posts";
+    }
+
     private void commonProcess(Model model, String title) {
         String URI = request.getRequestURI();
 
         // 서브 메뉴 처리
-        String subMenuCode = Menus.getSubMenuCode(request);
+        String subMenuCode = GameMenus.getSubMenuCode(request);
         model.addAttribute("subMenuCode", subMenuCode);
 
-        List<MenuDetail> submenus = Menus.gets("board");
+        List<MenuDetail> submenus = GameMenus.gets("board");
         model.addAttribute("submenus", submenus);
 
         model.addAttribute("pageTitle", title);
+        model.addAttribute("title", title);
+    }
+
+    @GetMapping("/{bId}")
+    public String list(@ModelAttribute MemberBoardSearch memberBoardSearch, @PathVariable String bId, Model model) {
+        search(model, bId);
+
+        Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch, bId);
+        model.addAttribute("items", data.getContent());
+
+        return "admin/board/list";
+    }
+
+    @GetMapping("/view/{id}")
+    public String view(@PathVariable("id") Long id, Model model) {
+
+        MemberBoardData memberboardData = memberBoardInfoService.get(id);
+        model.addAttribute("memberBoardData", memberboardData);
+        model.addAttribute("pageTitle", memberboardData.getBoard().getBId());
+
+
+        return "admin/board/view";
+    }
+
+
+    private void search(Model model, String title){
+
+        String URI = request.getRequestURI();
+        // 서브 메뉴 처리
+        String subMenuCode = GameMenus.getSubMenuCode(request);
+        model.addAttribute("subMenuCode", subMenuCode);
+
+        List<MenuDetail> submenus = GameMenus.gets("board");
+        model.addAttribute("submenus", submenus);
+
+        model.addAttribute("pageTitle", "게시글 검색");
         model.addAttribute("title", title);
     }
 }

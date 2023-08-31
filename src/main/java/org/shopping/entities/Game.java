@@ -2,67 +2,49 @@ package org.shopping.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.shopping.commons.constants.GameStatus;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity @Data @Builder
 @AllArgsConstructor @NoArgsConstructor
-@Table(indexes={
-        @Index(name="idx_boarddata_category", columnList = "category DESC"),
-        @Index(name="idx_boarddata_createAt", columnList = "createdAt DESC")
-})
 public class Game extends BaseEntity {
-    /* 게시글 번호 */
     @Id @GeneratedValue
-    private Long id;
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="bId")
-    private Board board;
+    private Long gameNo;
 
-    @Column(length=65, nullable = false)
-    private String gid = UUID.randomUUID().toString();
+    @ToString.Exclude
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="cateCd", nullable = false)
+    private Category category;
 
-    /* 작성자 */
-    @Column(length=40, nullable = false)
-    private String poster;
+    @Column(length=45, nullable = false)
+    private String gid;
 
-    /* 비회원 비밀번호 */
-    @Column(length=65)
-    private String guestPw;
+    @Column(length=100, nullable = false)
+    private String gameNm;
+    private int price;
+    private int stock;
 
-    /* 게시판 분류 */
-    @Column(length=60)
-    private String category;
+    @Enumerated(EnumType.STRING)
+    @Column(length=25, nullable = false)
+    private GameStatus status = GameStatus.READY;
 
-    /* 제목 */
-    @Column(nullable = false)
-    private String subject;
-
-    /* 내용 */
-    @Lob
-    @Column(nullable = false)
-    private String content;
-
-    /* 조회수 */
-    private int hit;
-
-    /* User-Agent : 브라우저 정보 */
-    @Column(length=125)
-    private String ua;
-
-    /* 작성자 IP */
-    @Column(length=20)
-    private String ip;
-
-    /* 댓글 수 */
-    private int commentCnt;
-
-    /* 상품 설명 */
     @Lob
     private String description;
 
-    /* 작성 회원 */
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="userNo")
-    private Member member;
+    private long listOrder;
+
+    @Transient
+    private List<FileInfo> mainImages; // 상품 메인 이미지
+
+    @Transient
+    private List<FileInfo> listImages; // 목록 이미지
+
+    @Transient
+    private List<FileInfo> editorImages; // 에디터 이미지
+
+
+
+
 }

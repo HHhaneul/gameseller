@@ -7,6 +7,20 @@
         <input type="hidden" name=poster th:field="*{poster}">
         <input type="hidden" name="bId" th:field="*{bId}">
         <div class="message" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+            <th:block th:if="*{poster == null}">
+                <dl>
+                    <dt>작성자</dt>
+                    <dd>
+                        <input type="text" name="guestPoster" th:field="*{poster}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>비밀번호</dt>
+                    <dd>
+                        <input type="password" name="guestPassword" th:field="*{guestPw}">
+                    </dd>
+                </dl>
+            </th:block>
             <dl>
                 <dt>작업 제목</dt>
                 <dd>

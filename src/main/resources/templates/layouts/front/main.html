@@ -4,6 +4,7 @@
 <head>
     <meta name="_csrf" th:content="${_csrf.token}">
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_ctx_path" th:content="@{/}">
     <meta th:name="description" th:content="${@siteConf.get('siteDescription')}">
     <title>
         <th:block th:if="${pageTitle != null}" th:text="${pageTitle + ' ::'}"></th:block>
@@ -15,7 +16,6 @@
     <th:block layout:fragment="addCss"></th:block>
 
     <script th:src="@{/js/front/common.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>
-    <script th:src="@{/js/front/ckeditor/ckeditor.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>
     <script th:each="jsFile : ${addScript}"
             th:src="@{/js/front/{jsFile}.js?v={v}(jsFile=${jsFile}, v=${@siteConf.get('cssJsVersion')})}"></script>
     <th:block layout:fragment="addScript"></th:block>
