@@ -4,6 +4,7 @@ import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.shopping.commons.CommonException;
 import org.shopping.commons.Utils;
 import org.shopping.entities.Member;
 import org.shopping.models.member.MemberInfo;
@@ -13,6 +14,7 @@ import org.shopping.models.member.MemberSaveService;
 
 
 import org.shopping.repositories.member.MemberRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -136,7 +138,16 @@ public class MemberController {
             errors.rejectValue("currentPassword", "password.invalid", "현재 비밀번호가 올바르지 않습니다.");
             return "member/changePassword";
         }
+        if (passwordChangeForm.getCurrentPassword().equals(passwordChangeForm.getNewPassword())){
+            throw new CommonException("samePassword", HttpStatus.BAD_REQUEST);
+        }
 
+        /*
+        * 강사님에게 현재 비밀번호와 바꾸려는 비밀번호가 일치하면 오류나오는거 여쭤보기.
+        * utils.getParam() 사용해봤지만 null값이 가져와짐.
+        * 알아서 해결해버림
+        * */
+        
         // Update the password
         currentMember.setUserPw(passwordEncoder.encode(passwordChangeForm.getNewPassword()));
         saveService.save(currentMember);
