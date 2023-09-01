@@ -1,22 +1,25 @@
 package org.shopping.controllers.members;
 
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.shopping.commons.CommonException;
 import org.shopping.commons.Utils;
+import org.shopping.controllers.admins.logins.FindIdForm;
 import org.shopping.entities.Member;
 import org.shopping.models.member.MemberInfo;
 import org.shopping.models.member.MemberInfoService;
 import org.shopping.models.member.MemberNotFoundException;
-import org.shopping.controllers.admins.logins.FindIdForm;
-import org.shopping.entities.Member;
-import org.shopping.models.member.MemberInfoService;
 import org.shopping.models.member.MemberSaveService;
 import org.shopping.repositories.member.MemberRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -52,7 +55,6 @@ public class MemberController {
             return "member/join";
         }
 
-        saveService.save(joinForm);
 
         return "redirect:/member/login";
     }
@@ -101,7 +103,7 @@ public class MemberController {
         System.out.println(memberInfo);
         model.addAttribute("member", memberInfo);
 
-        /*Member member = saveService.findById(userId);
+        /* Member member = saveService.findById(userId);
         if (member == null) {
             return "redirect:/";
         }

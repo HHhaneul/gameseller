@@ -1,9 +1,7 @@
 package org.shopping.models.buyer;
 
 import lombok.RequiredArgsConstructor;
-import org.shopping.entities.Buyer;
 import org.shopping.entities.Cart;
-import org.shopping.entities.Game;
 import org.shopping.repositories.CartRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,5 @@
 package org.shopping.models.buyer;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

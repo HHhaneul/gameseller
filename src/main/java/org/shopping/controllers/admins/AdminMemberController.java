@@ -7,13 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.shopping.commons.Utils;
 import org.shopping.commons.configs.ConfigInfoService;
 import org.shopping.commons.configs.ConfigSaveService;
-import org.shopping.commons.constants.Role;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
-import org.shopping.controllers.members.JoinForm;
 import org.shopping.controllers.members.JoinValidator;
 import org.shopping.entities.Member;
-import org.shopping.models.member.*;
+import org.shopping.models.member.MemberInfo;
+import org.shopping.models.member.MemberListService;
+import org.shopping.models.member.MemberSaveService;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +27,7 @@ import java.util.List;
 @Controller("AdminMemberController")
 @RequestMapping("/admin/member")
 @RequiredArgsConstructor
-public class MemberController {
+public class AdminMemberController {
 
     private final HttpServletRequest request;
     private final MemberInfoService memberInfoService;
@@ -91,10 +91,10 @@ public class MemberController {
             ,JoinForm joinForm, Model model) {
         MemberInfo.setRoles(memberInfoService.get(2l).getRoles());
 
-        String aa = memberInfoService.formGet(userNo).getUserNm();
-        Member member = (Member) memberInfoService.loadUserByUsername(aa);
+//        String aa = memberInfoService.formGet(userNo).getUserNm();
+//        Member member = (Member) memberInfoService.loadUserByUsername(aa);
 
-        model.addAttribute("memberInfo", member == null ? new MemberInfo() : member);
+//        model.addAttribute("memberInfo", member == null ? new MemberInfo() : member);
 
         return "admin/member/update";
     }

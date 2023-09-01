@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.shopping.commons.Utils;
 import org.shopping.commons.validators.RequiredValidator;
 import org.shopping.entities.Board;
-import org.shopping.entities.Game;
 import org.shopping.repositories.BoardRepository;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,6 @@ package org.shopping.repositories;
 
 
 import org.shopping.entities.Board;
-import org.shopping.entities.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 

@@ -3,17 +3,13 @@ package org.shopping.models.games;
 import lombok.RequiredArgsConstructor;
 import org.shopping.commons.Utils;
 import org.shopping.commons.validators.RequiredValidator;
-import org.shopping.controllers.admins.game.CategoryForm;
 import org.shopping.controllers.admins.game.GameForm;
-import org.shopping.entities.Category;
 import org.shopping.entities.Game;
-import org.shopping.repositories.CategoryRepository;
 import org.shopping.repositories.GameRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

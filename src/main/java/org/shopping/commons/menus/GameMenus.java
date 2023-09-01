@@ -1,9 +1,9 @@
 package org.shopping.commons.menus;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.shopping.commons.menus.MenuDetail;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameMenus {
     public static List<MenuDetail> gets(String code) {
