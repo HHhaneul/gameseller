@@ -6,10 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.shopping.CommonProcess;
 import org.shopping.commons.AlertBackException;
 import org.shopping.commons.CommonException;
+import org.shopping.commons.MemberUtil;
 import org.shopping.commons.ScriptExceptionProcess;
 import org.shopping.entities.CartInfo;
+import org.shopping.models.member.MemberInfo;
 import org.shopping.models.order.CartInfoService;
 import org.shopping.models.order.CartItemNotFoundException;
+import org.shopping.models.order.OrderSaveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Controller
@@ -27,6 +31,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController implements CommonProcess, ScriptExceptionProcess {
     private final CartInfoService cartInfoService;
+    private final OrderSaveService saveService;
+    private final MemberUtil memberUtil;
 
     @GetMapping
     public String index(@ModelAttribute OrderForm form, Model model) {
@@ -47,7 +53,11 @@ public class OrderController implements CommonProcess, ScriptExceptionProcess {
             return "order/index";
         }
 
-        return "commons/_execute_script";
+        saveService.save(form);
+
+        // 결제 진행
+        model.addAttribute("script", "processPay()");
+        return "order/index";
     }
 
     public void commonProcess(Model model, String mode) {
@@ -77,8 +87,18 @@ public class OrderController implements CommonProcess, ScriptExceptionProcess {
                 throw new CartItemNotFoundException();
             }
 
+            int totalPrice = cartInfoService.getTotalPrice(items);
+            form.setTotalPrice(totalPrice);
             model.addAttribute("items", items);
             /** 주문서 양식인 경우 장바구니 상품 조회 E */
+
+            /** 로그인한 경우 - 회원정보로 주문자 정보 완성 */
+            if (memberUtil.isLogin()) {
+                MemberInfo member = memberUtil.getMember();
+                form.setOrderName(Objects.requireNonNullElse(form.getOrderName(), member.getUserNm()));
+                form.setOrderEmail(Objects.requireNonNullElse(form.getOrderEmail(), member.getEmail()));
+                form.setOrderMobile(Objects.requireNonNullElse(form.getOrderMobile(), member.getMobile()));
+            }
         }
         model.addAttribute("addCommonScript", addCommonScript);
         model.addAttribute("addScript", addScript);
