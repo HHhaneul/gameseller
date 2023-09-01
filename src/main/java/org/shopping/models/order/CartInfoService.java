@@ -16,7 +16,6 @@ import org.shopping.repositories.order.CartInfoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service("cartInfoService2")
 @RequiredArgsConstructor
@@ -45,11 +44,29 @@ public class CartInfoService {
         return repository.findOne(builder).orElse(null);
     }
 
+
     public List<CartInfo> getList(String mode) {
-        mode = Objects.requireNonNullElse(mode, "cart");
+        return getList(mode, null);
+    }
+
+    public List<CartInfo> getList(List<Long> cartNos) {
+        return getList(null, cartNos);
+    }
+
+    public List<CartInfo> getList(String mode, List<Long> cartNos) {
+
         QCartInfo cartInfo = QCartInfo.cartInfo;
         BooleanBuilder builder = new BooleanBuilder();
-        builder.and(cartInfo.mode.eq(mode));
+        if (mode != null && !mode.isBlank()) {
+            builder.and(cartInfo.mode.eq(mode));
+        }
+
+        /** 장바구니 등록 번호로 조회 S */
+        if (cartNos != null && !cartNos.isEmpty()) {
+            builder.and(cartInfo.cartNo.in(cartNos));
+        }
+        /** 장바구니 등록 번호로 조회 E */
+
         if (memberUtil.isLogin()) { // 회원
             builder.and(cartInfo.member.userNo.eq(memberUtil.getMember().getUserNo()));
         } else { // 비회원

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/front/main}">
+<main layout:fragment="content" style="background: #fff;">
+    <h1 th:text="${pageTitle}"></h1>
+    <form name="frmSave" method="POST" th:action="@{/order}" autocomplete="off" th:object="${orderForm}">
+        <div class="errors global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+        <table border="1">
+            <thead>
+            <tr>
+                <th colspan="2">상품정보</th>
+                <th>수량</th>
+                <th>판매가</th>
+                <th>합계</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${items != null && items.size() > 0}" th:each="item, status : ${items}" th:object="${item}">
+                <td>
+                    <input type="hidden" name="cartNo" th:value="*{cartNo}">
+                    <th:block th:if="*{game != null && game.listImages != null && game.listImages.size() > 0}">
+                        <a th:href="@{/game/view/{no}(no=*{game.gameNo})}" target="_blank">
+                            <img th:src="*{game.listImages[0].thumbsUrl[0]}">
+                        </a>
+
+                    </th:block>
+                </td>
+                <td>
+                    <th:block th:if="*{game != null}" th:text="*{game.gameNm}"></th:block>
+                </td>
+                <td th:text="*{ea + '개'}"></td>
+                <td>
+                    <th:block th:if="*{game != null && game.price < 1000}" th:text="*{game.price + '원'}"></th:block>
+                    <th:block th:if="*{game != null && game.price >= 1000}" th:text="*{#numbers.formatInteger(game.price, 3, 'COMMA') + '원'}"></th:block>
+                </td>
+                <td>
+                    <th:block th:if="*{game != null}" th:text="*{#strings.concat(game.price * ea, '원')}"></th:block>
+                </td>
+            </tr>
+            <tr th:if="${items == null || items.isEmpty()}">
+                <td colspan="4" class="no_data">장바구니가 비어 있습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <h2>주문자 정보</h2>
+        <dl>
+            <dt>주문자명</dt>
+            <dd>
+                <input type="text" name="orderName" th:field="*{orderName}">
+                <div class="errors" th:each="err : ${#fields.errors('orderName')}" th:text="${err}"></div>
+            </dd>
+            <dl>
+                <dt>이메일</dt>
+                <dd>
+                    <input type="text" name="orderEmail" th:field="*{orderEmail}">
+                    <div class="errors" th:each="err : ${#fields.errors('orderEmail')}" th:text="${err}"></div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>휴대전화번호</dt>
+                <dd>
+                    <input type="text" name="orderMobile" th:field="*{orderMobile}">
+                    <div class="errors" th:each="err : ${#fields.errors('orderMobile')}" th:text="${err}"></div>
+                </dd>
+            </dl>
+        </dl>
+
+        <h2>배송지 정보</h2>
+        <div>
+            <input type="checkbox" class="make_same_orderInfo" value="true" id="make_same_orderInfo">
+            <label for="make_same_orderInfo">주문자 정보와 동일</label>
+        </div>
+        <dl>
+            <dt>받는분</dt>
+            <dd>
+                <input type="text" name="receiverName" th:field="*{receiverName}">
+                <div class="errors" th:each="err : ${#fields.errors('receiverName')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>휴대전화번호</dt>
+            <dd>
+                <input type="text" name="receiverMobile" th:field="*{receiverMobile}">
+                <div class="errors" th:each="err : ${#fields.errors('receiverMobile')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>주소</dt>
+            <dd>
+                <div class="address_rows">
+                    <input type="text" name="zonecode" placeholder="우편번호" th:field="*{zonecode}">
+                    <button type="button" class="search_address" data-zipcode-name="zonecode" data-address-name="address">주소검색</button>
+                </div>
+                <div class="address_rows">
+                    <input type="text" name="address" placeholder="주소" th:field="*{address}">
+                </div>
+                <div class="address_rows">
+                    <input type="text" name="addressSub" placeholder="나머지 주소" th:field="*{addressSub}">
+                </div>
+                <div class="errors" th:each="err : ${#fields.errors('zonecode')}" th:text="${err}"></div>
+                <div class="errors" th:each="err : ${#fields.errors('address')}" th:text="${err}"></div>
+                <div class="errors" th:each="err : ${#fields.errors('addressSub')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <h2>결제 정보</h2>
+        <dl>
+            <dt>배송비</dt>
+            <dd>3,000원</dd>
+        </dl>
+        <dl>
+            <dt>결제금액</dt>
+            <dd></dd>
+        </dl>
+        <dl>
+            <dt>결제방법</dt>
+            <dd>
+                <span>
+                    <input type="radio" name="paymentType" value="LBT" id="paymentType_lbt" th:field="*{paymentType}">
+                    <label for="paymentType_lbt">무통장 입금</label>
+                    <input type="radio" name="paymentType" value="DIRECT" id="paymentType_direct" th:field="*{paymentType}">
+                    <label for="paymentType_direct">신용카드</label>
+                    <input type="radio" name="paymentType" value="VACCOUNT" id="paymentType_vaccount" th:field="*{paymentType}">
+                    <label for="paymentType_vaccount">가상계좌</label>
+                    <input type="radio" name="paymentType" value="CARD" id="paymentType_card" th:field="*{paymentType}">
+                    <label for="paymentType_card">신용카드</label>
+                </span>
+                <div class="errors" th:each="err : ${#fields.errors('paymentType')}" th:text="${err}"></div>
+            </dd>
+            <dl class="lbt_account_info">
+                <dt>입금계좌번호</dt>
+                <dd>
+                    국민 0000-00-0000 / 입금자명
+                </dd>
+            </dl>
+        </dl>
+        <button type="submit">주문하기</button>
+    </form>
+</main>
+</html>
