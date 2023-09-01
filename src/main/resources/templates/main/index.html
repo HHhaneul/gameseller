@@ -2,8 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>gamesell</title>
+</head>
 
-<main layout:fragment="content">
-    메인!
-</main>
+<body layout:fragment="content">
+    <div class="sidemenu">
+        <h3 class="announcement" th:text="${pageTitle}"></h3>
+        <aside th:replace="~{outlines/front/side::menu}"></aside>
+    </div>
+</body>
 </html>

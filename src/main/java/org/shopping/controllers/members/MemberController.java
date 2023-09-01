@@ -69,10 +69,9 @@ public class MemberController {
         model.addAttribute("pageTitle", "회원가입");
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/myPage")
     public String showUpdateForm(String userId, Model model) {
         MemberInfo memberInfo = (MemberInfo) session.getAttribute("memberInfo");
-        System.out.println(memberInfo);
         model.addAttribute("member", memberInfo);
 
         /*Member member = saveService.findById(userId);
