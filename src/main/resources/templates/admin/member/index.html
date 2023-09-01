@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin/main}">
+<section layout:fragment="content">
+    <h1>회원 검색</h1>
+    <form name="frmSearch" method="get" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}">
+        <table class="table-cols">
+            <tr>
+                <th>검색어</th>
+                <td>
+                    <div class="input_grp">
+                        <select name="sopt" th:field="*{sopt}">
+                            <option value="all">통합검색</option>
+                            <option value="userId">회원ID</option>
+                            <option value="userNm">회원명</option>
+                        </select>
+                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색어 입력...">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="search_btn">
+            <button type="submit">조회하기</button>
+        </div>
+    </form>
+
+    <h1>회원 목록</h1>
+    <form name='frmList' method="post" th:action="@{/admin/member}" autocomplete="off" target="ifrmProcess">
+        <input type="hidden" name="_method" value="patch">
+        <table class="table-rows">
+            <thead>
+            <tr>
+                <th width="40">
+                    <input type="checkbox" class="checkall" id="checkall" data-target-name="userId">
+                    <label for="checkall"></label>
+                </th>
+                <th width="150">회원번호</th>
+                <th width="150">회원ID</th>
+                <th width="300">회원명</th>
+                <th width="150">이메일</th>
+                <th width="150">전화번호</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item, status : ${items}" th:object="${item}">
+                <td align="center">
+                    <input type="checkbox" name="userId" th:value="*{userId}" th:id="${'userid_' + status.index}">
+                    <label th:for="${'userid_' + status.index}"></label>
+                </td>
+                <td align="center" th:text="*{userNo}"></td>
+                <td align="center" th:text="*{userId}"></td>
+                <td align="center" th:text="*{userNm}"></td>
+                <td align="center" th:text="*{email}"></td>
+                <td align="center" th:text="*{mobile}"></td>
+                <td>
+                    <a th:href="@{/admin/member/{userNo}/update(userNo=*{userNo})}" class="sbtn">설정수정</a>
+                    <a th:href="@{/member/list/{userNo}(userNo=*{userNo})}" class="sbtn">미리보기</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-action">
+            <button type="button" class="sbtn"> 수정하기</button>
+            <button type="button" class="sbtn blue"> 삭제하기</button>
+        </div>
+    </form>
+</section>
+</html>
