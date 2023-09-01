@@ -16,4 +16,5 @@ public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslP
 
         return exists(member.userId.eq(userId));
     }
+    Member findByUserNmAndMobile(String userNm, String mobile);
 }

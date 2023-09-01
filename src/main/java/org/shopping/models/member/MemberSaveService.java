@@ -38,4 +38,15 @@ public class MemberSaveService {
     public void save(Member member) {
         memberRepository.save(member);
     }
+    public void save(MemberInfo memberInfo) {
+
+        Member member = new ModelMapper().map(memberInfo, Member.class);
+        member.setRoles(Role.USER);
+
+        member.setUserPw(passwordEncoder.encode(memberInfo.getUserPw()));
+
+        memberRepository.saveAndFlush(member);
+
+    }
+
 }

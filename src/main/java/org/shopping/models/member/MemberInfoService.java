@@ -2,6 +2,7 @@ package org.shopping.models.member;
 
 
 import lombok.RequiredArgsConstructor;
+import org.shopping.controllers.members.JoinForm;
 import org.shopping.entities.Member;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,6 +39,25 @@ public class MemberInfoService implements UserDetailsService {
                 .roles(member.getRoles())
                 .authorities(authorities)
                 .build();
+    }
 
+    public JoinForm formGet(Long userNo){
+        Member member = repository.findById(userNo).orElseThrow(MemberNotFoundException::new);
+
+
+        JoinForm form = JoinForm.builder()
+                .userId(member.getUserId())
+                .userNm(member.getUserNm())
+                .email(member.getEmail())
+                .mobile(member.getMobile())
+                .build();
+
+        return form;
+    }
+
+
+
+    public Member get(Long userNo){
+        return repository.findById(userNo).orElseThrow(MemberNotFoundException::new);
     }
 }

@@ -2,6 +2,7 @@ package org.shopping.controllers.members;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.shopping.commons.constants.Role;
 
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
