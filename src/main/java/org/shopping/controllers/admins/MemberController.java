@@ -1,24 +1,25 @@
 package org.shopping.controllers.admins;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.shopping.commons.Utils;
 import org.shopping.commons.configs.ConfigInfoService;
 import org.shopping.commons.configs.ConfigSaveService;
+import org.shopping.commons.constants.Role;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
 import org.shopping.controllers.members.JoinForm;
 import org.shopping.controllers.members.JoinValidator;
 import org.shopping.entities.Member;
-import org.shopping.models.member.MemberInfoService;
-import org.shopping.models.member.MemberListService;
-import org.shopping.models.member.MemberSaveService;
+import org.shopping.models.member.*;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,8 @@ public class MemberController {
     private final JoinValidator joinValidator;
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
+    private final HttpSession session;
+    private final Utils utils;
 
 
     private final ConfigSaveService configSaveService;
@@ -70,50 +73,43 @@ public class MemberController {
         model.addAttribute("pageTitle", title);
         model.addAttribute("title", title);
     }
-/*
-    @GetMapping("/changePassword/{userId}")
-    public String showUpdateForm(@PathVariable("userId") String userId, Model model) {
-        Member member = memberSaveService.findById(userId);
-        if (member == null) {
-            return "redirect:/";
+
+    /*
+        @GetMapping("/changePassword/{userId}")
+        public String showUpdateForm(@PathVariable("userId") String userId, Model model) {
+            Member member = memberSaveService.findById(userId);
+            if (member == null) {
+                return "redirect:/";
+            }
+            model.addAttribute("member", member);
+            model.addAttribute("userId", userId);
+            return "admin/member/update";
         }
-        model.addAttribute("member", member);
-        model.addAttribute("userId", userId);
-        return "admin/member/update";
-    }
-*/
+    */
     @GetMapping("/{userNo}/update")
-    public String update(@PathVariable Long userNo,  @ModelAttribute JoinForm joinForm
-    , Model model){
+    public String update(@PathVariable Long userNo, @ModelAttribute MemberInfo MemberInfo
+            ,JoinForm joinForm, Model model) {
+        MemberInfo.setRoles(memberInfoService.get(2l).getRoles());
 
+        String aa = memberInfoService.formGet(userNo).getUserNm();
+        Member member = (Member) memberInfoService.loadUserByUsername(aa);
 
-        joinForm = configInfoService.get(String.valueOf(userNo), JoinForm.class);
+        model.addAttribute("memberInfo", member == null ? new MemberInfo() : member);
 
-
-        model.addAttribute("joinForm", joinForm == null ? new JoinForm() : joinForm);
-
-/*
-
-        System.out.println("멤버: " + member);
-        joinForm.setUserId(member.getUserId());
-        joinForm.setEmail(member.getEmail());
-        joinForm.setMobile(member.getMobile());
-        joinForm.setUserNm(member.getUserNm());
-        model.addAttribute("member", member);
-        memberRepository.save(member);
-        memberRepository.flush();
-
-*/
         return "admin/member/update";
     }
 
     @PostMapping("/{userNo}/update")
-    public String updateMember(@PathVariable Long userNo, JoinForm joinForm) {
+    public String updateMember(@PathVariable Long userNo, @Valid MemberInfo memberInfo, Errors errors) {
 
-        configSaveService.save(String.valueOf(userNo), joinForm);
 
-        return "redirect:/admin/member/index";
+        memberSaveService.save(memberInfo);
+
+
+        return "redirect:/admin/member";
     }
+
+
 /*
     @GetMapping("/changePassword")
     public String showChangePasswordForm(Model model) {
@@ -157,5 +153,6 @@ public class MemberController {
         }
         return null;
     }*/
-}
+    }
+
 

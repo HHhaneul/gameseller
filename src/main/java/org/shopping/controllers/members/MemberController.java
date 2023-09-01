@@ -27,7 +27,7 @@ public class MemberController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/join")
-    public String join(@ModelAttribute org.shopping.controllers.members.JoinForm joinForm, Model model) {
+    public String join(@ModelAttribute JoinForm joinForm, Model model) {
         commonProcess(model);
         return "member/join";
     }

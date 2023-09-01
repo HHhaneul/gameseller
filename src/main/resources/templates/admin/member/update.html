@@ -24,7 +24,7 @@
         <br>
         <button type="submit" th:text="#{member.submit}"></button>-->
 
-        <form name="frmSave" method="post" th:action="@{/}" autocomplete="off" th:object="${joinForm}">
+        <form method="post" autocomplete="off" th:object="${MemberInfo}">
             <table class="table-cols">
                 <tr>
                     <th>아이디</th>
@@ -32,7 +32,6 @@
                         <input type="text" name="siteTitle" th:field="*{userId}">
                     </td>
                 </tr>
-
             </table>
             <div class="btns">
                 <button type="reset">다시입력</button>
