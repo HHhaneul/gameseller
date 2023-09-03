@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
-
+<head>
+    <link rel="stylesheet" th:href="@{/front/style.css}">
+</head>
 <main layout:fragment="content">
     <form name="frmJoin" method="post" th:action="@{/member/join}" th:object="${joinForm}" autocomplete="off">
         <div>

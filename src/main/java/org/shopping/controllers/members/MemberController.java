@@ -74,13 +74,6 @@ public class MemberController {
         MemberInfo memberInfo = (MemberInfo) session.getAttribute("memberInfo");
         model.addAttribute("member", memberInfo);
 
-        /*Member member = saveService.findById(userId);
-        if (member == null) {
-            return "redirect:/";
-        }
-
-        model.addAttribute("userId", userId);*/
-
         return "member/update";
     }
 
@@ -95,11 +88,7 @@ public class MemberController {
         if (memberInfo == null) {
             return "redirect:/";
         }
-        /*
-        member.setUserNm(updatedMember.getUserNm());
-        member.setEmail(updatedMember.getEmail());
-        member.setMobile(updatedMember.getMobile());
-        */
+
         ((MemberInfo) session.getAttribute("memberInfo")).setEmail(utils.getParam("email_"));
         ((MemberInfo) session.getAttribute("memberInfo")).setUserNm(utils.getParam("userNm_"));
         ((MemberInfo) session.getAttribute("memberInfo")).setMobile(utils.getParam("mobile_"));
@@ -141,12 +130,6 @@ public class MemberController {
             throw new CommonException("samePassword", HttpStatus.BAD_REQUEST);
         }
 
-        /*
-        * 강사님에게 현재 비밀번호와 바꾸려는 비밀번호가 일치하면 오류나오는거 여쭤보기.
-        * utils.getParam() 사용해봤지만 null값이 가져와짐.
-        * 알아서 해결해버림
-        * */
-        
         // Update the password
         currentMember.setUserPw(passwordEncoder.encode(passwordChangeForm.getNewPassword()));
         saveService.save(currentMember);

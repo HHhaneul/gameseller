@@ -366,10 +366,55 @@ img.s-sideLogo {
 
 }
 .module-title {
-    margin: 0;
+    margin: 0 0 10px 0;
     padding: 20px 32px 20px 0px;
+    border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .left_banner_items {
 
+}
+
+.list-group-item {
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.01);
+    color: #ffffff80;
+    background: #ffffff0D;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.module-title {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+span {
+    color: #ffffff;
+}
+
+.module-title span::before {
+    content: "";
+    border-top: 1px solid #67c1f5;
+    box-shadow: 0 0 4px rgba(255,255,255,0.5);
+    width: 100%;
+    height: 0;
+    position: absolute;
+    top: -21px;
+    left: 0;
+}
+
+.module-title span {
+    position: relative;
+    display: inline-block;
+}
+
+.h3 {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 }

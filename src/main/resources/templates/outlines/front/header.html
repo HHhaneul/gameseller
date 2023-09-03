@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" th:href="@{/front/style.css}">
+</head>
 <header th:fragment="common" class="main-header">
     <div class="header">
         <a href="/">
@@ -10,13 +13,13 @@
         </a>
         <th:block sec:authorize="isAuthenticated()">
             <div class="gameSearch">
-                        <input type="text" class="searchValue">
-                        <button type="submit" class="xi-search"></button>
+                <input type="text" class="searchValue">
+                <button type="submit" class="xi-search"></button>
             </div>
             <div class="head-right">
                 <div class="login">
                     <a class="btn btn-default btn-sm" th:href="@{/member/logout}" th:text="#{member.logout}"></a>
-                    <a class="btn btn-default btn-sm" th:href="@{/member/myPage}" th:text="#{member.myInfo}"></a>
+                    <a class="btn btn-default btn-sm" th:href="@{/member/myPage}" th:text="#{member.myPage}"></a>
                 </div>
                 <div class="cart">
                     <a class="xi-cart xi-2x" th:href="@{/cart/index}"></a>
@@ -31,8 +34,8 @@
             </div>
             <div class="head-right">
                 <div class="login">
-                    <a class="btn btn-default btn-sm" th:href="@{/member/logout}" th:text="#{member.logout}"></a>
-                    <a class="btn btn-default btn-sm" th:href="@{/member/myPage}" th:text="#{member.myInfo}"></a>
+                    <a class="btn btn-default btn-sm" th:href="@{/member/login}" th:text="#{member.login}"></a>
+                    <a class="btn btn-default btn-sm" th:href="@{/member/join}" th:text="#{member.join}"></a>
                 </div>
                 <div class="cart">
                     <a class="xi-cart xi-2x" th:href="@{/cart/index}"></a>

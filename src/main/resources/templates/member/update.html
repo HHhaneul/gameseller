@@ -2,6 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
+<head>
+    <title>회원정보수정</title>
+    <link rel="stylesheet" href="../../static/css/front/style.css">
+</head>
     <main layout:fragment="content">
     <h2 th:text="#{update}"></h2>
         <form action="#" th:action="@{/member/update}" th:object="${member}" method="post">

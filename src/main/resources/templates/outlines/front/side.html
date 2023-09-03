@@ -2,12 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <aside th:fragment="menu">
         <div class="sidemenu">
-            <div class="announcement">
-                <h3 class="module-title">
-                    <strong>공지사항</strong>
-                    <a th:href="@{/notice}">+ 더보기</a>
-                </h3>
-            </div>
             <div class="list-group" th:each = "item, index : ${items}" th:if="${index.index} < 5">
                 <a th:href="@{/board/view/{id}(id=*{item.id})}">
                     <span th:text="*{item.subject}"></span>
