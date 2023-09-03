@@ -11,8 +11,9 @@ import org.shopping.commons.constants.PaymentType;
 @Data
 @Builder @NoArgsConstructor @AllArgsConstructor
 public class OrderInfo {
+
     @Id @GeneratedValue
-    private Long id;
+    private Long orderNo;
 
     @Column(length=40, nullable = false)
     private String orderName;
@@ -43,4 +44,8 @@ public class OrderInfo {
     private PaymentType paymentType;
 
     private int payPrice; // 결제 금액
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="userNo")
+    private Member member;
 }

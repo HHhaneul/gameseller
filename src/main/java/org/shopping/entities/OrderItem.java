@@ -31,4 +31,8 @@ public class OrderItem extends BaseMemberEntity {
     @Enumerated(EnumType.STRING)
     @Column(length=15, nullable = false)
     private OrderStatus status = OrderStatus.READY;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="orderNo")
+    private OrderInfo orderInfo;
 }

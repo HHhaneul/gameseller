@@ -94,4 +94,12 @@ public class CartInfoService {
         Game game = cartInfo.getGame();
         if (game != null) gameInfoService.addFileInfo(game);
     }
+
+    public int getTotalPrice(List<CartInfo> items) {
+        items.stream().forEach(item -> item.setTotalPrice(item.getGame().getPrice() * item.getEa()));
+
+        int totalPrice = items.stream().mapToInt(CartInfo::getTotalPrice).sum();
+
+        return totalPrice;
+    }
 }
