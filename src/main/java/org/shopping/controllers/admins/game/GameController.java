@@ -5,9 +5,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.CommonProcess;
-import org.shopping.commons.*;
-import org.shopping.commons.configs.ConfigInfoService;
-import org.shopping.commons.configs.ConfigSaveService;
+import org.shopping.commons.AlertException;
+import org.shopping.commons.CommonException;
+import org.shopping.commons.ListData;
+import org.shopping.commons.ScriptExceptionProcess;
 import org.shopping.commons.constants.GameStatus;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
@@ -38,9 +39,6 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
     private final GameSaveService saveService;
     private final GameInfoService infoService;
     private final GameDeleteService deleteService;
-
-    private final ConfigInfoService configInfoService;
-    private final ConfigSaveService configSaveService;
 
     private final CategoryInfoService categoryInfoService;
     private final CategorySaveService categorySaveService;

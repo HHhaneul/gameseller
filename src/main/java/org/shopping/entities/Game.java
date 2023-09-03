@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.shopping.commons.constants.GameStatus;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity @Data @Builder

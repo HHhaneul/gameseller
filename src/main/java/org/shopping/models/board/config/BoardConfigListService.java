@@ -8,7 +8,9 @@ import org.shopping.entities.Board;
 import org.shopping.entities.QBoard;
 import org.shopping.repositories.BoardRepository;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import static org.springframework.data.domain.Sort.Order.desc;

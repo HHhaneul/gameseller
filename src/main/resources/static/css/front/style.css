@@ -1,6 +1,5 @@
-/** 사이트 공통 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
-* { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: white;; outline: none; }
+* { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: white; outline: none; }
 html { font-size: 13px; }
 ul, ol { list-style: none; margin:0; padding:0; }
 dl, dt, dd { margin:0; padding: 0; }
@@ -16,7 +15,6 @@ body {
     color: #ffffff;
     }
 
-img { border: 0; }
 
 /** 기준 너비 */
 .layout_width { max-width: 1300px;
@@ -35,7 +33,6 @@ input[type='date'] { border: 1px solid #d5d5d5;
     height: 45px;
     padding: 0 10px;
     border-radius: 3px;
-    color: #000000;
     }
 
 /** 기본 스타일 - 체크박스, 라디오 버튼 */
@@ -71,11 +68,11 @@ h1 { font-size: 30px; font-weight: bold; margin: 0; margin-bottom: 35px; line-he
 h2 { font-size: 18px; font-weight: bold; margin: 25px 0 10px; line-height: 1; }
 
 /** 기본 테이블 스타일 */
-.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
-.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; }
-.table-cols td { background: #fff; padding: 10px 15px; }
+.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; color: black; }
+.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; color: black; }
+.table-cols td { background: #fff; padding: 10px 15px; color: black; }
 .table-cols th,
-.table-cols td { border-bottom: 1px solid #d5d5d5; }
+.table-cols td { border-bottom: 1px solid #d5d5d5; color: black; }
 
 /** 공통 서브 메뉴 */
 nav.submenus { background: #fff; box-shadow: 1px 1px 5px #cdced5; margin-bottom: 30px; display: flex; height: 60px; }

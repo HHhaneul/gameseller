@@ -3,12 +3,10 @@ package org.shopping.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
-import org.shopping.commons.constants.GameStatus;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
 import org.shopping.controllers.members.MemberBoardSearch;
 import org.shopping.entities.MemberBoardData;
-import org.shopping.models.member.board.MemberBoardInfoService;
 import org.shopping.models.member.board.MemberBoardListService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -32,8 +30,9 @@ public class MainController implements CommonProcess {
     public String index(MemberBoardSearch memberBoardSearch, Model model){
         commonProcess(model, "main");
 
-
+        memberBoardSearch.setLimit(5);
         Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch, "notice");
+        data.getContent().stream().forEach(System.out::println);
         model.addAttribute("items", data.getContent());
         return "main/index";
     }

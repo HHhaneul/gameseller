@@ -1,7 +1,8 @@
 package org.shopping.models.games;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.*;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -13,12 +14,17 @@ import org.shopping.commons.Pagination;
 import org.shopping.commons.configs.ConfigInfoService;
 import org.shopping.commons.constants.GameStatus;
 import org.shopping.controllers.admins.game.GameForm;
-import org.shopping.entities.*;
+import org.shopping.entities.Category;
+import org.shopping.entities.FileInfo;
+import org.shopping.entities.Game;
+import org.shopping.entities.QGame;
 import org.shopping.models.files.FileInfoService;
 import org.shopping.repositories.GameRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor

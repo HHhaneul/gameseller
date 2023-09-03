@@ -10,7 +10,7 @@
             <th>제목</th>
             <td th:text="*{subject}"></td>
             <th width="100">작성자</th>
-            <td th:text="*{poster}"></td>
+            <td th:text="*{#strings.concat(poster, '(', member.userId, ')')}"></td>
         </tr>
         <tr>
             <th >등록일시</th>

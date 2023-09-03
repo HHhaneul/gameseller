@@ -6,7 +6,6 @@ import org.shopping.commons.MemberUtil;
 import org.shopping.entities.FileInfo;
 import org.shopping.models.member.MemberInfo;
 import org.shopping.repositories.FileInfoRepository;
-import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.stereotype.Service;
 
 import java.io.File;

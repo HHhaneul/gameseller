@@ -4,20 +4,19 @@
       layout:decorate="~{layouts/front/main}">
     <th:block layout:fragment="memberBoardForm" th:object="${memberBoardForm}" >
         <input type="file" id="file" multiple>
-        <input type="hidden" name=poster th:field="*{poster}">
         <input type="hidden" name="bId" th:field="*{bId}">
         <div class="message" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
             <th:block th:if="*{poster == null}">
                 <dl>
                     <dt>작성자</dt>
                     <dd>
-                        <input type="text" name="guestPoster" th:field="*{poster}">
+                        <input type="text" name="poster" th:field="*{poster}">
                     </dd>
                 </dl>
                 <dl>
                     <dt>비밀번호</dt>
                     <dd>
-                        <input type="password" name="guestPassword" th:field="*{guestPw}">
+                        <input type="password" name="guestPw" th:field="*{guestPw}">
                     </dd>
                 </dl>
             </th:block>
@@ -30,7 +29,7 @@
             <dl>
                 <dt>작업 내용</dt>
                 <dd>
-                    <textarea name="content" class="form-control" id="p_content" th:field="*{content}"></textarea>
+                    <textarea name="content" class="description" id="description" th:field="*{content}"></textarea>
                     <button type="button" class="fileUpload image">이미지 추가</button>
                 </dd>
             </dl>

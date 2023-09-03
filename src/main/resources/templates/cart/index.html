@@ -49,7 +49,7 @@
                         <th:block th:if="*{game != null}" th:text="*{#strings.concat(game.price * ea, '원')}"></th:block>
                     </td>
                 </tr>
-                <tr th:if="${items == null && items.size() == 0}">
+                <tr th:if="${items == null || items.isEmpty()}">
                     <td colspan="5" class="no_data">장바구니가 비어 있습니다.</td>
                 </tr>
             </tbody>

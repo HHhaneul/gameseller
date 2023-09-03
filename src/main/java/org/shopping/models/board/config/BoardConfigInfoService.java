@@ -80,4 +80,9 @@ public class BoardConfigInfoService {
             throw new BoardNotAllowAccessException();
         }
     }
+
+    public Board get(String bId){
+        return boardRepository.findBybId(bId);
+
+    }
 }
