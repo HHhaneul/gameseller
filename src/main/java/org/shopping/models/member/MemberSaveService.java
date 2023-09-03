@@ -4,6 +4,7 @@ package org.shopping.models.member;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.commons.constants.Role;
+import org.shopping.controllers.members.JoinForm;
 import org.shopping.entities.Member;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;

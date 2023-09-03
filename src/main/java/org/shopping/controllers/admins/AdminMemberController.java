@@ -9,9 +9,11 @@ import org.shopping.commons.configs.ConfigInfoService;
 import org.shopping.commons.configs.ConfigSaveService;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
+import org.shopping.controllers.members.JoinForm;
 import org.shopping.controllers.members.JoinValidator;
 import org.shopping.entities.Member;
 import org.shopping.models.member.MemberInfo;
+import org.shopping.models.member.MemberInfoService;
 import org.shopping.models.member.MemberListService;
 import org.shopping.models.member.MemberSaveService;
 import org.shopping.repositories.member.MemberRepository;
@@ -88,7 +90,7 @@ public class AdminMemberController {
     */
     @GetMapping("/{userNo}/update")
     public String update(@PathVariable Long userNo, @ModelAttribute MemberInfo MemberInfo
-            ,JoinForm joinForm, Model model) {
+            , JoinForm joinForm, Model model) {
         MemberInfo.setRoles(memberInfoService.get(2l).getRoles());
 
 //        String aa = memberInfoService.formGet(userNo).getUserNm();
