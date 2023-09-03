@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.shopping.commons.Utils;
 import org.shopping.commons.validators.RequiredValidator;
 import org.shopping.entities.Board;
+import org.shopping.entities.QBoard;
 import org.shopping.repositories.BoardRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,18 @@ public class BoardConfigDeleteService implements RequiredValidator {
     public void delete(String bId){
         Board board = boardRepository.findById(bId).orElseThrow(BoardNotAllowDeleteException::new);
         boardRepository.delete(board);
+        boardRepository.flush();
+    }
+
+    public void delete(String[] bIds) {
+        QBoard board = QBoard.board;
+        if (bIds == null || bIds.length == 0) return;
+
+        List<Board> items = (List<Board>)boardRepository.findAll(board.bId.in(bIds));
+
+        if (items == null || items.isEmpty()) return;
+
+        boardRepository.deleteAll(items);
         boardRepository.flush();
     }
 

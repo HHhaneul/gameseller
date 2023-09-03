@@ -10,6 +10,7 @@ import org.shopping.models.board.config.BoardConfigInfoService;
 import org.shopping.repositories.member.BoardDataRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +25,12 @@ public class MemberBoardSaveService {
     private final MemberBoardInfoService infoService;
 
     public void save(MemberBoardForm memberBoardForm) {
-        validator.check(memberBoardForm);
+        save(memberBoardForm, null);
+    }
+    public void save(MemberBoardForm memberBoardForm, Errors errors) {
+        if (errors.hasErrors()) {
+            return;
+        }
 
         Long id = memberBoardForm.getId();
         Board board = configInfoService.get(memberBoardForm.getBId(), id == null ? "write" : "update");
@@ -48,6 +54,7 @@ public class MemberBoardSaveService {
             /* Member */
             if (memberUtil.isLogin()) {
                 memberBoardData.setMember(memberUtil.getEntity());
+                memberBoardData.setPoster(memberUtil.getMember().getUserNm());
                 
                 /* Guest */
             }else {

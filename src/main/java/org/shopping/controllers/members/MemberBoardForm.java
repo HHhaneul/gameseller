@@ -20,7 +20,6 @@ public class MemberBoardForm {
     private String gid = UUID.randomUUID().toString();
 
     /* 작성자 */
-    @NotBlank
     private String poster;
 
     /* 비회원 비밀번호 */

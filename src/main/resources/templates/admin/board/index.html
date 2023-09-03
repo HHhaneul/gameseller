@@ -27,7 +27,7 @@
 
     <h1>게시판 목록</h1>
     <form name='frmList' method="post" th:action="@{/admin/board}" autocomplete="off" target="ifrmProcess">
-        <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="mode" value="delete">
         <table class="table-rows">
             <thead>
             <tr>
@@ -57,8 +57,8 @@
             </tbody>
         </table>
         <div class="table-action">
-            <a th:href="@{board/register}" class="sbtn form_action" data-mode="delete" data-target-name="frmList">추가하기</a>
-            <button type="button" class="sbtn blue form_action" data-mode="edit" data-target-name="frmList">삭제하기</button>
+            <a th:href="@{board/register}" class="sbtn">추가하기</a>
+            <button type="button" class="sbtn blue form_action" data-mode="delete" data-target-name="frmList">삭제하기</button>
         </div>
     </form>
 </section>

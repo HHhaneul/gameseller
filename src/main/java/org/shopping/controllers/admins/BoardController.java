@@ -58,6 +58,16 @@ public class BoardController implements CommonProcess, ScriptExceptionProcess {
         return "admin/board/index";
     }
 
+
+    @PostMapping
+    public String indexPs(@RequestParam("bId") String[] bIds, Model model) {
+
+        boardConfigDeleteService.delete(bIds);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "commons/_execute_script";
+    }
+
     /**
      * 게시판 등록
      * @return
