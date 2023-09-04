@@ -90,22 +90,22 @@ public class AdminMemberController {
         }
     */
     @GetMapping("/{userNo}/update")
-    public String update(@PathVariable Long userNo, @ModelAttribute MemberInfo MemberInfo
-            , JoinForm joinForm, Model model) {
-        MemberInfo.setRoles(memberInfoService.get(2l).getRoles());
+    public String update(@PathVariable Long userNo, @ModelAttribute JoinForm joinForm, Model model) {
+        Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 
-//        String aa = memberInfoService.formGet(userNo).getUserNm();
-//        Member member = (Member) memberInfoService.loadUserByUsername(aa);
-
-//        model.addAttribute("memberInfo", member == null ? new MemberInfo() : member);
+        joinForm.setMode("update");
+        joinForm.setUserId(member.getUserId());
+        joinForm.setMobile(member.getMobile());
+        joinForm.setAgrees(member.get);
 
         return "admin/member/update";
     }
 
     @PostMapping("/{userNo}/update")
-    public String updateMember(@PathVariable Long userNo, @Valid MemberInfo memberInfo, Errors errors) {
+    public String updateMember(@ModelAttribute Long userNo, @Valid JoinForm joinForm, Errors errors) {
 
 
+        System.out.println("앍"+memberInfo);
         memberSaveService.save(memberInfo);
 
 

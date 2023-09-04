@@ -24,7 +24,7 @@
         <br>
         <button type="submit" th:text="#{member.submit}"></button>-->
 
-        <form method="post" autocomplete="off" th:object="${MemberInfo}">
+        <form method="post" autocomplete="off" th:action="@{admin/member/update}" th:object="${MemberInfo}">
             <table class="table-cols">
                 <tr>
                     <th>아이디</th>

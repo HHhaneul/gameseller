@@ -13,6 +13,7 @@ import java.util.List;
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class JoinForm {
+    private String mode;
     @NotBlank
     @Size(min=6, max=20)
     private String userId;
