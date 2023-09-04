@@ -3,10 +3,15 @@ package org.shopping.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
+import org.shopping.commons.ListData;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
 import org.shopping.controllers.members.MemberBoardSearch;
+import org.shopping.entities.Game;
 import org.shopping.entities.MemberBoardData;
+import org.shopping.models.games.GameInfoService;
+import org.shopping.models.games.GameListService;
+import org.shopping.models.games.GameSearch;
 import org.shopping.models.member.board.MemberBoardListService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -25,15 +30,24 @@ public class MainController implements CommonProcess {
 
     private final HttpServletRequest request;
     private final MemberBoardListService memberBoardListService;
+    private final GameInfoService gameInfoService;
+    private final GameListService gameListService;
 
     @GetMapping
-    public String index(MemberBoardSearch memberBoardSearch, Model model){
+    public String index(MemberBoardSearch memberBoardSearch, GameSearch gameSearch, Model model){
         commonProcess(model, "main");
 
         memberBoardSearch.setLimit(5);
         Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch, "notice");
         data.getContent().stream().forEach(System.out::println);
         model.addAttribute("items", data.getContent());
+
+        /* 최신게임 */
+        commonProcess(model, "list");
+        ListData<Game> data2 = gameInfoService.getList(gameSearch);
+        model.addAttribute("items2", data2.getContent());
+        model.addAttribute("pagination", data2.getPagination());
+
         return "main/index";
     }
 
@@ -45,62 +59,11 @@ public class MainController implements CommonProcess {
         return "main/games";
     }
 
-    @GetMapping("/notice")
-    public String notice(Model model){
-        commonProcess(model, "notice");
-
-        return "main/notice";
-    }
-
-    @GetMapping("/support")
-    public String support(Model model){
-        commonProcess(model, "support");
-
-        return "main/support";
-    }
-
-    @GetMapping("/myPage")
-    public String myPage(Model model){
-        commonProcess(model, "myPage");
-
-        return "main/myPage";
-    }
-
-
-    @GetMapping("/inquire")
-    public String inquire(Model model){
-        commonProcess(model, "inquire");
-        return "main/inquire";
-    }
-
     @Override
     public void commonProcess(Model model, String mode) {
 
-
         List<String> addCommonScript = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
-
-        String pageTitle = "메인페이지";
-        if (mode.equals("games")) {
-            pageTitle = "게임 목록";
-
-        } else if (mode.equals("promotion")) {
-            pageTitle = "프로 모션";
-
-        } else if (mode.equals("notice")) {
-            pageTitle = "공지 사항";
-
-        } else if (mode.equals("support")) {
-            pageTitle = "고객 지원";
-
-        } else if (mode.equals("myPage")) {
-            pageTitle = "마이 페이지";
-
-        } else if (mode.equals("inquire")) {
-            pageTitle = "문의하기";
-        }
-
-        CommonProcess.super.commonProcess(model, pageTitle);
 
         model.addAttribute("menuCode", "game");
         model.addAttribute("addCommonScript", addCommonScript);

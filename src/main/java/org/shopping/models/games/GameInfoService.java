@@ -186,5 +186,7 @@ public class GameInfoService{
         game.setMainImages(mainImages);
         game.setListImages(listImages);
         game.setEditorImages(editorImages);
+        System.out.println("여기?");
+        System.out.println(game);
     }
 }

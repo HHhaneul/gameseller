@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <aside th:fragment="menu">
-        <h3 class="module-title"><strong>공지사항</strong>
-            <div><a th:href="@{/board/notice}">+ 더보기</a></div></h3>
+        <h3 class="module-title">
+            <strong>공지사항</strong>
+            <div class="pull-right" style="padding-top:4px; font-size:16px;">
+                <a th:href="@{/board/notice}" style="color: #67c1f5" >+ 더보기</a>
+            </div>
+        </h3>
         <div class="list-group" th:each = "item, index : ${items}" th:if="${index.index} < 5">
-            <a th:href="@{/board/view/{id}(id=*{item.id})}">
-                <span th:text="*{item.subject}"></span>
+            <a th:href="@{/board/view/{id}(id=*{item.id})}" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">
+                [[*{item.subject}]]
             </a>
         </div>
         <div class="sidemenu">
