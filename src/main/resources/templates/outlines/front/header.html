@@ -25,7 +25,7 @@
                     <a class="xi-cart xi-2x" th:href="@{/cart/index}"></a>
                 </div>
             </div>
-            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}" th:text="#{adminPage}"></a>
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}" th:text="#{adminPage}" style="height: 16px;"></a>
         </th:block>
         <th:block sec:authorize="isAnonymous()">
             <div class="gameSearch">

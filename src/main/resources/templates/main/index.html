@@ -8,7 +8,7 @@
 </head>
 
 <body layout:fragment="content">
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
         <div class="container text-center">
             <div class="row">
                 <div class="t3-sidebar t3-sidebar-left col col-xs-12 col-sm-4 col-sm-pull-8 col-md-3 col-md-pull-9  hidden-xs" style="min-height: 1750px;">
@@ -25,12 +25,12 @@
                         </div>
                         <div class="list-group">
                             <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">
-                                The current link item
+                                공지사항 입력 란
                             </a>
-                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">A second link item</a>
-                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">A third link item</a>
-                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">A fourth link item</a>
-                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">A disabled link item</a>
+                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">공지사항 입력 란</a>
+                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">공지사항 입력 란</a>
+                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">공지사항 입력 란</a>
+                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">공지사항 입력 란</a>
                         </div>
                     </div>
                     <div class="sidemenu">
@@ -41,42 +41,123 @@
                 <div class="t3-content col col-xs-12 col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
                     <div class="wrap t3-content-mast-bottom">
                         <div class="container">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Active</a>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">인기게임</button>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Link</a>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">최신게임</button>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">한글화게임</button>
                                 </li>
                             </ul>
                             <br>
-                            <div class="tab-content">
-                                <div class="vmgroup grid-group-item">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card" style="width: 18rem; height: 200px;">
-                                                <img th:src="@{/images/item.jpg.jpg}" class="card-img-top" alt="...">
-                                                <div class="card-body">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                    <br>
+                                    <div class="tab-content">
+                                        <div class="vmgroup grid-group-item">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="card" style="width: 18rem; height: 200px;">
+                                                        <a href="#">
+                                                            <img th:src="@{/images/item.jpg}" class="card-img-top" alt="...">
+                                                        </a>
+                                                            <div class="card-body">
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card" style="width: 18rem; height: 200px;">
+                                                        <a href="#">
+                                                            <img th:src="@{/images/item1.jpg}" class="card-img-top" alt="...">
+                                                        </a>
+                                                        <div class="card-body">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+
+                                                    <div class="card" style="width: 18rem; height: 200px;">
+                                                        <a href="#">
+                                                            <img th:src="@{/images/item2.jpg}" class="card-img-top" alt="...">
+                                                        </a>
+                                                        <div class="card-body">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="card" style="width: 18rem; height: 200px;">
-                                                <img th:src="@{/images/item1.jpg.jpg}" class="card-img-top" alt="...">
-                                                <div class="card-body">
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                    <br>
+                                    <div class="tab-content">
+                                        <div class="vmgroup grid-group-item">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="card" style="width: 18rem; height: 200px;">
+                                                        <a href="#">
+                                                        <img th:src="@{/images/item3.png}" class="card-img-top" alt="...">
+                                                        </a>
+                                                        <div class="card-body">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card" style="width: 18rem; height: 200px;">
+                                                        <a href="#">
+                                                        <img th:src="@{/images/item4.png}" class="card-img-top" alt="...">
+                                                        </a>
+                                                        <div class="card-body">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card" style="width: 18rem; height: 200px;">
+                                                        <a href="#">
+                                                        <img th:src="@{/images/item5.jpg}" class="card-img-top" alt="...">
+                                                        </a>
+                                                        <div class="card-body">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="card" style="width: 18rem; height: 200px;">
-                                                <img th:src="@{/images/item2.jpg.jpg}" class="card-img-top" alt="...">
-                                                <div class="card-body">
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                                    <br>
+                                    <div class="tab-content">
+                                        <div class="vmgroup grid-group-item">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="card" style="width: 18rem; height: 200px;">
+                                                        <a href="#">
+                                                        <img th:src="@{/images/item6.png}" class="card-img-top" alt="...">
+                                                        </a>
+                                                        <div class="card-body">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card" style="width: 18rem; height: 200px;">
+                                                        <a href="#">
+                                                        <img th:src="@{/images/item7.jpg}" class="card-img-top" alt="...">
+                                                        </a>
+                                                        <div class="card-body">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card" style="width: 18rem; height: 200px;">
+                                                        <a href="#">
+                                                        <img th:src="@{/images/item8.jpg}" class="card-img-top" alt="...">
+                                                        </a>
+                                                        <div class="card-body">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

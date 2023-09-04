@@ -314,9 +314,8 @@ button.xi-search {
     width: 180px;
 }
 
-.cart {
-    padding: 0px 10px 5px 10px;
-    border: 1px;
+.xi-cart::before {
+    color: rgb(239,165,60);
 }
 
 .btn-sm {
@@ -374,8 +373,9 @@ img.s-sideLogo {
 .left_banner_items {
 
 }
-
+/* 메인 홈페이지 스타일 */
 .list-group-item {
+
     background-color: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.01);
     color: #ffffff80;
@@ -411,10 +411,16 @@ span {
     display: inline-block;
 }
 
-.h3 {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+.h1 {
+    color: #ffffff;
 }
+
+.nav {
+    --bs-nav-link-hover-color: #ffffff;
+    --bs-nav-link-color: #ffffff;
+}
+
+.nav-link{
+    color: #ffffff;
+}
+

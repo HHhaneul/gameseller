@@ -65,11 +65,17 @@ public class MemberController {
         return "member/login";
     }
 
+    @GetMapping("/myPage")
+    public String myPage() {
+
+        return "member/myPage";
+    }
+
     private void commonProcess(Model model) {
         model.addAttribute("pageTitle", "회원가입");
     }
 
-    @GetMapping("/myPage")
+    @GetMapping("/update")
     public String showUpdateForm(String userId, Model model) {
         MemberInfo memberInfo = (MemberInfo) session.getAttribute("memberInfo");
         model.addAttribute("member", memberInfo);
