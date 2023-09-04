@@ -42,8 +42,4 @@ public class Game extends BaseEntity {
 
     @Transient
     private List<FileInfo> editorImages; // 에디터 이미지
-
-
-
-
 }

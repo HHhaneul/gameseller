@@ -177,11 +177,11 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
             if (mode.equals("add")) {
                 System.out.println("추가");
                 categorySaveService.save(form);
-            /* 수정 */
+                /* 수정 */
             } else if (mode.equals("edit")) {
                 System.out.println("수정");
                 categorySaveService.saveList(form);
-            /* 삭제 */
+                /* 삭제 */
             } else if (mode.equals("delete")) {
                 System.out.println("삭제");
                 categoryDeleteService.deleteList(form);

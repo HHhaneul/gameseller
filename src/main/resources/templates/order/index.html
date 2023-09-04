@@ -21,7 +21,7 @@
                 <td>
                     <input type="hidden" name="cartNo" th:value="*{cartNo}">
                     <th:block th:if="*{game != null && game.listImages != null && game.listImages.size() > 0}">
-                        <a th:href="@{/game/view/{no}(no=*{game.gameNo})}" target="_blank">
+                        <a th:href="@{/game/view_/{no}(no=*{game.gameNo})}" target="_blank">
                             <img th:src="*{game.listImages[0].thumbsUrl[0]}">
                         </a>
 
