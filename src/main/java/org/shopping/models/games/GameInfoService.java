@@ -162,6 +162,7 @@ public class GameInfoService{
                 .orderBy(orderSpecifier.toArray(OrderSpecifier[]::new))
                 .fetch();
 
+        items.stream().forEach(this::addFileInfo);
         ListData<Game> data = new ListData<>();
         data.setContent(items);
 
@@ -186,5 +187,7 @@ public class GameInfoService{
         game.setMainImages(mainImages);
         game.setListImages(listImages);
         game.setEditorImages(editorImages);
+        System.out.println("여기?");
+        System.out.println(game);
     }
 }

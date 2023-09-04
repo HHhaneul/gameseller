@@ -1,38 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="frontMenu">
-    <ul>
-        <li>
+    <div th:fragment="frontMenu">
             <a th:href="@{/game/list}" th:classappend="${menuCode} == 'game' ? 'on'">
                 <i class="xi-gamepad"></i>
                 게임
             </a>
-        </li>
-        <li>
             <a th:href="@{/board/notice}" th:classappend="${menuCode} == 'board' ? 'on'">
                 <i class="xi-view-list"></i>
                 공지사항
             </a>
-        </li>
-        <li>
             <a th:href="@{/support/inquire}" th:classappend="${menuCode} == 'support' ? 'on'">
                 <i class="xi-forum-o"></i>
                 고객센터
             </a>
-        </li>
-        <li>
             <a th:href="@{/order/cart}" th:classappend="${menuCode} == 'myPage' ? 'on'">
                 <i class="xi-user"></i>
                 마이 페이지
             </a>
-        </li>
-
-        <li>
             <a th:href="@{/order/cart}" th:classappend="${menuCode} == 'cart' ? 'on'">
                 <i class="xi-cart xi-2x"></i>
                 장바구니
             </a>
-        </li>
-    </ul>
-</div>
+    </div>
 </html>

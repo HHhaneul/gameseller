@@ -9,29 +9,7 @@
         <div class="container text-center">
             <div class="row">
                 <div class="t3-sidebar t3-sidebar-left col col-xs-12 col-sm-4 col-sm-pull-8 col-md-3 col-md-pull-9  hidden-xs" style="min-height: 1750px;">
-                    <div class="t3-module module normal-module">
-                        <div class="module-inner">
-                            <h3 class="module-title">
-                                <strong>
-                                    <span>공지사항</span>
-                                </strong>
-                                <div class="pull-right" style="padding-top:4px; font-size:16px;">
-                                    <a th:href="@{/notice}" style="color: #67c1f5">+ 더보기</a>
-                                </div>
-                            </h3>
-                        </div>
-                        <div class="list-group">
-                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">
-                                공지사항 입력 란
-                            </a>
-                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">공지사항 입력 란</a>
-                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">공지사항 입력 란</a>
-                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">공지사항 입력 란</a>
-                            <a href="#" class="list-group-item" style="width:240px;white-space:nowrap;text-overflow:ellipsis; overflow:hidden;white-space:nowrap">공지사항 입력 란</a>
-                        </div>
-                    </div>
                     <div class="sidemenu">
-                        <h3 class="announcement" th:text="${pageTitle}"></h3>
                         <aside th:replace="~{outlines/front/side::menu}"></aside>
                     </div>
                 </div>
@@ -55,36 +33,17 @@
                                     <br>
                                     <div class="tab-content">
                                         <div class="vmgroup grid-group-item">
-                                            <div class="row">
-                                                <div class="col">
+                                            <form class="row" name="frmView" method="post" th:action="@{/order/cart}" target="ifrmProcess">
+                                                <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
                                                     <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a href="#">
-                                                            <img th:src="@{/images/item.jpg}" class="card-img-top" alt="...">
-                                                        </a>
-                                                            <div class="card-body">
-                                                            </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a href="#">
-                                                            <img th:src="@{/images/item1.jpg}" class="card-img-top" alt="...">
+                                                        <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                            <img th:src="*{listImages[0].thumbsUrl[0]}">
                                                         </a>
                                                         <div class="card-body">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col">
-
-                                                    <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a href="#">
-                                                            <img th:src="@{/images/item2.jpg}" class="card-img-top" alt="...">
-                                                        </a>
-                                                        <div class="card-body">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -97,24 +56,6 @@
                                                     <div class="card" style="width: 18rem; height: 200px;">
                                                         <a href="#">
                                                         <img th:src="@{/images/item3.png}" class="card-img-top" alt="...">
-                                                        </a>
-                                                        <div class="card-body">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a href="#">
-                                                        <img th:src="@{/images/item4.png}" class="card-img-top" alt="...">
-                                                        </a>
-                                                        <div class="card-body">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a href="#">
-                                                        <img th:src="@{/images/item5.jpg}" class="card-img-top" alt="...">
                                                         </a>
                                                         <div class="card-body">
                                                         </div>
@@ -133,24 +74,6 @@
                                                     <div class="card" style="width: 18rem; height: 200px;">
                                                         <a href="#">
                                                         <img th:src="@{/images/item6.png}" class="card-img-top" alt="...">
-                                                        </a>
-                                                        <div class="card-body">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a href="#">
-                                                        <img th:src="@{/images/item7.jpg}" class="card-img-top" alt="...">
-                                                        </a>
-                                                        <div class="card-body">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a href="#">
-                                                        <img th:src="@{/images/item8.jpg}" class="card-img-top" alt="...">
                                                         </a>
                                                         <div class="card-body">
                                                         </div>
