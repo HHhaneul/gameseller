@@ -35,6 +35,8 @@ public class GameMenus {
         } else if (code.equals("support")){
             menus.add(new MenuDetail("inquire", "문의하기", "/inquire"));
             menus.add(new MenuDetail("repeatedly", "자주묻는질문", "/repeatedly"));
+        } else if (code.equals("order")) {
+            menus.add(new MenuDetail("order", "주문 목록", "/admin/order"));
         }
         return menus;
     }
