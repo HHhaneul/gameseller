@@ -55,6 +55,7 @@ public class MemberController {
             return "member/join";
         }
 
+        saveService.save(joinForm);
 
         return "redirect:/member/login";
     }
