@@ -78,7 +78,7 @@ public class OrderInfoService {
             skey = skey.trim();
 
             if (sopt.equals("all")) { // 통합 검색
-                
+
             } else if (sopt.equals("name")) { // 주문자, 받는사람 이름
                 BooleanBuilder orBuilder = new BooleanBuilder();
                 orBuilder.or(orderInfo.orderName.contains(skey))
@@ -90,7 +90,11 @@ public class OrderInfoService {
                         .or(orderInfo.receiverMobile.contains(skey));
                 andBuilder.and(orBuilder);
             } else if (sopt.equals("address")) { // 배송주소
-
+                BooleanBuilder orBuilder = new BooleanBuilder();
+                orBuilder.or(orderInfo.zonecode.contains(skey))
+                        .or(orderInfo.address.contains(skey))
+                        .or(orderInfo.addressSub.contains(skey));
+                andBuilder.and(orBuilder);
             }
 
         }
