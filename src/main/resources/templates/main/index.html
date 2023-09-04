@@ -33,18 +33,17 @@
                                     <br>
                                     <div class="tab-content">
                                         <div class="vmgroup grid-group-item">
-                                            <div class="row">
+                                            <form class="row" name="frmView" method="post" th:action="@{/order/cart}" target="ifrmProcess">
                                                 <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
                                                     <div class="card" style="width: 18rem; height: 200px;">
                                                         <a th:href="@{/game/view/{no}(no=*{gameNo})}">
                                                             <img th:src="*{listImages[0].thumbsUrl[0]}">
                                                         </a>
                                                         <div class="card-body">
-
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
