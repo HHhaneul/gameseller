@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
 import org.shopping.commons.ListData;
+import org.shopping.commons.constants.OrderStatus;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
 import org.shopping.controllers.orders.OrderSearch;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -31,14 +33,21 @@ public class OrderController implements CommonProcess {
     public String index(@ModelAttribute OrderSearch search, Model model) {
         commonProcess(model, "list");
         ListData<OrderInfo> data = orderInfoService.getList(search);
-        data.getContent().stream().forEach(System.out::println);
 
         model.addAttribute("items", data.getContent());
         model.addAttribute("pagination", data.getPagination());
 
         return tplCommon + "index";
     }
-    
+
+    @GetMapping("/view/{orderNo}")
+    public String view(@PathVariable Long orderNo, Model model) {
+        commonProcess(model, "view");
+        OrderInfo data = orderInfoService.get(orderNo);
+        model.addAttribute("data", data);
+
+        return tplCommon + "view";
+    }
     public void commonProcess(Model model, String mode) {
         String pageTitle = "주문 목록";
 
@@ -46,7 +55,6 @@ public class OrderController implements CommonProcess {
 
         List<String> addScript = new ArrayList<>();
         List<String> addCommonScript = new ArrayList<>();
-
 
 
         model.addAttribute("addScript", addScript);
@@ -60,5 +68,7 @@ public class OrderController implements CommonProcess {
         // 서브 메뉴 조회
         List<MenuDetail> submenus = GameMenus.gets("order");
         model.addAttribute("submenus", submenus);
+
+        model.addAttribute("orderStatuses", OrderStatus.getList());
     }
 }
