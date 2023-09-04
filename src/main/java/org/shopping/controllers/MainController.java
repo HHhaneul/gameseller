@@ -71,14 +71,6 @@ public class MainController implements CommonProcess {
         return "main/index";
     }
 
-
-    @GetMapping("/games")
-    public String games(Model model){
-        commonProcess(model, "games");
-
-        return "main/games";
-    }
-
     @Override
     public void commonProcess(Model model, String mode) {
 

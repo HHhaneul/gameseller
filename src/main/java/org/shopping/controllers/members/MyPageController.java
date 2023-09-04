@@ -42,10 +42,10 @@ public class MyPageController {
         return "order/cart";
     }
 
-    @GetMapping("/support/inquire")
+    @GetMapping("/member/support/inquire")
     public String support() {
 
-        return "support/inquire";
+        return "myPage/myPage_QnA";
     }
 
     @GetMapping("/myPage/update")
