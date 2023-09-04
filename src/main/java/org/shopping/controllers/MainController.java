@@ -48,6 +48,26 @@ public class MainController implements CommonProcess {
         model.addAttribute("items2", data2.getContent());
         model.addAttribute("pagination", data2.getPagination());
 
+        /* 인기게임 */
+        commonProcess(model, "list");
+        ListData<Game> data3 = gameInfoService.getList(gameSearch);
+        model.addAttribute("items3", data3.getContent());
+        model.addAttribute("pagination", data3.getPagination());
+
+        /* 한글화 게임 */
+        commonProcess(model, "list");
+        ListData<Game> data4 = gameInfoService.getList(gameSearch);
+        model.addAttribute("items4", data4.getContent());
+        model.addAttribute("pagination", data4.getPagination());
+
+        List<String> icons = new ArrayList<>();
+        icons.add("베스트");
+        icons.add("인기");
+        icons.add("주문폭주");
+        icons.add("최다판매");
+        icons.add("추천");
+        model.addAttribute("icons", icons);
+
         return "main/index";
     }
 

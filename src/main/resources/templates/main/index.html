@@ -33,17 +33,29 @@
                                     <br>
                                     <div class="tab-content">
                                         <div class="vmgroup grid-group-item">
-                                            <form class="row" name="frmView" method="post" th:action="@{/order/cart}" target="ifrmProcess">
+                                            <div class="row">
                                                 <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
                                                     <div class="card" style="width: 18rem; height: 200px;">
                                                         <a th:href="@{/game/view/{no}(no=*{gameNo})}">
-                                                            <img th:src="*{listImages[0].thumbsUrl[0]}">
+                                                            <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
                                                         </a>
                                                         <div class="card-body">
+                                                            <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                            <ul>
+                                                                <li th:text="*{gameNm}"></li>
+                                                                <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                                <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                                <img th:src="@{/images/베스트.gif}">
+                                                                <img th:src="@{/images/인기.gif}">
+                                                                <img th:src="@{/images/주문폭주.gif}">
+                                                                <img th:src="@{/images/최다판매.gif}">
+                                                                <img th:src="@{/images/추천.gif}">
+                                                            </ul>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -52,12 +64,24 @@
                                     <div class="tab-content">
                                         <div class="vmgroup grid-group-item">
                                             <div class="row">
-                                                <div class="col">
+                                                <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
                                                     <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a href="#">
-                                                        <img th:src="@{/images/item3.png}" class="card-img-top" alt="...">
+                                                        <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                            <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
                                                         </a>
                                                         <div class="card-body">
+                                                            <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                                <ul>
+                                                                    <li th:text="*{gameNm}"></li>
+                                                                    <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                                    <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                                    <img th:src="@{/images/베스트.gif}">
+                                                                    <img th:src="@{/images/인기.gif}">
+                                                                    <img th:src="@{/images/주문폭주.gif}">
+                                                                    <img th:src="@{/images/최다판매.gif}">
+                                                                    <img th:src="@{/images/추천.gif}">
+                                                                </ul>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -70,12 +94,24 @@
                                     <div class="tab-content">
                                         <div class="vmgroup grid-group-item">
                                             <div class="row">
-                                                <div class="col">
+                                                <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
                                                     <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a href="#">
-                                                        <img th:src="@{/images/item6.png}" class="card-img-top" alt="...">
+                                                        <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                            <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
                                                         </a>
                                                         <div class="card-body">
+                                                            <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                                <ul>
+                                                                    <li th:text="*{gameNm}"></li>
+                                                                    <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                                    <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                                    <img th:src="@{/images/베스트.gif}">
+                                                                    <img th:src="@{/images/인기.gif}">
+                                                                    <img th:src="@{/images/주문폭주.gif}">
+                                                                    <img th:src="@{/images/최다판매.gif}">
+                                                                    <img th:src="@{/images/추천.gif}">
+                                                                </ul>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
