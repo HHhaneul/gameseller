@@ -1,17 +1,19 @@
 package org.shopping.controllers.members;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.shopping.CommonProcess;
+import org.shopping.commons.AlertBackException;
 import org.shopping.commons.CommonException;
 import org.shopping.commons.Utils;
+import org.shopping.commons.menus.GameMenus;
+import org.shopping.commons.menus.MenuDetail;
 import org.shopping.controllers.admins.logins.FindIdForm;
 import org.shopping.entities.Member;
-import org.shopping.models.member.MemberInfo;
-import org.shopping.models.member.MemberInfoService;
-import org.shopping.models.member.MemberNotFoundException;
-import org.shopping.models.member.MemberSaveService;
+import org.shopping.models.member.*;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -21,16 +23,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
-public class MemberController {
+public class MemberController implements CommonProcess {
 
+    private final HttpServletRequest request;
     private final MemberSaveService saveService;
     private final JoinValidator joinValidator;
     private final MemberRepository memberRepository;
@@ -38,6 +41,7 @@ public class MemberController {
     private final HttpSession session;
     private final PasswordEncoder passwordEncoder;
     private final Utils utils;
+    private final MemberDeleteService memberDeleteService;
 
     @GetMapping("/join")
     public String join(@ModelAttribute JoinForm joinForm, Model model) {
@@ -190,4 +194,51 @@ public class MemberController {
         }
         return null;
     }
+    /* 회원 목록 삭제 */
+    @PostMapping("{userNo}/delete")
+    public String delete(@PathVariable Long userNo) {
+        try {
+            memberDeleteService.delete(userNo);
+        } catch (CommonException e) {
+            e.printStackTrace();
+            throw new AlertBackException(e.getMessage());
+        }
+        return "redirect:/admin/member/index";
+    }
+
+    @PostMapping("/delete")
+    public String listDelete(@PathVariable Long userNo, Model model) {
+        try {
+            memberDeleteService.delete(userNo);
+        } catch (CommonException e) {
+            e.printStackTrace();
+            throw new AlertBackException(e.getMessage());
+        }
+        return "commons/_execute_script";
+    }
+
+    @Override
+    public void commonProcess(Model model, String mode) {
+
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+        if (mode.equals("add") || mode.equals("edit") || mode.equals("save")) {
+            addCommonScript.add("ckeditor/ckeditor");
+            addCommonScript.add("fileManager");
+            addScript.add("game/form");
+        }
+        String menuCode = GameMenus.getSubMenuCode(request);
+
+        model.addAttribute("menuCode", menuCode);
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
+
+        // 서브 메뉴 처리
+        model.addAttribute("subMenuCode", menuCode);
+
+        // 서브 메뉴 조회
+        List<MenuDetail> submenus = GameMenus.gets("board");
+        model.addAttribute("submenus", submenus);
+    }
+
 }

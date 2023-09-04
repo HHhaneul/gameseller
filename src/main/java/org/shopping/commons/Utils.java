@@ -85,6 +85,10 @@ public class Utils {
         return request.getParameter(name);
     }
 
+    public String getParam(Long name) {
+        return request.getParameter(String.valueOf(name));
+    }
+
     /**
      * 복수개 요청 데이터 조회
      *
