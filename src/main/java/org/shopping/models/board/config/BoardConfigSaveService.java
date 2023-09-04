@@ -66,7 +66,6 @@ public class BoardConfigSaveService {
         board.setUseReply(boardForm.isUseReply());
         board.setUseComment(boardForm.isUseComment());
         board.setSkin(boardForm.getSkin());
-        System.out.println(board);
         boardRepository.saveAndFlush(board);
     }
 }

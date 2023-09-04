@@ -5,13 +5,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.commons.MemberUtil;
-import org.shopping.commons.MenuDetail;
-import org.shopping.commons.Menus;
-import org.shopping.controllers.admins.BoardSearch;
+import org.shopping.commons.menus.GameMenus;
+import org.shopping.commons.menus.MenuDetail;
 import org.shopping.entities.Board;
-import org.shopping.entities.Member;
 import org.shopping.entities.MemberBoardData;
-import org.shopping.entities.QMemberBoardData;
 import org.shopping.models.board.config.BoardConfigInfoService;
 import org.shopping.models.member.board.MemberBoardDeleteService;
 import org.shopping.models.member.board.MemberBoardInfoService;
@@ -42,7 +39,7 @@ public class MemberBoardController {
     private final MemberUtil memberUtil;
     private final HttpServletRequest request;
     private final BoardDataRepository repository;
-
+    private final BoardSaveValidator saveValidator;
     private Board board;
 
     /* 게시글 작성 양식 */
@@ -50,14 +47,7 @@ public class MemberBoardController {
     public String write(@PathVariable String bId, @ModelAttribute MemberBoardForm memberBoardForm, Model model) {
         commonProcess(bId, "write", model);
 
-        memberBoardForm = new MemberBoardForm();
-        System.out.println("board.getBId="+board.getBId());
         memberBoardForm.setBId(board.getBId());
-        if (memberUtil.isLogin()) {
-            memberBoardForm.setPoster(memberUtil.getMember().getUserNm());
-        }
-        model.addAttribute("memberBoardForm", memberBoardForm);
-        model.addAttribute("addScript", new String[]{"ckeditor/ckeditor", "form"});
 
         return "board/write";
     }
@@ -75,8 +65,10 @@ public class MemberBoardController {
     }
     @PostMapping("/save")
     public String save(@Valid MemberBoardForm memberBoardform, Errors errors) {
+        saveValidator.validate(memberBoardform, errors);
+
         try {
-            saveService.save(memberBoardform);
+            saveService.save(memberBoardform, errors);
         } catch (Exception e) {
             errors.reject("boardSaveErr", e.getMessage());
         }
@@ -132,7 +124,7 @@ public class MemberBoardController {
     @ExceptionHandler(Exception.class)
     public String errorHandler(Exception e, Model model) {
         model.addAttribute("scripts", alertBack(e.getMessage()));
-        return "commons/execute_script";
+        return "commons/_execute_script";
     }
 
     private void commonProcess(String bId, String action, Model model) {
@@ -153,17 +145,15 @@ public class MemberBoardController {
         List<String> addScript = new ArrayList<>();
 
         /* 공통 스타일 CSS */
-        addCss.add("board/style");
-        addCss.add(String.format("board/%s_style", board.getSkin()));
+        addCss.add("style");
 
         /* 글 작성, 수정시 필요한 자바스크립트 */
         if (action.equals("write") || action.equals("update")) {
 
-            /* 에디터 사용 경우 */
-            if (board.isUseEditor()) {
-                addScript.add("ckeditor/ckeditor");
-            }
-            addScript.add("board/form");
+
+        addScript.add("ckeditor/ckeditor");
+        addScript.add("fileManager");
+
         }
         /* 공통 필요 속성 추가 */
         model.addAttribute("board", board); // 게시판 설정
@@ -175,10 +165,10 @@ public class MemberBoardController {
 
         String URI = request.getRequestURI();
         // 서브 메뉴 처리
-        String subMenuCode = Menus.getSubMenuCode(request);
+        String subMenuCode = GameMenus.getSubMenuCode(request);
         model.addAttribute("subMenuCode", subMenuCode);
 
-        List<MenuDetail> submenus = Menus.gets("board");
+        List<MenuDetail> submenus = GameMenus.gets("board");
         model.addAttribute("submenus", submenus);
 
         model.addAttribute("pageTitle", title);

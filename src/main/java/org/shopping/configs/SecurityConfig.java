@@ -3,7 +3,8 @@ package org.shopping.configs;
 import jakarta.servlet.http.HttpServletResponse;
 import org.shopping.models.member.LoginFailureHandler;
 import org.shopping.models.member.LoginSuccessHandler;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,7 +36,7 @@ public class SecurityConfig {
                     /* 회원 전용 */
                     .requestMatchers("/mypage/**").authenticated()
                     /* 관리자 전용 */
-                    .requestMatchers("/admin/**").hasAuthority("ADMIN") // 관리자만 접근 가능
+                   // .requestMatchers("/admin/**").hasAuthority("ADMIN") // 관리자만 접근 가능
                     /* 회원 / 비회원 / 관리자 접근 가능 */
                     .anyRequest().permitAll();
         });
@@ -53,6 +54,8 @@ public class SecurityConfig {
                 }
             });
         });
+
+        http.headers(h -> h.frameOptions(f -> f.sameOrigin()));
         return http.build();
     }
 

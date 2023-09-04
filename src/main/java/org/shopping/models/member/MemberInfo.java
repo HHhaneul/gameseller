@@ -10,6 +10,7 @@ import java.util.Collection;
 
 @Data
 @Builder
+@NoArgsConstructor @AllArgsConstructor
 public class MemberInfo implements UserDetails {
 
     private Long userNo;

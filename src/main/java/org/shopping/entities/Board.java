@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.shopping.commons.constants.Role;
 
+import java.util.List;
+
 @Entity
 @Data
 @Builder
@@ -95,6 +97,8 @@ public class Board extends BaseMemberEntity {
     /* 게시판 스킨 */
     @Column(length=20, nullable=false)
     private String skin = "default";
+
+    private List<Integer> chkNo;
 
     /**
      * 게시판 분류 목록

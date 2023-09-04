@@ -1,7 +1,6 @@
 package org.shopping.models.member;
 
 
-
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.shopping.commons.constants.Role;
@@ -10,7 +9,6 @@ import org.shopping.entities.Member;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 /**
  * 회원 정보 추가, 수정
@@ -39,5 +37,14 @@ public class MemberSaveService {
 
     public void save(Member member) {
         memberRepository.save(member);
+    }
+    public void save(MemberInfo memberInfo) {
+
+        Member member = new ModelMapper().map(memberInfo, Member.class);
+        member.setRoles(Role.USER);
+
+        member.setUserPw(passwordEncoder.encode(memberInfo.getUserPw()));
+
+        memberRepository.saveAndFlush(member);
     }
 }

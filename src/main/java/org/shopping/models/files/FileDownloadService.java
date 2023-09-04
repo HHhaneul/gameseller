@@ -15,14 +15,11 @@ public class FileDownloadService {
     private final FileInfoService infoService;
 
     public void download(Long id) {
+
         FileInfo item = infoService.get(id);
         String filePath = item.getFilePath();
-        System.out.println(filePath);
-        System.out.println(item);
         File file = new File(filePath);
-
-        /* 파일이 없는 경우 */
-        if (!file.exists()) {
+        if (!file.exists()) { // 파일이 없는 경우
             throw new FileNotFoundException();
         }
 

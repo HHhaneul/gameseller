@@ -1,10 +1,10 @@
 package org.shopping.controllers.members;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
-import org.modelmapper.ModelMapper;
-import org.shopping.entities.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
@@ -20,7 +20,6 @@ public class MemberBoardForm {
     private String gid = UUID.randomUUID().toString();
 
     /* 작성자 */
-    @NotBlank
     private String poster;
 
     /* 비회원 비밀번호 */

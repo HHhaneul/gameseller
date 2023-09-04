@@ -2,16 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
-    <body>
-        <div layout:fragment="content">
-            <h2 th:text="${memberBoardData.subject}"></h2>
-            <dl>
-                <dt th:text="${memberBoardData.content}"></dt>
-            </dl>
-            <div class="author-info">
-                작성자: <span th:text="${memberBoardData.poster}"></span>
-                작성일: <span th:text="${#temporals.format(memberBoardData.createdAt, 'MM/dd')}"></span>
-            </div>
-        </div>
-    </body>
+
+<section layout:fragment="content">
+    <h1 th:text="${pageTitle}"></h1>
+    <table class="table-cols" th:object="${memberBoardData}">
+        <tr>
+            <th>제목</th>
+            <td th:text="*{subject}"></td>
+            <th width="100">작성자</th>
+            <td th:text="*{#strings.concat(poster, '(', member.userId, ')')}"></td>
+
+        </tr>
+        <tr>
+            <th >등록일시</th>
+            <td width="300" th:text="${#temporals.format(memberBoardData.createdAt, 'MM월dd일 HH:mm')}"></td>
+            <th>IP</th>
+            <td th:text="*{ip}"></td>
+            <th>조회수</th>
+            <td th:text="*{hit}"></td>
+            <th>댓글 수</th>
+            <td th:text="*{commentCnt}"></td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td height="500" th:utext="*{content}"></td>
+        </tr>
+        <tr>
+            <th>제목</th>
+            <td th:text="*{subject}"></td>
+        </tr>
+    </table>
+</section>
+
 </html>
