@@ -12,7 +12,7 @@
     </title>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/front/style.css?v={v}(v=${@siteConf.get('cssJsVersion')})}">
-    <link rel="stylesheet" type="text/css" th:each="file : ${addCommonCss}" th:href="@{/css/common/{cssFile}.css?v={v}(cssFile=${file}, v=${@siteConf.get('cssJsVersion')})}">
+    <link rel="stylesheet" type="text/css" th:each="file : ${addCommonCss}" th:href="@{/common/css/{cssFile}.css?v={v}(cssFile=${file}, v=${@siteConf.get('cssJsVersion')})}">
     <link rel="stylesheet" type="text/css" th:each="file : ${addCss}" th:href="@{/css/front/{cssFile}.css?v={v}(cssFile=${file}, v=${@siteConf.get('cssJsVersion')})}">
     <th:block layout:fragment="addCss"></th:block>
     <script th:src="@{/js/front/common.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>

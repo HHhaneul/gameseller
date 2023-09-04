@@ -111,6 +111,10 @@ public class MemberBoardController {
 
         Page<MemberBoardData> data = listService.gets(memberBoardSearch, bId);
         model.addAttribute("items", data.getContent());
+/*
+        String pageTitle = infoService.get()
+        model.addAttribute("pageTitle", pageTitle);
+*/
 
         return "board/index";
     }
@@ -129,37 +133,30 @@ public class MemberBoardController {
     }
 
     private void commonProcess(String bId, String action, Model model) {
-        /**
-         * 1. bId 게시판 설정 조회
-         * 2. action - write, update - 공통 스크립트, 공통 CSS
-         *           - 에디터 사용 -> 에디터 스크립트 추가
-         *           - 에디터 미사용 -> 에디터 스크립트 미추가
-         *           - write, list, view -> 권한 체크
-         *           - update - 본인이 게시글만 수정 가능
-         *                    - 회원 - 회원번호
-         *                    - 비회원 - 비회원비밀번호
-         *                    - 관리자는 다 가능
-         *
-         */
+
         board = configInfoService.get(bId, action);
+
         List<String> addCss = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addCommonCss = new ArrayList<>();
 
         /* 공통 스타일 CSS */
-        addCss.add("style");
+        addCommonCss.add("style");
 
         /* 글 작성, 수정시 필요한 자바스크립트 */
         if (action.equals("write") || action.equals("update")) {
-
-
-        addScript.add("ckeditor/ckeditor");
-        addScript.add("fileManager");
+        addCommonScript.add("ckeditor/ckeditor");
+        addCommonScript.add("fileManager");
+        addCommonScript.add("form");
 
         }
         /* 공통 필요 속성 추가 */
         model.addAttribute("board", board); // 게시판 설정
         model.addAttribute("addCss", addCss); // CSS 설정
         model.addAttribute("addScript", addScript); // JS 설정
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addCommonCss", addCommonCss); // JS 설정
     }
 
     private void search(Model model, String title){

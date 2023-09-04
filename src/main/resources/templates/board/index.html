@@ -25,7 +25,7 @@
         </div>
     </form>
 
-    <h1>전체 게시판</h1>
+    <h1 th:text="@{pageTitle}"></h1>
     <form name='frmList' method="post" th:action="@{/front/board}" autocomplete="off" target="ifrmProcess">
         <input type="hidden" name="_method" value="patch">
         <table class="table-rows">
