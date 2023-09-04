@@ -2,7 +2,128 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/admin/main}">
-<section layout:fragment="content">
-    <h1></h1>
+<section layout:fragment="content" th:object="${data}">
+    <h1>주문번호 : <th:block th:text="*{orderNo}"></th:block></h1>
+    <h2>주문 상품</h2>
+    <form name="frmSave" method="post" th:action="@{/admin/order}" target="ifrmProcess" autocomplete="off">
+        <input type="hidden" name="orderNo" th:value="*{orderNo}">
+        <table class="table-rows">
+            <thead>
+                <tr>
+                    <th colspan="2" width="250">주문상품</th>
+                    <th width="100">판매가</th>
+                    <th width="100">주문수량</th>
+                    <th width="150">합계</th>
+                    <th width="200">운송장번호</th>
+                    <th>주문상태</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="*{orderItems != null && !orderItems.isEmpty()}"
+                    th:each="item : *{orderItems}" th:object="${item}">
+                    <td width="50">
+                        <input type="hidden" name="itemId" th:value="*{id}">
+                        <a th:if="*{game != null && game.listImages != null && !game.listImages.isEmpty()}" th:href="@{/game/view/{gameNo}(gameNo=*{game.gameNo})}" class="product_image" target="_blank">
+                            <img th:src="*{game.listImages[0].thumbsUrl[0]}" width="50">
+                        </a>
+                    </td>
+                    <td th:text="*{gameNm}"></td>
+                    <td>
+                        <th:block th:if="*{price < 1000}" th:text="*{price}"></th:block>
+                        <th:block th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA')}"></th:block>원
+                    </td>
+                    <td th:text="*{#strings.concat('구매수량 : ', ea, '개')}"></td>
+                    <td>
+                        <th:block th:if="*{totalPrice < 1000}" th:text="*{totalPrice}"></th:block>
+                        <th:block th:if="*{totalPrice >= 1000}" th:text="*{#numbers.formatInteger(totalPrice, 3, 'COMMA')}"></th:block>원
+                    </td>
+                    <td>
+                        <input type="text" th:name="*{'invoice_' + id}" th:value="*{invoice}">
+                    </td>
+                    <td>
+                        <select th:name="${'status_' + id}">
+                            <option th:each="s : ${orderStatuses}" th:value="${s[0]}" th:text="${s[1]}" th:selected="${s[0] == item.status}"></option>
+                        </select>
+
+                    </td>
+                </tr>
+                <tr th:unless="*{orderItems != null && !orderItems.isEmpty()}">
+                    <td colspan="7" class="no_data">주문상품이 없습니다.</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="submit_btn">
+            <button type="submit" onclick="return confirm('정말 수정하시겠습니까?');">수정하기</button>
+        </div>
+
+        <h2>주문자 정보</h2>
+        <dl>
+            <dt>주문자명</dt>
+            <dd>
+                <input type="text" name="orderName" th:field="*{orderName}">
+            </dd>
+        </dl>
+        <dl>
+            <dt>이메일</dt>
+            <dd>
+                <input type="text" name="orderEmail" th:field="*{orderEmail}">
+            </dd>
+        </dl>
+        <dl>
+            <dt>휴대전화번호</dt>
+            <dd>
+                <input type="text" name="orderMobile" th:field="*{orderMobile}">
+            </dd>
+        </dl>
+
+        <h2>배송지 정보</h2>
+        <dl>
+            <dt>받는분</dt>
+            <dd>
+                <input type="text" name="receiverName" th:field="*{receiverName}">
+            </dd>
+        </dl>
+        <dl>
+            <dt>휴대전화번호</dt>
+            <dd>
+                <input type="text" name="receiverMobile" th:field="*{receiverMobile}">
+            </dd>
+        </dl>
+        <dl>
+            <dt>주소</dt>
+            <dd>
+                <th:block th:text="*{zonecode}"></th:block>
+                <th:block th:text="*{address}"></th:block>
+                <th:block th:text="*{addressSub}"></th:block>
+            </dd>
+        </dl>
+        <dl th:if="*{deliveryCompany != null && invoice != null}">
+            <dt>운송장정보</dt>
+            <dd>
+                <th:block th:text="*{deliveryComapny}"></th:block>
+                <th:block th:text="*{invoice}"></th:block>
+                <button type="button" th:data-delivery-company="*{deliveryCompany}" th:data-invoice="*{invoice}" class="trace_delivery">배송조회</button>
+            </dd>
+        </dl>
+        <h2>결제 정보</h2>
+        <dl>
+            <dt>배송비</dt>
+            <dd>3,000원</dd>
+        </dl>
+        <dl>
+            <dt>결제금액</dt>
+            <dd>
+                <th:block th:if="*{payPrice < 1000}" th:text="*{payPrice + '원'}"></th:block>
+                <th:block th:if="*{payPrice >= 1000}" th:text="*{#numbers.formatInteger(payPrice, 3, 'COMMA') + '원'}"></th:block>
+            </dd>
+        </dl>
+        <dl>
+            <dt>결제방법</dt>
+            <dd th:text="*{paymentType.title}"></dd>
+        </dl>
+        <div class="submit_btn">
+            <button type="submit" onclick="return confirm('정말 수정하시겠습니까?');">수정하기</button>
+        </div>
+    </form>
 </section>
 </html>
