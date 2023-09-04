@@ -37,7 +37,7 @@ public class GameInfoService{
     private final ConfigInfoService configInfoService;
 
     /**
-     * 도서 개별 조회
+     * 게임 개별 조회
      *
      * @param gameNo
      * @return
@@ -50,7 +50,7 @@ public class GameInfoService{
     }
 
     /**
-     * 도서 엔티티를 도서 양식으로 반환
+     * 게임 엔티티를 게임 양식으로 반환
      *
      * @param gameNo
      * @return
