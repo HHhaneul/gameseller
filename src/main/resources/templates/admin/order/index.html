@@ -31,7 +31,7 @@
                 <th>주문상태</th>
                 <td colspan="3">
                     <span th:each="orderStatus, status : ${orderStatuses}">
-                        <input type="checkbox" name="statuses" th:value="${orderStatus[0]}" th:id="${'status_' + status.index}">
+                        <input type="checkbox" name="statuses" th:value="${orderStatus[0]}" th:id="${'status_' + status.index}" th:field="*{statuses}">
                         <label th:for="${'status_' + status.index}" th:text="${orderStatus[1]}"></label>
                     </span>
                 </td>

@@ -40,11 +40,12 @@ public class OrderController implements CommonProcess {
         return tplCommon + "index";
     }
 
-    @GetMapping("/view/{orderNo}")
+    @GetMapping("/{orderNo}")
     public String view(@PathVariable Long orderNo, Model model) {
         commonProcess(model, "view");
         OrderInfo data = orderInfoService.get(orderNo);
         model.addAttribute("data", data);
+
 
         return tplCommon + "view";
     }
@@ -63,6 +64,7 @@ public class OrderController implements CommonProcess {
         model.addAttribute("menuCode", "order");
         // 서브 메뉴 처리
         String subMenuCode = GameMenus.getSubMenuCode(request);
+        if (mode.equals("view")) subMenuCode = "order";
         model.addAttribute("subMenuCode", subMenuCode);
 
         // 서브 메뉴 조회
