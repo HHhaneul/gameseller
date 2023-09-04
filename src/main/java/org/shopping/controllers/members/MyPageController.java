@@ -36,10 +36,10 @@ public class MyPageController {
         return "cart/index";
     }
 
-    @GetMapping("/myPage/main")
+    @GetMapping("/order/index")
     public String myPage_main() {
 
-        return "order/cart";
+        return "order/index";
     }
 
     @GetMapping("/support/inquire")
