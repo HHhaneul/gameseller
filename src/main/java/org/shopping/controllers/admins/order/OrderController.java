@@ -3,11 +3,16 @@ package org.shopping.controllers.admins.order;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
+import org.shopping.commons.ListData;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
+import org.shopping.controllers.orders.OrderSearch;
+import org.shopping.entities.OrderInfo;
+import org.shopping.models.order.OrderInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -17,12 +22,19 @@ import java.util.List;
 @RequestMapping("/admin/order")
 @RequiredArgsConstructor
 public class OrderController implements CommonProcess {
+
     private String tplCommon = "admin/order/";
     private final HttpServletRequest request;
+    private final OrderInfoService orderInfoService;
 
     @GetMapping
-    public String index(Model model) {
+    public String index(@ModelAttribute OrderSearch search, Model model) {
         commonProcess(model, "list");
+        ListData<OrderInfo> data = orderInfoService.getList(search);
+        data.getContent().stream().forEach(System.out::println);
+
+        model.addAttribute("items", data.getContent());
+        model.addAttribute("pagination", data.getPagination());
 
         return tplCommon + "index";
     }

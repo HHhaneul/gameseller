@@ -4,6 +4,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.shopping.controllers.orders.OrderSearch;
 import org.shopping.entities.OrderInfo;
 import org.shopping.entities.OrderItem;
 import org.shopping.entities.QOrderInfo;
+import org.shopping.entities.QOrderItem;
 import org.shopping.models.games.GameInfoService;
 import org.shopping.repositories.order.OrderInfoRepository;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,7 @@ public class OrderInfoService {
 
     public ListData<OrderInfo> getList(OrderSearch search) {
         QOrderInfo orderInfo = QOrderInfo.orderInfo;
+        QOrderItem orderItem = QOrderItem.orderItem;
         BooleanBuilder andBuilder = new BooleanBuilder();
 
         int page = Utils.getNumber(search.getPage(), 1);
@@ -69,9 +72,23 @@ public class OrderInfoService {
         /** 주문 번호 검색 처리 - orderNo, orderNos E */
 
         /** 주문 상태 검색 처리 - status, statuses S */
+        if (status != null && statuses == null) {
+            statuses = new OrderStatus[] { status };
+        }
+
 
         /** 주문 상태 검색 처리 - status, statuses E */
+        if (statuses != null && statuses.length > 0) {
+            BooleanBuilder subBuilder = new BooleanBuilder();
+            subBuilder.and(orderItem.orderInfo.orderNo.eq(orderInfo.orderNo))
+                    .and(orderItem.status.in(statuses));
 
+            andBuilder.and(orderInfo.orderNo.in(
+                    JPAExpressions.select(orderItem.orderInfo.orderNo)
+                            .from(orderItem)
+                            .where(subBuilder)
+            ));
+        }
         /** 키워드 검색 처리 S */
         sopt = Objects.requireNonNullElse(sopt, "all");
         if (skey != null && !skey.isBlank()) {
@@ -95,6 +112,16 @@ public class OrderInfoService {
                         .or(orderInfo.address.contains(skey))
                         .or(orderInfo.addressSub.contains(skey));
                 andBuilder.and(orBuilder);
+            } else if (sopt.equals("gameNm")) {
+                BooleanBuilder sub = new BooleanBuilder();
+                sub.and(orderItem.orderInfo.orderNo.eq(orderInfo.orderNo))
+                        .and(orderItem.gameNm.contains(skey));
+
+                andBuilder.and(orderInfo.orderNo.in(
+                        JPAExpressions.select(orderItem.orderInfo.orderNo)
+                                .from(orderItem)
+                                .where(sub)
+                ));
             }
 
         }

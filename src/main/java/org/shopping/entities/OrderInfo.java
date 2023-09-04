@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Data
 @Builder @NoArgsConstructor @AllArgsConstructor
-public class OrderInfo {
+public class OrderInfo extends BaseMemberEntity {
 
     @Id @GeneratedValue
     private Long orderNo;
