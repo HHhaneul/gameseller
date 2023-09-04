@@ -96,21 +96,33 @@ public class AdminMemberController {
         joinForm.setMode("update");
         joinForm.setUserId(member.getUserId());
         joinForm.setMobile(member.getMobile());
-        joinForm.setAgrees(member.get);
+        joinForm.setUserNm(member.getUserNm());
+        joinForm.setEmail(member.getEmail());
+
+        model.addAttribute("joinForm", joinForm);
 
         return "admin/member/update";
     }
 
     @PostMapping("/{userNo}/update")
-    public String updateMember(@ModelAttribute Long userNo, @Valid JoinForm joinForm, Errors errors) {
+    public String updateMember(@PathVariable Long userNo, @Valid @ModelAttribute JoinForm joinForm, Errors errors) {
+        if (errors.hasErrors()) {
 
+        return "admin/member/update";
+        }
 
-        System.out.println("앍"+memberInfo);
-        memberSaveService.save(memberInfo);
+        Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 
+        member.setUserId(joinForm.getUserId());
+        member.setMobile(joinForm.getMobile());
+        member.setUserNm(joinForm.getUserNm());
+        member.setEmail(joinForm.getEmail());
 
-        return "redirect:/admin/member";
-    }
+        memberRepository.save(member);
+
+        return "redirect:/admin/member" + userNo;
+
+}
     /* 회원 목록 삭제 */
     @PostMapping("{userNo}/delete")
     public String delete(@PathVariable Long userNo) {
