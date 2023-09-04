@@ -27,12 +27,12 @@
 
     <h1>회원 목록</h1>
     <form name='frmList' method="post" th:action="@{/admin/member}" autocomplete="off" target="ifrmProcess">
-        <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="mode" value="delete">
         <table class="table-rows">
             <thead>
             <tr>
                 <th width="40">
-                    <input type="checkbox" class="checkall" id="checkall" data-target-name="userId">
+                    <input type="checkbox" class="checkall" id="checkall" data-target-name="userNo">
                     <label for="checkall"></label>
                 </th>
                 <th width="150">회원번호</th>
@@ -40,14 +40,13 @@
                 <th width="300">회원명</th>
                 <th width="150">이메일</th>
                 <th width="150">전화번호</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item, status : ${items}" th:object="${item}">
                 <td align="center">
-                    <input type="checkbox" name="userId" th:value="*{userId}" th:id="${'userid_' + status.index}">
-                    <label th:for="${'userid_' + status.index}"></label>
+                    <input type="checkbox" name="userNo" th:value="*{userNo}" th:id="${'userNos_' + status.index}">
+                    <label th:for="${'userNos_' + status.index}"></label>
                 </td>
                 <td align="center" th:text="*{userNo}"></td>
                 <td align="center" th:text="*{userId}"></td>

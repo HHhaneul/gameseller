@@ -124,13 +124,11 @@ public class AdminMemberController {
     }
 
     @PostMapping("/delete")
-    public String listDelete(@PathVariable Long userNo, Model model) {
-        try {
-            memberDeleteService.delete(userNo);
-        } catch (CommonException e) {
-            e.printStackTrace();
-            throw new AlertBackException(e.getMessage());
-        }
+    public String listDelete(Long[] userNos, Model model) {
+
+            memberDeleteService.delete(userNos);
+
+
         return "commons/_execute_script";
     }
 

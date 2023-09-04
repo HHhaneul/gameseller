@@ -65,7 +65,7 @@ public class BoardController implements CommonProcess, ScriptExceptionProcess {
         boardConfigDeleteService.delete(bIds);
 
         model.addAttribute("script", "parent.location.reload();");
-        return "commons/_execute_script";
+        return "commons/_exe11cute_script";
     }
 
     /**

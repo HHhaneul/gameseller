@@ -24,6 +24,7 @@ public class MemberDeleteService implements RequiredValidator {
         Member member = memberListRepository.findById(userNo)
                 .orElseThrow(MemberNotFoundException::new);
         memberListRepository.delete(member);
+        memberListRepository.flush();
     }
 
     public void delete(Long[] userNo) {
@@ -35,15 +36,16 @@ public class MemberDeleteService implements RequiredValidator {
         if (items == null || items.isEmpty()) return;
 
         memberListRepository.deleteAll(items);
+        memberListRepository.flush();
     }
 
-    public void delete(JoinForm form) {
+    public void delete(Member member) {
         List<Member> items = new ArrayList<>();
-        List<Integer> chks = form.getChkNo();
+        List<Integer> chks = member.getChkNo();
         nullCheck(chks, utils.getMessage("NotSeleted.delete", "validation"));
 
         for (Integer chk : chks) {
-            Long userNo = Long.valueOf(utils.getParam("userNo_" + chk));
+            Long userNo = Long.valueOf(utils.getParam("userNo" + chk));
             // findById 메소드 사용 및 예외 처리 추가
             Member item = memberListRepository.findById(userNo)
                     .orElse(null);
@@ -51,5 +53,6 @@ public class MemberDeleteService implements RequiredValidator {
             items.add(item);
         }
         memberListRepository.deleteAll(items);
+        memberListRepository.flush();
     }
 }

@@ -33,5 +33,5 @@ public class JoinForm {
 
     private boolean[] agrees;
 
-    private List<Integer> chkNo;
+
 }

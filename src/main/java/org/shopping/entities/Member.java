@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.shopping.commons.constants.Role;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity @Data @Builder
@@ -41,5 +42,6 @@ public class Member extends BaseEntity {
     @Column(length=10, nullable = false)
     private Role roles = Role.USER;
 
+    private List<Integer> chkNo;
 
 }
