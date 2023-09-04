@@ -9,7 +9,6 @@
         <div class="container text-center">
             <div class="row">
                 <div class="t3-sidebar t3-sidebar-left col col-xs-12 col-sm-4 col-sm-pull-8 col-md-3 col-md-pull-9  hidden-xs" style="min-height: 1750px;">
-                    [[${items2}]]
                     <div class="sidemenu">
                         <aside th:replace="~{outlines/front/side::menu}"></aside>
                     </div>
@@ -27,7 +26,6 @@
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">한글화게임</button>
                                 </li>
-                                [[${items2}]]
                             </ul>
                             <br>
                             <div class="tab-content" id="myTabContent">
@@ -36,10 +34,10 @@
                                     <div class="tab-content">
                                         <div class="vmgroup grid-group-item">
                                             <div class="row">
-                                                <div th:each="item2 : ${items2}" th:object="${items2}" class="col">
+                                                <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
                                                     <div class="card" style="width: 18rem; height: 200px;">
-                                                        <a th:href="@{/game/view/{no}(no=*{item2.gameNo})}">
-                                                            <img th:src="*{item2.listImages[0].thumbsUrl[0]}" class="card-img-top" alt="...">
+                                                        <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                            <img th:src="*{listImages[0].thumbsUrl[0]}">
                                                         </a>
                                                         <div class="card-body">
 

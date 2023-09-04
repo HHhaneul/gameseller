@@ -162,6 +162,7 @@ public class GameInfoService{
                 .orderBy(orderSpecifier.toArray(OrderSpecifier[]::new))
                 .fetch();
 
+        items.stream().forEach(this::addFileInfo);
         ListData<Game> data = new ListData<>();
         data.setContent(items);
 
