@@ -111,8 +111,8 @@ public class MemberBoardController {
 
         Page<MemberBoardData> data = listService.gets(memberBoardSearch, bId);
         model.addAttribute("items", data.getContent());
-
-        return "board/index";
+        model.addAttribute("bId", bId);
+        return "board/_index";
     }
 
 
@@ -144,22 +144,25 @@ public class MemberBoardController {
         board = configInfoService.get(bId, action);
         List<String> addCss = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addCommonCss = new ArrayList<>();
 
         /* 공통 스타일 CSS */
-        addCss.add("style");
+        addCommonCss.add("style");
 
         /* 글 작성, 수정시 필요한 자바스크립트 */
         if (action.equals("write") || action.equals("update")) {
-
-
-        addScript.add("ckeditor/ckeditor");
-        addScript.add("fileManager");
+        addCommonScript.add("ckeditor/ckeditor");
+        addCommonScript.add("fileManager");
+        addCommonScript.add("form");
 
         }
         /* 공통 필요 속성 추가 */
         model.addAttribute("board", board); // 게시판 설정
         model.addAttribute("addCss", addCss); // CSS 설정
         model.addAttribute("addScript", addScript); // JS 설정
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addCommonCss", addCommonCss); // JS 설정
     }
 
     private void search(Model model, String title){

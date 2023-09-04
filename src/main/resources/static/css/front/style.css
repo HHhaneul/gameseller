@@ -8,7 +8,7 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
     padding: 0;
-    max-width: 1000px;
+    max-width: 1152px;
     min-width: 1000px;
     margin: 0 auto;
     background-color: #1b2838;
@@ -68,11 +68,11 @@ h1 { font-size: 30px; font-weight: bold; margin: 0; margin-bottom: 35px; line-he
 h2 { font-size: 18px; font-weight: bold; margin: 25px 0 10px; line-height: 1; }
 
 /** 기본 테이블 스타일 */
-.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; color: black; }
-.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; color: black; }
-.table-cols td { background: #fff; padding: 10px 15px; color: black; }
+.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
+.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; }
+.table-cols td { background: #fff; padding: 10px 15px; }
 .table-cols th,
-.table-cols td { border-bottom: 1px solid #d5d5d5; color: black; }
+.table-cols td { border-bottom: 1px solid #d5d5d5; }
 
 /** 공통 서브 메뉴 */
 nav.submenus { background: #fff; box-shadow: 1px 1px 5px #cdced5; margin-bottom: 30px; display: flex; height: 60px; }
@@ -251,60 +251,71 @@ button.sbtn.blue {
     color: white;
     }
 
+/* 기본 header 스타일 */
+
 .logo_img {
-    display: flex;
     margin: 10px 16px 0px 16px;
-    width: 160;
-    height: 45;
+    width: 160px;
+    height: 45px;
     background: url("/images/logo.png") left center no-repeat;
 }
 .main-header{
-    display: flex;
-    margin-left: -16;
-    margin-right: -16;
-    width:100%;
-    height:100%;
+    display: block;
+    margin: 0px;
+    height: 118.94px;
     padding-top: 20px;
     padding-bottom: 30px;
-    box-sizing: border-box;
+
 }
 
 .header{
-    display:inline-flex;
-    width:100%;
-    height:100%;
+    display:flex;
+    width:1434px;
+    height:66px;
+
+    margin: 0px;
 }
 
 
 div.head-right {
     padding: 10px 16px 0px 16px;
+    width: 260px;
+    height: 42px;
     min-height:1px;
-    width: 40%;
-    text-align: right;
+    text-align: center;
     display:inline-flex;
+    margin-top: 10.5px;
 }
 
-.search{
-    width:100%;
+.gameSearch{
+    margin: 1px;
+    margin-top: 10.5px;
     display:inline-flex;
-    text-align: right;
+    text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 672px;
+    height: 45px;
 }
 
-.user-Info {
-    width:22%;
-
+input.searchValue {
+    border: 1px solid rgba(255,255,255,0.1);
+    margin: 0px;
 }
+
+button.xi-search {
+    margin: 0px;
+    height: 45px;
+    margin: 0px;
+}
+
 .login{
-    padding: 5px 10px 5px 10px;
+    padding: 0px 10px 5px 10px;
     border: 1px;
-    width: 70%;
+    width: 180px;
 }
 
-.cart {
-    padding: 5px 10px 5px 10px;
-    border: 1px;
-    width: 30%;
+.xi-cart::before {
+    color: rgb(239,165,60);
 }
 
 .btn-sm {
@@ -328,7 +339,88 @@ div.head-right {
     border: 1px solid #cccccc;
     box-shadow: 0 0 1px rgba(255, 255, 255, 0.2) insert;
 }
+/* 사이드 메뉴 스타일 */
 
-.frmJoin {
-    color: black;
+div.sidemenu {
+    text-align: center;
+    width: 239px;
+    height: 1752px;
 }
+
+img.b-sideLogo {
+    width: 239px;
+    height: 224px;
+}
+
+img.s-sideLogo {
+    width: 239px;
+    height: 112px;
+}
+
+.sideLogo {
+    text-align: center;
+}
+
+.announcement {
+
+}
+.module-title {
+    margin: 0 0 10px 0;
+    padding: 20px 32px 20px 0px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.left_banner_items {
+
+}
+/* 메인 홈페이지 스타일 */
+.list-group-item {
+
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.01);
+    color: #ffffff80;
+    background: #ffffff0D;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.module-title {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+span {
+    color: #ffffff;
+}
+
+.module-title span::before {
+    content: "";
+    border-top: 1px solid #67c1f5;
+    box-shadow: 0 0 4px rgba(255,255,255,0.5);
+    width: 100%;
+    height: 0;
+    position: absolute;
+    top: -21px;
+    left: 0;
+}
+
+.module-title span {
+    position: relative;
+    display: inline-block;
+}
+
+.h1 {
+    color: #ffffff;
+}
+
+.nav {
+    --bs-nav-link-hover-color: #ffffff;
+    --bs-nav-link-color: #ffffff;
+}
+
+.nav-link{
+    color: #ffffff;
+}
+

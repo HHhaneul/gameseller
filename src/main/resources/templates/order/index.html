@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
 <main layout:fragment="content" style="background: #fff;">
+    <style>*  { color: #000; }</style>
     <h1 th:text="${pageTitle}"></h1>
     <form name="frmSave" method="POST" th:action="@{/order}" autocomplete="off" th:object="${orderForm}">
         <div class="errors global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>

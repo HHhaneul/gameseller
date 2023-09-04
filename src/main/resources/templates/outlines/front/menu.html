@@ -4,7 +4,7 @@
     <ul>
         <li>
             <a th:href="@{/game/list}" th:classappend="${menuCode} == 'game' ? 'on'">
-                <i class="xi-cog"></i>
+                <i class="xi-gamepad"></i>
                 게임
             </a>
         </li>
@@ -16,20 +16,20 @@
         </li>
         <li>
             <a th:href="@{/support/inquire}" th:classappend="${menuCode} == 'support' ? 'on'">
-                <i class="xi-users"></i>
+                <i class="xi-forum-o"></i>
                 고객센터
             </a>
         </li>
         <li>
             <a th:href="@{/myPage/main}" th:classappend="${menuCode} == 'myPage' ? 'on'">
-                <i class="xi-view-list"></i>
+                <i class="xi-user"></i>
                 마이 페이지
             </a>
         </li>
 
         <li>
             <a th:href="@{/order/cart}" th:classappend="${menuCode} == 'cart' ? 'on'">
-                <i class="xi-view-list"></i>
+                <i class="xi-cart xi-2x"></i>
                 장바구니
             </a>
         </li>

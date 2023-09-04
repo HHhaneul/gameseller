@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/front/main}">
+<main layout:fragment="content" style="background: #fff;" th:object="${data}">
+    <style>*  { color: #000; }</style>
+    <h1 th:text="${pageTitle}"></h1>
+
+    <div class="order_no">
+        주문번호 :
+        <a th:href="@{/order/view/{orderNo}(orderNo=*{orderNo})}" th:text="*{orderNo}"></a>
+    </div>
+    <div>
+        주문 상품 : <th:block th:text="*{gameNm}"></th:block>
+    </div>
+    <div class="btns">
+        <a th:href="@{/}">계속 쇼핑하기</a>
+        <a th:href="@{/order/view/{orderNo}(orderNo=*{orderNo})}">주문서 확인</a>
+    </div>
+</main>
+</html>

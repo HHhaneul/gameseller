@@ -7,10 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.shopping.commons.constants.PaymentType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @Builder @NoArgsConstructor @AllArgsConstructor
-public class OrderInfo {
+public class OrderInfo extends BaseMemberEntity {
 
     @Id @GeneratedValue
     private Long orderNo;
@@ -45,7 +48,18 @@ public class OrderInfo {
 
     private int payPrice; // 결제 금액
 
+    @Column(length=50)
+    private String deliveryCompany; // 배송 업체
+    @Column(length=50)
+    private String invoice; // 운송장 번호
+
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="userNo")
     private Member member;
+
+    @Transient
+    private String gameNm;
+
+    @OneToMany(mappedBy = "orderInfo", fetch=FetchType.EAGER)
+    private List<OrderItem> orderItems = new ArrayList<>();
 }

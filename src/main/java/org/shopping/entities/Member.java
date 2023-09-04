@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.shopping.commons.constants.Role;
 
-import java.util.List;
+import java.util.UUID;
 
 @Entity @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
@@ -18,6 +18,9 @@ public class Member extends BaseEntity {
 
     @Column(length=40, nullable = false, unique = true)
     private String userId;
+
+    @Column(length = 40, nullable = false ,unique = true)
+    private String gId = UUID.randomUUID().toString();
 
     @Column(length=65, nullable = false)
     private String userPw;
@@ -37,4 +40,6 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(length=10, nullable = false)
     private Role roles = Role.USER;
+
+
 }

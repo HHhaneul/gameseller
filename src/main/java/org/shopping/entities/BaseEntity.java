@@ -6,6 +6,7 @@ import org.springframework.data.annotation.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter @Setter
 @MappedSuperclass
@@ -22,4 +23,6 @@ public abstract class BaseEntity {
 
     @Column(insertable = false)
     private LocalDateTime deletedAt;
+
+
 }

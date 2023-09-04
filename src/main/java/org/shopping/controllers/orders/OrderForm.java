@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 public class OrderForm {
 
+    private Long orderNo;
+
     private List<Long> cartNo;
 
     @NotBlank
