@@ -3,6 +3,7 @@ package org.shopping.models.member;
 import lombok.RequiredArgsConstructor;
 import org.shopping.commons.Utils;
 import org.shopping.commons.validators.RequiredValidator;
+import org.shopping.controllers.members.JoinForm;
 import org.shopping.entities.Member;
 import org.shopping.entities.QMember;
 import org.shopping.repositories.MemberListRepository;
@@ -29,16 +30,16 @@ public class MemberDeleteService implements RequiredValidator {
         QMember member = QMember.member;
         if (userNo == null || userNo.length == 0) return;
 
-        List<Member> items = (List<Member>) memberListRepository.findAll(member.userNo.in(userNo));
+        List<Member> items = (List<Member>) memberListRepository.findByUserNo(userNo);
 
         if (items == null || items.isEmpty()) return;
 
         memberListRepository.deleteAll(items);
     }
 
-    public void delete(Member member) {
+    public void delete(JoinForm form) {
         List<Member> items = new ArrayList<>();
-        List<Integer> chks = member.getChkNo();
+        List<Integer> chks = form.getChkNo();
         nullCheck(chks, utils.getMessage("NotSeleted.delete", "validation"));
 
         for (Integer chk : chks) {

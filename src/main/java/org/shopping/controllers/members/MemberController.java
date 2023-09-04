@@ -33,7 +33,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController implements CommonProcess {
 
-    private final HttpServletRequest request;
+
     private final MemberSaveService saveService;
     private final JoinValidator joinValidator;
     private final MemberRepository memberRepository;
@@ -59,6 +59,7 @@ public class MemberController implements CommonProcess {
             return "member/join";
         }
 
+        saveService.save(joinForm);
 
         return "redirect:/member/login";
     }
@@ -193,52 +194,6 @@ public class MemberController implements CommonProcess {
             return authentication.getName();
         }
         return null;
-    }
-    /* 회원 목록 삭제 */
-    @PostMapping("{userNo}/delete")
-    public String delete(@PathVariable Long userNo) {
-        try {
-            memberDeleteService.delete(userNo);
-        } catch (CommonException e) {
-            e.printStackTrace();
-            throw new AlertBackException(e.getMessage());
-        }
-        return "redirect:/admin/member/index";
-    }
-
-    @PostMapping("/delete")
-    public String listDelete(@PathVariable Long userNo, Model model) {
-        try {
-            memberDeleteService.delete(userNo);
-        } catch (CommonException e) {
-            e.printStackTrace();
-            throw new AlertBackException(e.getMessage());
-        }
-        return "commons/_execute_script";
-    }
-
-    @Override
-    public void commonProcess(Model model, String mode) {
-
-        List<String> addCommonScript = new ArrayList<>();
-        List<String> addScript = new ArrayList<>();
-        if (mode.equals("add") || mode.equals("edit") || mode.equals("save")) {
-            addCommonScript.add("ckeditor/ckeditor");
-            addCommonScript.add("fileManager");
-            addScript.add("game/form");
-        }
-        String menuCode = GameMenus.getSubMenuCode(request);
-
-        model.addAttribute("menuCode", menuCode);
-        model.addAttribute("addCommonScript", addCommonScript);
-        model.addAttribute("addScript", addScript);
-
-        // 서브 메뉴 처리
-        model.addAttribute("subMenuCode", menuCode);
-
-        // 서브 메뉴 조회
-        List<MenuDetail> submenus = GameMenus.gets("board");
-        model.addAttribute("submenus", submenus);
     }
 
 }

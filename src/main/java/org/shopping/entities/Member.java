@@ -37,7 +37,4 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(length=10, nullable = false)
     private Role roles = Role.USER;
-
-    @Column(length=20, nullable=false)
-    private List<Integer> chkNo;
 }

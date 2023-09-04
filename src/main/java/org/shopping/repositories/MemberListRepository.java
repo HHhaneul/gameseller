@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface MemberListRepository extends JpaRepository<Member, Long>, QuerydslPredicateExecutor<Member> {
     Member findByUserNo(Long userNo);
 
-    Optional<Member> findbyId(Long userNo);
+    Member findByUserNo(Long[] userNo);
 }

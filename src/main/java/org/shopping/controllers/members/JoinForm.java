@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class JoinForm {
@@ -30,4 +32,6 @@ public class JoinForm {
     private String mobile;
 
     private boolean[] agrees;
+
+    private List<Integer> chkNo;
 }
