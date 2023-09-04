@@ -5,6 +5,7 @@ import org.shopping.commons.Utils;
 import org.shopping.commons.validators.RequiredValidator;
 import org.shopping.entities.Member;
 import org.shopping.entities.QMember;
+import org.shopping.repositories.MemberListRepository;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,25 +16,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberDeleteService implements RequiredValidator {
 
-    private final MemberRepository memberRepository;
+    private final MemberListRepository memberListRepository;
     private final Utils utils;
 
     public void delete(Long userNo) {
-        Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
-        memberRepository.delete(member);
-        memberRepository.flush();
+        Member member = memberListRepository.findById(userNo)
+                .orElseThrow(MemberNotFoundException::new);
+        memberListRepository.delete(member);
     }
 
     public void delete(Long[] userNo) {
         QMember member = QMember.member;
         if (userNo == null || userNo.length == 0) return;
 
-        List<Member> items = (List<Member>)memberRepository.findAll(member.userNo.in(userNo));
+        List<Member> items = (List<Member>) memberListRepository.findAll(member.userNo.in(userNo));
 
-        if(items == null || items.isEmpty()) return;
+        if (items == null || items.isEmpty()) return;
 
-        memberRepository.deleteAll(items);
-        memberRepository.flush();
+        memberListRepository.deleteAll(items);
     }
 
     public void delete(Member member) {
@@ -43,11 +43,12 @@ public class MemberDeleteService implements RequiredValidator {
 
         for (Integer chk : chks) {
             Long userNo = Long.valueOf(utils.getParam("userNo_" + chk));
-            Member item = memberRepository.findById(userNo).orElse(null);
-            if(item == null) continue;
+            // findById 메소드 사용 및 예외 처리 추가
+            Member item = memberListRepository.findById(userNo)
+                    .orElse(null);
+            if (item == null) continue;
             items.add(item);
         }
-        memberRepository.deleteAll(items);
-        memberRepository.flush();
+        memberListRepository.deleteAll(items);
     }
 }

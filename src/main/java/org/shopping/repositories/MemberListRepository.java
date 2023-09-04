@@ -4,6 +4,10 @@ import org.shopping.entities.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
+import java.util.Optional;
+
 public interface MemberListRepository extends JpaRepository<Member, Long>, QuerydslPredicateExecutor<Member> {
-    Member findbyuserNm(Long userNm);
+    Member findByUserNo(Long userNo);
+
+    Optional<Member> findbyId(Long userNo);
 }
