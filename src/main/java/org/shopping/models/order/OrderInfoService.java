@@ -152,6 +152,7 @@ public class OrderInfoService {
                 .offset(offset)
                 .limit(limit)
                 .orderBy(orderSpecifier.toArray(OrderSpecifier[]::new))
+                .where(andBuilder)
                 .fetch();
 
         items.stream().forEach(this::toAddInfo);
