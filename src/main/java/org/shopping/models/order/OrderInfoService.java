@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.shopping.commons.ListData;
 import org.shopping.commons.Pagination;
 import org.shopping.commons.Utils;
+import org.shopping.commons.constants.OrderStatus;
 import org.shopping.controllers.orders.OrderSearch;
 import org.shopping.entities.OrderInfo;
 import org.shopping.entities.OrderItem;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -54,8 +56,48 @@ public class OrderInfoService {
         int limit = Utils.getNumber(search.getLimit(), 20);
         int offset = (page - 1) * limit;
         /** 검색 처리 S */
+        Long orderNo = search.getOrderNo();
+        Long[] orderNos = search.getOrderNos();
+        OrderStatus status = search.getStatus();
+        OrderStatus[] statuses = search.getStatuses();
+        String sopt = search.getSopt();
+        String skey = search.getSkey();
 
-        /** 검색 처리 E1 */
+        /** 주문 번호 검색 처리 - orderNo, orderNos S */
+        if (orderNo != null) andBuilder.and(orderInfo.orderNo.eq(orderNo));
+        if (orderNos != null && orderNos.length > 0) andBuilder.and(orderInfo.orderNo.in(orderNos));
+        /** 주문 번호 검색 처리 - orderNo, orderNos E */
+
+        /** 주문 상태 검색 처리 - status, statuses S */
+
+        /** 주문 상태 검색 처리 - status, statuses E */
+
+        /** 키워드 검색 처리 S */
+        sopt = Objects.requireNonNullElse(sopt, "all");
+        if (skey != null && !skey.isBlank()) {
+            skey = skey.trim();
+
+            if (sopt.equals("all")) { // 통합 검색
+                
+            } else if (sopt.equals("name")) { // 주문자, 받는사람 이름
+                BooleanBuilder orBuilder = new BooleanBuilder();
+                orBuilder.or(orderInfo.orderName.contains(skey))
+                        .or(orderInfo.receiverName.contains(skey));
+                andBuilder.and(orBuilder);
+            } else if (sopt.equals("mobile")) { // 주문자, 받는사람 휴대전화번호
+                BooleanBuilder orBuilder = new BooleanBuilder();
+                orBuilder.or(orderInfo.orderMobile.contains(skey))
+                        .or(orderInfo.receiverMobile.contains(skey));
+                andBuilder.and(orBuilder);
+            } else if (sopt.equals("address")) { // 배송주소
+
+            }
+
+        }
+        /** 키워드 검색 처리 E */
+
+        /** 검색 처리 E */
+
         /** 정렬 처리 S */
         // listOrder_DESC,createdAt_ASC
         List<OrderSpecifier> orderSpecifier = new ArrayList<>();
