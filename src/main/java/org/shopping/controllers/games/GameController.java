@@ -54,7 +54,6 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
 
         if (mode.equals("view")) {
             addScript.add("game/view");
-            addScript.add("order/cart");
         }
 
 

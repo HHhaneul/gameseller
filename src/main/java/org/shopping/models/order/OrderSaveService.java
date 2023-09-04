@@ -71,5 +71,6 @@ public class OrderSaveService {
 
         itemRepository.saveAllAndFlush(items);
         /** 주문 상품 정보 저장 E */
+        form.setOrderNo(orderInfo.getOrderNo());
     }
 }

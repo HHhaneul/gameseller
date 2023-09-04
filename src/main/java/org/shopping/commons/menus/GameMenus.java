@@ -23,6 +23,8 @@ public class GameMenus {
             menus.add(new MenuDetail("board", "게시판 목록", "/admin/board"));
             menus.add(new MenuDetail("register", "게시판 등록/수정", "/admin/board/register"));
             menus.add(new MenuDetail("posts", "게시글 관리", "/admin/board/posts"));
+        } else if (code.equals("order")) {
+            menus.add(new MenuDetail("order", "주문 목록", "/admin/order"));
         }
 
         return menus;

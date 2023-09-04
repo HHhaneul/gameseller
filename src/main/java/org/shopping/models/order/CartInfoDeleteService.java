@@ -23,4 +23,12 @@ public class CartInfoDeleteService {
         repository.deleteAll(items);
         repository.flush();
     }
+
+    public void delete(List<Long> cartNos) {
+        List<CartInfo> items = infoService.getList(cartNos);
+        if (items == null || items.isEmpty()) return;
+
+        repository.deleteAll(items);
+        repository.flush();
+    }
 }
