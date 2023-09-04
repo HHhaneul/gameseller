@@ -115,8 +115,5 @@ public class MemberBoardListService {
         System.out.println("뭘까" + andBuilder);
         return data;
     }
-    public Page<MemberBoardData> gets(MemberBoardSearch memberBoardSearch) {
-        return gets(memberBoardSearch, null);
-    }
 
 }
