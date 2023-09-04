@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<aside th:fragment="menu">
-
-    <ul>
+    <aside th:fragment="menu">
         <h3 class="module-title"><strong>공지사항</strong>
             <div><a th:href="@{/board/notice}">+ 더보기</a></div></h3>
         <div class="list-group" th:each = "item, index : ${items}" th:if="${index.index} < 5">
@@ -10,56 +8,59 @@
                 <span th:text="*{item.subject}"></span>
             </a>
         </div>
-        <li>
-            <a th:href="@{/admin/config}">
-                <img th:src="@{/images/sideLogo1.jpg}">
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/admin/board}">
-                <img th:src="@{/images/sideLogo2.jpg}">
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/admin/game}">
-                <img th:src="@{/images/sideLogo3.jpg}">
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/admin/buyer/list}">
-                <img th:src="@{/images/sideLogo4.jpg}">
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/admin/buyer/list}">
-                <img th:src="@{/images/sideLogo5.jpg}">
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/admin/buyer/list}">
-                <img th:src="@{/images/sideLogo6.jpg}">
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/admin/buyer/list}">
-                <img th:src="@{/images/sideLogo7.jpg}">
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/admin/buyer/list}">
-                <img th:src="@{/images/sideLogo8.jpg}">
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/admin/buyer/list}">
-                <img th:src="@{/images/sideLogo9.jpg}">
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/admin/buyer/list}">
-                <img th:src="@{/images/sideLogo10.jpg}">
-            </a>
-        </li>
-    </ul>
-</aside>
+        <div class="sidemenu">
+            <div class="sideLogo">
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/config}">
+                        <img th:src="@{/images/sideLogo1.jpg}" class="b-sideLogo">
+                    </a>
+                </div>
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/board}">
+                        <img th:src="@{/images/sideLogo2.jpg}" class="s-sideLogo">
+                    </a>
+                </div>
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/game}">
+                        <img th:src="@{/images/sideLogo3.jpg}" class="s-sideLogo">
+                    </a>
+                </div>
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/buyer/list}">
+                        <img th:src="@{/images/sideLogo4.jpg}" class="s-sideLogo">
+                    </a>
+                </div>
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/buyer/list}">
+                        <img th:src="@{/images/sideLogo5.jpg}" class="s-sideLogo">
+                    </a>
+                </div>
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/buyer/list}">
+                        <img th:src="@{/images/sideLogo6.jpg}" class="s-sideLogo">
+                    </a>
+                </div>
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/buyer/list}">
+                        <img th:src="@{/images/sideLogo7.jpg}" class="s-sideLogo">
+                    </a>
+                </div>
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/buyer/list}">
+                        <img th:src="@{/images/sideLogo8.jpg}" class="s-sideLogo">
+                    </a>
+                </div>
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/buyer/list}">
+                        <img th:src="@{/images/sideLogo9.jpg}" class="s-sideLogo">
+                    </a>
+                </div>
+                <div class="left_banner_items">
+                    <a th:href="@{/admin/buyer/list}">
+                        <img th:src="@{/images/sideLogo10.jpg}" class="s-sideLogo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
 </html>

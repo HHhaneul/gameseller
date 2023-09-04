@@ -6,8 +6,7 @@
     <div class="message" th:each="boardSaveErr : ${#fields.globalErrors()}" th:text="${boardSaveErr}"></div>
     <form name="memberBoardForm" id="memberBoardForm" th:object="${memberBoardForm}" method="post" th:action="@{/board/save}" autocomplete="off">
         <input type="hidden" name="mode" value="write">
-        <th:block layout:replace="~{board/_form::memberBoardForm}">
-        </th:block>
+        <th:block layout:replace="~{board/_form::memberBoardForm}"></th:block>
         <div class="btns">
             <button type="reset">다시작성</button>
             <button type="submit">

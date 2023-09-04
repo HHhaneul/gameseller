@@ -111,12 +111,8 @@ public class MemberBoardController {
 
         Page<MemberBoardData> data = listService.gets(memberBoardSearch, bId);
         model.addAttribute("items", data.getContent());
-/*
-        String pageTitle = infoService.get()
-        model.addAttribute("pageTitle", pageTitle);
-*/
-
-        return "board/index";
+        model.addAttribute("bId", bId);
+        return "board/_index";
     }
 
 
@@ -133,9 +129,19 @@ public class MemberBoardController {
     }
 
     private void commonProcess(String bId, String action, Model model) {
-
+        /**
+         * 1. bId 게시판 설정 조회
+         * 2. action - write, update - 공통 스크립트, 공통 CSS
+         *           - 에디터 사용 -> 에디터 스크립트 추가
+         *           - 에디터 미사용 -> 에디터 스크립트 미추가
+         *           - write, list, view -> 권한 체크
+         *           - update - 본인이 게시글만 수정 가능
+         *                    - 회원 - 회원번호
+         *                    - 비회원 - 비회원비밀번호
+         *                    - 관리자는 다 가능
+         *
+         */
         board = configInfoService.get(bId, action);
-
         List<String> addCss = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
         List<String> addCommonScript = new ArrayList<>();
