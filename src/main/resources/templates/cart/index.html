@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
+
 <main layout:fragment="content">
-    <h1>장바구니</h1>
+    <div th:replace="~{/myPage/main::myPage}"></div>
     <form name="frmCart" method="post" th:action="@{/order/cart}" target="ifrmProcess" autocomplete="off">
         <input type="hidden" name="_method" value="PATCH">
 

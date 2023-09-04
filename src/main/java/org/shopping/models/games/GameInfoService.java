@@ -42,7 +42,7 @@ public class GameInfoService{
      * @param gameNo
      * @return
      */
-    public Game get(Long gameNo) {
+    public org.shopping.entities.Game get(Long gameNo) {
         Game game = gameRepository.findById(gameNo).orElseThrow(GameNotFoundException::new);
         addFileInfo(game);
 
