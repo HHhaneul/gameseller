@@ -34,7 +34,6 @@ public class MemberInfoService implements UserDetailsService {
         return MemberInfo.builder()
                 .userNo(member.getUserNo())
                 .userId(member.getUserId())
-                .gId(member.getGId())
                 .userPw(member.getUserPw())
                 .userNm(member.getUserNm())
                 .email(member.getEmail())

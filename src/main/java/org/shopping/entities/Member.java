@@ -20,9 +20,6 @@ public class Member extends BaseEntity {
     @Column(length=40, nullable = false, unique = true)
     private String userId;
 
-    @Column(length = 40, nullable = false ,unique = true)
-    private String gId = UUID.randomUUID().toString();
-
     @Column(length=65, nullable = false)
     private String userPw;
 
