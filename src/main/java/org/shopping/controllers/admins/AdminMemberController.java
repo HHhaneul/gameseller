@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.shopping.commons.AlertBackException;
+import org.shopping.commons.CommonException;
 import org.shopping.commons.Utils;
 import org.shopping.commons.configs.ConfigInfoService;
 import org.shopping.commons.configs.ConfigSaveService;
@@ -12,10 +14,7 @@ import org.shopping.commons.menus.MenuDetail;
 import org.shopping.controllers.members.JoinForm;
 import org.shopping.controllers.members.JoinValidator;
 import org.shopping.entities.Member;
-import org.shopping.models.member.MemberInfo;
-import org.shopping.models.member.MemberInfoService;
-import org.shopping.models.member.MemberListService;
-import org.shopping.models.member.MemberSaveService;
+import org.shopping.models.member.*;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller("AdminMemberController")
@@ -40,6 +40,7 @@ public class AdminMemberController {
     private final MemberRepository memberRepository;
     private final HttpSession session;
     private final Utils utils;
+    private final MemberDeleteService memberDeleteService;
 
 
     private final ConfigSaveService configSaveService;
@@ -89,27 +90,61 @@ public class AdminMemberController {
         }
     */
     @GetMapping("/{userNo}/update")
-    public String update(@PathVariable Long userNo, @ModelAttribute MemberInfo MemberInfo
-            , JoinForm joinForm, Model model) {
-        MemberInfo.setRoles(memberInfoService.get(2l).getRoles());
+    public String update(@PathVariable Long userNo, @ModelAttribute JoinForm joinForm, Model model) {
+        Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 
-//        String aa = memberInfoService.formGet(userNo).getUserNm();
-//        Member member = (Member) memberInfoService.loadUserByUsername(aa);
+        joinForm.setMode("update");
+        joinForm.setUserId(member.getUserId());
+        joinForm.setMobile(member.getMobile());
+        joinForm.setUserNm(member.getUserNm());
+        joinForm.setEmail(member.getEmail());
 
-//        model.addAttribute("memberInfo", member == null ? new MemberInfo() : member);
+        model.addAttribute("joinForm", joinForm);
 
         return "admin/member/update";
     }
 
     @PostMapping("/{userNo}/update")
-    public String updateMember(@PathVariable Long userNo, @Valid MemberInfo memberInfo, Errors errors) {
+    public String updateMember(@PathVariable Long userNo, @Valid JoinForm joinForm, Errors errors) {
+        if (errors.hasErrors()) {
 
+        return "admin/member/update";
+        }
 
-        memberSaveService.save(memberInfo);
+        Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 
+        member.setUserId(joinForm.getUserId());
+        member.setMobile(joinForm.getMobile());
+        member.setUserNm(joinForm.getUserNm());
+        member.setEmail(joinForm.getEmail());
+
+        memberRepository.save(member);
 
         return "redirect:/admin/member";
+
+}
+    /* 회원 목록 삭제 */
+    @PostMapping("{userNo}/delete")
+    public String delete(@PathVariable Long userNo) {
+        try {
+            memberDeleteService.delete(userNo);
+        } catch (CommonException e) {
+            e.printStackTrace();
+            throw new AlertBackException(e.getMessage());
+        }
+        return "redirect:/admin/member/index";
     }
+
+    @PostMapping("/delete")
+    public String listDelete(Long[] userNos, Model model) {
+
+            memberDeleteService.delete(userNos);
+
+
+        return "commons/_execute_script";
+    }
+
+
 
 
 /*

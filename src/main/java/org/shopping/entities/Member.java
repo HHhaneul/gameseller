@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.shopping.commons.constants.Role;
 
+import java.util.List;
+
 @Entity @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
 @Table(indexes={
@@ -39,5 +41,6 @@ public class Member extends BaseEntity {
     @Column(length=10, nullable = false)
     private Role roles = Role.USER;
 
+    private List<Integer> chkNo;
 
 }

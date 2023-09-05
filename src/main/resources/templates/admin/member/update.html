@@ -4,34 +4,33 @@
       layout:decorate="~{layouts/front/main}">
 <main layout:fragment="content">
     <h2 th:text="#{member.update}"></h2>
-<!--    <form action="#" th:action="@{admin/member/save}" th:object="${joinForm}" method="post" autocomplete="off">
-        <input type="text" th:value="${member.userNo}">
-        <label for="userId" th:text="#{userId}"></label>
-        <input type="text" id="userId" th:value="${member.userId}">
-        <br>
-        <label for="userPw" th:text="#{userPw}"></label>
-        <input type="text" id="userPw" th:value="${member.userPw}">
-        <br>
-        <label for="userNm" th:text="#{userNm}"></label>
-        <input type="text" id="userNm" th:value="${member.userNm}">
-        <br>
-        <label for="email" th:text="#{email}"></label>
-        <input type="email" id="email" th:value="${member.email}">
-        <br>
-        <label for="mobile" th:text="#{mobile}"></label>
-        <input type="text" id="mobile" th:value="${member.mobile}">
-        <br>
-        <br>
-        <button type="submit" th:text="#{member.submit}"></button>-->
-
-        <form method="post" autocomplete="off" th:object="${MemberInfo}">
+        <form method="post" autocomplete="off" th:action="@{admin/member/update}" th:object="${joinForm}">
             <table class="table-cols">
                 <tr>
                     <th>아이디</th>
                     <td>
-                        <input type="text" name="siteTitle" th:field="*{userId}">
+                        <input type="text" name="userId" th:field="*{userId}">
                     </td>
                 </tr>
+                <tr>
+                    <th>이름</th>
+                    <td>
+                        <input type="text" name="userNm" th:field="*{userNm}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td>
+                        <input type="text" name="email" th:field="*{email}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td>
+                        <input type="text" name="mobile" th:field="*{mobile}">
+                    </td>
+                </tr>
+
             </table>
             <div class="btns">
                 <button type="reset">다시입력</button>

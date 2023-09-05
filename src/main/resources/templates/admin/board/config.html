@@ -14,7 +14,6 @@
                 <th>게시판 ID</th>
                 <td th:if="*{mode != null && mode == 'update'}">
                     <input type="hidden" name="bId" th:field="*{bId}">
-                    [[*{bId}]]
                     <a th:href="@{/board/{bId}(bId=*{bId})}" target="_blank" class="sbtn">미리보기</a>
                 </td>
                 <td th:unless="*{mode != null && mode == 'update'}">
