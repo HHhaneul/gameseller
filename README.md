@@ -15,7 +15,7 @@
 <img src="https://img.shields.io/badge/HTML-FCC624?style=for-the-badge&logo=linux&logoColor=black">
 <img src="https://img.shields.io/badge/CSS-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/JavaScrpit-F05032?style=for-the-badge&logo=git&logoColor=white">
-<img src="https://img.shields.io/badge/Thymeleaf-5C3EE8?style=for-the-badge&logo=opencv&logoColor=black">
+<img src="https://img.shields.io/badge/Thymeleaf-5C3EE8?style=for-the-badge&logo=Spring&logoColor=black">
 
 ## **MindMap**
 >
