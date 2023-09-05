@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/front/main}">
+      layout:decorate="~{layouts/admin/main}">
 <main layout:fragment="content">
     <h2 th:text="#{member.update}"></h2>
-        <form method="post" autocomplete="off" th:action="@{admin/member/update}" th:object="${joinForm}">
+        <form method="post" autocomplete="off" th:action="@{/admin/member/save}" th:object="${joinForm}">
             <table class="table-cols">
+                <tr>
+                    <td th:if="*{mode != null && mode == 'update'}">
+                    </td>
+                </tr>
                 <tr>
                     <th>아이디</th>
                     <td>
                         <input type="text" name="userId" th:field="*{userId}">
+                        <div class="errors" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
                     </td>
                 </tr>
                 <tr>
                     <th>이름</th>
                     <td>
                         <input type="text" name="userNm" th:field="*{userNm}">
+                        <div class="errors" th:each="err : ${#fields.errors('userNm')}" th:text="${err}"></div>
                     </td>
                 </tr>
                 <tr>
                     <th>이메일</th>
                     <td>
                         <input type="text" name="email" th:field="*{email}">
+                        <div class="errors" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
                     </td>
                 </tr>
                 <tr>
                     <th>전화번호</th>
                     <td>
                         <input type="text" name="mobile" th:field="*{mobile}">
+                        <div class="errors" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
                     </td>
                 </tr>
 

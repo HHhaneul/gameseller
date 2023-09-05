@@ -36,7 +36,8 @@ public class MemberSaveService {
     }
 
     public void save(Member member) {
-        memberRepository.save(member);
+
+        memberRepository.saveAndFlush(member);
     }
     public void save(MemberInfo memberInfo) {
 
@@ -44,6 +45,17 @@ public class MemberSaveService {
         member.setRoles(Role.USER);
 
         member.setUserPw(passwordEncoder.encode(memberInfo.getUserPw()));
+
+        memberRepository.saveAndFlush(member);
+    }
+
+    public void edit(JoinForm joinForm){
+
+        Member member = memberRepository.findByUserId(joinForm.getUserId());
+
+        member.setMobile(joinForm.getMobile());
+        member.setEmail(joinForm.getEmail());
+        member.setUserNm(joinForm.getUserNm());
 
         memberRepository.saveAndFlush(member);
     }

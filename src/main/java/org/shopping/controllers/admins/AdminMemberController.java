@@ -98,27 +98,19 @@ public class AdminMemberController {
         joinForm.setMobile(member.getMobile());
         joinForm.setUserNm(member.getUserNm());
         joinForm.setEmail(member.getEmail());
+        joinForm.setUserPwRe(passwordEncoder.encode(member.getUserPw()));
+        joinForm.setUserPw(passwordEncoder.encode(member.getUserPw()));
 
         model.addAttribute("joinForm", joinForm);
 
         return "admin/member/update";
     }
 
-    @PostMapping("/{userNo}/update")
-    public String updateMember(@PathVariable Long userNo, @Valid JoinForm joinForm, Errors errors) {
-        if (errors.hasErrors()) {
+    @PostMapping("/save")
+    public String updateMember( @Valid JoinForm joinForm, Errors errors) {
 
-        return "admin/member/update";
-        }
+        memberSaveService.edit(joinForm);
 
-        Member member = memberRepository.findById(userNo).orElseThrow(MemberNotFoundException::new);
-
-        member.setUserId(joinForm.getUserId());
-        member.setMobile(joinForm.getMobile());
-        member.setUserNm(joinForm.getUserNm());
-        member.setEmail(joinForm.getEmail());
-
-        memberRepository.save(member);
 
         return "redirect:/admin/member";
 
