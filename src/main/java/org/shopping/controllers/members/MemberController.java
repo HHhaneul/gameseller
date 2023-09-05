@@ -99,7 +99,7 @@ public class MemberController {
     }
 
     @GetMapping("/edit")
-    public String showUpdateForm(String userId, Model model) {
+    public String showUpdateForm( Model model) {
         MemberInfo memberInfo = (MemberInfo) session.getAttribute("memberInfo");
         System.out.println(memberInfo);
         model.addAttribute("member", memberInfo);

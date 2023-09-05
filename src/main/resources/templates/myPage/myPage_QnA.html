@@ -4,9 +4,21 @@
       layout:decorate="~{layouts/front/main}">
 
 <main layout:fragment="content">
-    <h1 th:text="${pageTitle}"></h1>
-    <form method="post" th:action="@{/member/support/inquire}">
-
-    </form>
+    <div class="frmQnA">
+        <div class="frmMyPage" th:insert="~{/myPage/index :: FragmentMyPage}"></div>
+        <h1 th:text="${pageTitle}"></h1>
+        <form class="frmQnA" name="frmQnA"  method="post" th:action="@{/myPage/myPage_QnA}" autocomplete="off">
+            <div class="frmQnABox">
+                <ul class="nav nav-underline">
+                    <li class="nav-item" style="font-size: 16px;">
+                        <a class="nav-link" th:href="@{/support/inquire}"><span>문의하기</span></a>
+                    </li>
+                    <li class="nav-item" style="font-size: 16px;">
+                        <a class="nav-link" href="#"><span>문의내역</span></a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
 </main>
 </html>
