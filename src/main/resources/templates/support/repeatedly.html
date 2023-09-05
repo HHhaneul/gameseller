@@ -3,7 +3,17 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
 
+<head>
+
+</head>
+
 <main layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
+    <ul class="custom-list">
+        <li th:each="item : ${items}" th:object="${item}" class="custom-list-item">
+            <div class="question" th:text="*{question}"></div>
+            <div class="answer dn" th:text="*{answer}"></div>
+        </li>
+    </ul>
 </main>
 </html>

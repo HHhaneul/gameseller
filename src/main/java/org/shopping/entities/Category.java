@@ -24,7 +24,7 @@ public class Category extends BaseMemberEntity {
     @Column(name="_use")
     private boolean use;
 
-    private long listOrder; // 진열 순서
+    private long listOrder;
 
     @OneToMany(mappedBy="category", fetch=FetchType.LAZY)
     private List<Game> games = new ArrayList<>();

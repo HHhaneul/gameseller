@@ -1,18 +1,34 @@
 package org.shopping.controllers.members;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.shopping.CommonProcess;
+import org.shopping.commons.menus.GameMenus;
+import org.shopping.commons.menus.MenuDetail;
+import org.shopping.entities.RepeatedQnA;
+import org.shopping.models.support.RepeatQnAInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/support")
 @RequiredArgsConstructor
-public class SupportController {
+public class SupportController implements CommonProcess {
+
+    private final RepeatQnAInfoService infoService;
+    private final HttpServletRequest request;
 
     @GetMapping("/inquire")
     public String support(Model model) {
+
+        commonProcess(model, "inquire");
+        List<RepeatedQnA> items = infoService.getListAll();
+        model.addAttribute("items", items);
 
 
 
@@ -20,8 +36,44 @@ public class SupportController {
     }
 
     @GetMapping("/repeatedly")
-    public String repeated(){
+    public String repeated(Model model){
+        commonProcess(model, "repeat");
+        List<RepeatedQnA> items = infoService.getList("faq");
+        model.addAttribute("items", items);
+
 
         return "support/repeatedly";
+    }
+
+    @Override
+    public void commonProcess(Model model, String mode) {
+
+        String pageTitle = "";
+        if (mode == "repeat"){
+            pageTitle = "자주 묻는 질문";
+        } else if (mode == "inquire") {
+            pageTitle = "질문하기";
+            
+        }
+
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+
+        addScript.add("support");
+
+
+        model.addAttribute("menuCode", "game");
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
+
+        // 서브 메뉴 처리
+        String subMenuCode = GameMenus.getSubMenuCode(request);
+        model.addAttribute("subMenuCode", subMenuCode);
+
+        // 서브 메뉴 조회
+        List<MenuDetail> submenus = GameMenus.gets("adminGame");
+        model.addAttribute("submenus", submenus);
+
+        CommonProcess.super.commonProcess(model, pageTitle);
     }
 }

@@ -1,16 +1,22 @@
 package org.shopping.controllers.admins.support;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.shopping.CommonProcess;
 import org.shopping.commons.*;
+import org.shopping.commons.menus.GameMenus;
+import org.shopping.commons.menus.MenuDetail;
 import org.shopping.entities.RepeatedQnA;
 import org.shopping.models.support.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Controller("adminSupportController")
 @RequestMapping("/admin/support")
 @RequiredArgsConstructor
@@ -20,12 +26,14 @@ public class AdminSupportController implements CommonProcess {
     private final RepeatQnADeleteService repeatQnADeleteService;
     private final RepeatQnAInfoService repeatQnAInfoService;
 
+    private final HttpServletRequest request;
+
     @GetMapping
     public String repeatAdd(Model model){
 
         commonProcess(model, "자주 묻는 질문");
         List<RepeatedQnA> items = repeatQnAInfoService.getListAll();
-        System.out.println("뭐야 왜 안뜨냐고" + items);
+        log.info("갯수 : " + items.size());
         model.addAttribute("items", items);
 
         return "admin/support/index";
@@ -33,7 +41,7 @@ public class AdminSupportController implements CommonProcess {
 
     @PostMapping
     public String repeatSave(RepeatQnAForm form, Model model){
-        commonProcess(model, "");
+        commonProcess(model, "자주 묻는 질문");
 
         String mode = form.getMode();
         mode = mode == null || mode.isBlank() ? "add" : mode;
@@ -43,8 +51,8 @@ public class AdminSupportController implements CommonProcess {
                 repeatQnASaveService.save(form);
                 /* 수정 */
             } else if (mode.equals("edit")) {
-
                 repeatQnASaveService.saveList(form);
+
                 /* 삭제 */
             } else if (mode.equals("delete")) {
 
@@ -65,9 +73,22 @@ public class AdminSupportController implements CommonProcess {
 
         pageTitle = "QnA";
 
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+
+
+        model.addAttribute("menuCode", "support");
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
+
+        // 서브 메뉴 처리
+        String subMenuCode = GameMenus.getSubMenuCode(request);
+        model.addAttribute("subMenuCode", subMenuCode);
+
+        // 서브 메뉴 조회
+        List<MenuDetail> submenus = GameMenus.gets("support");
+        model.addAttribute("submenus", submenus);
 
         CommonProcess.super.commonProcess(model, pageTitle);
-
-
     }
 }

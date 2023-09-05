@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.shopping.CommonProcess;
 import org.shopping.commons.AlertBackException;
 import org.shopping.commons.CommonException;
+import org.shopping.commons.ListData;
 import org.shopping.commons.ScriptExceptionProcess;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
@@ -131,6 +132,7 @@ public class BoardController implements CommonProcess, ScriptExceptionProcess {
         model.addAttribute("title", "전체 게시판");
 
         Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch);
+
         model.addAttribute("items", data.getContent());
 
         return "admin/board/posts";
@@ -140,7 +142,7 @@ public class BoardController implements CommonProcess, ScriptExceptionProcess {
 
     @GetMapping("/{bId}")
     public String list(@ModelAttribute MemberBoardSearch memberBoardSearch, @PathVariable String bId, Model model) {
-        Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch, bId);
+        ListData<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch, bId);
         String pageTitle = boardConfigInfoService.get(bId).getBName();
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("items", data.getContent());

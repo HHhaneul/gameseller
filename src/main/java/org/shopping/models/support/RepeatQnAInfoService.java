@@ -18,9 +18,11 @@ public class RepeatQnAInfoService {
     }
 
     /* 전체 목록 조회 */
-    public List<RepeatedQnA> getList() {
-        return repository.getList();
+    public List<RepeatedQnA> getList(String mode) {
+
+        return repository.getList(mode);
     }
+
 
     public List<RepeatedQnA> getListAll() {
         return repository.getList("all");

@@ -25,6 +25,10 @@ public class GameMenus {
             menus.add(new MenuDetail("posts", "게시글 관리", "/admin/board/posts"));
         } else if (code.equals("order")) {
             menus.add(new MenuDetail("order", "주문 목록", "/admin/order"));
+        } else if (code.equals("support")) {
+            menus.add(new MenuDetail("support", "QnA", "/admin/support"));
+            menus.add(new MenuDetail("repeat", "자주 묻는 질문", "/admin/support/repeat"));
+            
         }
 
         return menus;

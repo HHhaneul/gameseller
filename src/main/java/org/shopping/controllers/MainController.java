@@ -13,7 +13,6 @@ import org.shopping.models.games.GameInfoService;
 import org.shopping.models.games.GameListService;
 import org.shopping.models.games.GameSearch;
 import org.shopping.models.member.board.MemberBoardListService;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +37,7 @@ public class MainController implements CommonProcess {
         commonProcess(model, "main");
 
         memberBoardSearch.setLimit(5);
-        Page<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch, "notice");
+        ListData<MemberBoardData> data = memberBoardListService.gets(memberBoardSearch, "notice");
         data.getContent().stream().forEach(System.out::println);
         model.addAttribute("items", data.getContent());
 

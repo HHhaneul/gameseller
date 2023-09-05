@@ -485,3 +485,28 @@ label {
 .navbar-brand {
     padding-top: 0;
 }
+
+/* QnA */
+
+.custom-list {
+    list-style-type: none;
+    padding: 0;
+}
+.custom-list-item {
+    margin-bottom: 10px;
+    background-color: #1e2a38;
+    padding: 10px;
+    border-radius: 5px;
+}
+.question {
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+}
+.answer {
+    background-color: #35404e;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    color: white;
+}

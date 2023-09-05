@@ -1,7 +1,10 @@
 package org.shopping.models.member.board;
 
 import com.querydsl.core.BooleanBuilder;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.shopping.commons.ListData;
+import org.shopping.commons.Pagination;
 import org.shopping.commons.Utils;
 import org.shopping.controllers.members.MemberBoardSearch;
 import org.shopping.entities.MemberBoardData;
@@ -20,8 +23,8 @@ import static org.springframework.data.domain.Sort.Order.desc;
 public class MemberBoardListService {
 
     private final BoardDataRepository boardDataRepository;
-
-    public Page<MemberBoardData> gets(MemberBoardSearch memberBoardSearch, String bId) {
+    private final HttpServletRequest request;
+    public ListData<MemberBoardData> gets(MemberBoardSearch memberBoardSearch, String bId) {
         QMemberBoardData memberBoardData = QMemberBoardData.memberBoardData;
 
         BooleanBuilder andBuilder = new BooleanBuilder();
@@ -66,9 +69,14 @@ public class MemberBoardListService {
         }
 
         Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
-        Page<MemberBoardData> data = boardDataRepository.findAll(andBuilder, pageable);
+        Page<MemberBoardData> pData = boardDataRepository.findAll(andBuilder, pageable);
 
-        System.out.println("뭘까" + andBuilder);
+        ListData<MemberBoardData> data = new ListData<>();
+        data.setContent(pData.getContent());
+        int total = (int)pData.getTotalPages();
+        Pagination pagination = new Pagination(page, total, 10, limit, request);
+        data.setPagination(pagination);
+
         return data;
     }
 

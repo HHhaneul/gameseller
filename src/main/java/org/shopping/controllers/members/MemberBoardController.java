@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.shopping.commons.ListData;
 import org.shopping.commons.MemberUtil;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
@@ -109,8 +110,9 @@ public class MemberBoardController {
 
         search(model, bId);
 
-        Page<MemberBoardData> data = listService.gets(memberBoardSearch, bId);
+        ListData<MemberBoardData> data = listService.gets(memberBoardSearch, bId);
         model.addAttribute("items", data.getContent());
+        model.addAttribute("pagination", data.getPagination());
         model.addAttribute("bId", bId);
         return "board/_index";
     }
