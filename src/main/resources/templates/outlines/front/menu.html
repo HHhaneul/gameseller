@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="mainMenu" th:fragment="frontMenu">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <th:block sec:authorize="isAuthenticated()">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
         <div class="container text-center" th:object="${orderSearch}">
             <div class="row row-cols-auto">
                 <div class="col">
@@ -58,27 +58,38 @@
             <div class="row row-cols-auto">
                 <div class="col">
                     <a th:href="@{/game/list}" th:classappend="${menuCode} == 'game' ? 'on'">
-                        <i class="xi-gamepad"></i>
-                        게임
-                    </a>
+                        <i class="xi-gamepad"></i><span class="word">게임</span></a>
                 </div>
                 <div class="col">
                     <a th:href="@{/board/notice}" th:classappend="${menuCode} == 'board' ? 'on'">
-                        <i class="xi-view-list"></i>
-                        공지사항
-                    </a>
+                        <i class="xi-view-list"></i><span class="word">공지사항</span></a>
                 </div>
                 <div class="col">
-                    <a th:href="@{/member/support/inquire}" th:classappend="${menuCode} == 'support' ? 'on'">
+                    <!--<a th:href="@{/member/support/inquire}" th:classappend="${menuCode} == 'support' ? 'on'">
                         <i class="xi-forum-o"></i>
                         고객센터
-                    </a>
-                </div>
-                <div class="col">
-                    <a th:href="@{/order/cart}" th:classappend="${menuCode} == 'cart' ? 'on'">
-                        <i class="xi-cart-add"></i>
-                        장바구니
-                    </a>
+                    </a>-->
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <div class="container-fluid">
+                            <i class="xi-forum-o"></i><span class="word">고객센터</span>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            <li><a class="dropdown-item" th:href="@{/support/repeatedly}">자주묻는질문</a></li>
+                                            <li><a class="dropdown-item" th:href="@{/support/inquire}">질문하기</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
             </div>
         </div>
