@@ -4,12 +4,12 @@
       layout:decorate="~{layouts/front/main}">
 
 <main layout:fragment="content">
-    <div th:replace="~{/myPage/main::myPage}"></div>
+    <div class="frmMyPage" th:insert="~{/myPage/index :: FragmentMyPage}"></div>
     <h1 th:text="${pageTitle}"></h1>
     <h2 th:text="#{update}"></h2>
     <form action="#" th:action="@{/myPage/update}" th:object="${member}" method="post">
         <input type="hidden" th:field="*{userNo}">
-        아이디 : <span th:text="@{{userId}(userId=${session.memberInfo.userId})}"></span>
+        <span>아이디 : </span><span th:text="@{{userId}(userId=${session.memberInfo.userId})}"></span>
         <br>
         <input type="hidden" th:field="*{userId}">
         <br>

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/templates")
+@RequestMapping
 @RequiredArgsConstructor
 public class MyPageController {
 
@@ -36,17 +36,36 @@ public class MyPageController {
         return "cart/index";
     }
 
-    @GetMapping("/order/view")
-    public String view() {
-
-        return "myPage/myPage_order";
+    @GetMapping("/myPage/leave")
+    public String myPage_leave() {
+        
+        return "myPage/leave";
     }
 
-    @GetMapping("/member/support/inquire")
-    public String support() {
+    @GetMapping("/myPage/index")
+    public String myPage_index() {
+
+        return "myPage/index";
+    }
+
+    @GetMapping("/myPage/myPage_QnA")
+    public String myPage_QnA() {
 
         return "myPage/myPage_QnA";
     }
+
+    @GetMapping("/support/inquire")
+    public String myPage_inquire() {
+
+        return "support/inquire";
+    }
+
+    /*@GetMapping("/order/view/{orderNo}")
+    public String orderInfo() {
+
+        return "myPage/myPage_order";
+    }*/
+
 
     @GetMapping("/myPage/update")
     public String showUpdateForm(String userId, Model model) {

@@ -11,7 +11,7 @@ body {
     max-width: 1152px;
     min-width: 1000px;
     margin: 0 auto;
-    background-color: #1b2838;
+    background-color: #121922;
     color: #ffffff;
     }
 
@@ -416,11 +416,72 @@ span {
 }
 
 .nav {
-    --bs-nav-link-hover-color: #ffffff;
-    --bs-nav-link-color: #ffffff;
+    --bs-nav-link-hover-color: #bfcde6;
+    --bs-nav-link-color: #bfcde6;
 }
 
 .nav-link{
-    color: #ffffff;
+    color: #bfcde6;
 }
 
+.frmMyPage, .frmQnA {
+    border: 0;
+    padding: 0;
+    color: #fff;
+}
+
+.nav-link.active, .nav-underline .show>.nav-link {
+    color: #fff;
+}
+
+
+.frmQnA > frmMyPage > frmQnA > frmQnABox > ul > li > a {
+    padding: 20px 32px;
+}
+
+.frmList {
+    background-color: #f8f9fa;
+}
+
+form[name="frmleave"] {
+    background-color: #1f344e;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    color: #fff;
+    text-align: center;
+}
+
+.xi-cart-add, .xi-forum-o, .xi-view-list, .xi-gamepad, .xi-user {
+    color: #fff;
+}
+
+.mainMenu {
+    background-color: #3c3c3d59;
+}
+
+.row row-cols-auto {
+    color: #fff;
+}
+
+button[type="button"] {
+    background-color: #1f344e;
+    color: #fff;
+}
+
+label {
+    color: white;
+}
+
+.col span {
+    font-size: 16px;
+    padding-top: 10;
+}
+
+.bg-dark {
+    padding-top: 0;
+}
+.navbar-brand {
+    padding-top: 0;
+}

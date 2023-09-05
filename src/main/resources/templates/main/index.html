@@ -8,6 +8,29 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <div class="container text-center">
     <div class="row">
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" style="height: 500; margin-bottom: 20px;">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000" >
+                    <img th:src="@{/images/item_1.jpg}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000" >
+                    <img th:src="@{/images/item_2.jpg}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" >
+                    <img th:src="@{/images/item_3.jpg}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
         <div class="t3-sidebar t3-sidebar-left col col-xs-12 col-sm-4 col-sm-pull-8 col-md-3 col-md-pull-9  hidden-xs" style="min-height: 1750px;">
             <div class="sidemenu">
                 <aside th:replace="~{outlines/front/side::menu}"></aside>

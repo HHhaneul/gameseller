@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/front/main}">
+
+<main layout:fragment="content" >
+    <form class="frmMyPage" name="frmMyPage" method="get" th:action="@{/myPage/index}" autocomplete="off" th:fragment="FragmentMyPage">
+            <h1 style="color: #fff;">마이페이지</h1>
+        <div class="myPageBox">
+            <ul class="nav nav-underline">
+                <li class="nav-item" style="font-size: 16px;">
+                    <a class="nav-link" aria-current="page" th:href="@{/order/view}">쇼핑정보</a>
+                </li>
+                <li class="nav-item" style="font-size: 16px;">
+                    <a class="nav-link" aria-current="page" th:href="@{/myPage/update}">정보수정</a>
+                </li>
+                <li class="nav-item" style="font-size: 16px;">
+                    <a class="nav-link" aria-current="page" th:href="@{/myPage/myPage_QnA}">문의내역</a>
+                </li>
+                <li class="nav-item" style="font-size: 16px;">
+                    <a class="nav-link" aria-current="page" th:href="@{/myPage/leave}">회원탈퇴</a>
+                </li>
+            </ul>
+        </div>
+            <br>
+            <h1 th:text="${pageTitle}"></h1>
+    </form>
+</main>
+</html>
