@@ -105,7 +105,7 @@ public class AdminMemberController {
     }
 
     @PostMapping("/{userNo}/update")
-    public String updateMember(@PathVariable Long userNo, @Valid @ModelAttribute JoinForm joinForm, Errors errors) {
+    public String updateMember(@PathVariable Long userNo, @Valid JoinForm joinForm, Errors errors) {
         if (errors.hasErrors()) {
 
         return "admin/member/update";
@@ -120,7 +120,7 @@ public class AdminMemberController {
 
         memberRepository.save(member);
 
-        return "redirect:/admin/member" + userNo;
+        return "redirect:/admin/member";
 
 }
     /* 회원 목록 삭제 */
