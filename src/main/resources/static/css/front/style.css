@@ -597,3 +597,13 @@ label {
                            .btns button[type="button"] {
                                background:#fff;
                            }
+                           .tap2 {
+                            display:flex;
+                           }
+                           .tap1 {
+                            width:100%;
+                           }
+                           .tap3 {
+                            width:100%;
+                            object-fit:cover;
+                           }

@@ -10,7 +10,8 @@
             </th:block>
         </div>
         <div class="product_info">
-            <form name="frmView" method="post" th:action="@{/order/cart}" target="ifrmProcess">
+            <form class="tap2" name="frmView" method="post" th:action="@{/order/cart}" target="ifrmProcess">
+                <div class="tap1">
                 <input type="hidden" name="mode" value="direct">
                 <input type="hidden" name="gameNo" th:value="*{gameNo}">
                 <dl th:if="*{category != null}">
@@ -41,6 +42,10 @@
                     <button type="button" class="action_button cart" data-mode="cart" style="color: #000;">장바구니</button>
                     <button type="button" class="action_button direct" data-mode="direct" style="color: #000;">바로구매</button>
                 </div>
+                </div>
+                <a class="tap3" th:href="@{/game/view/{no}(no=*{gameNo})}">
+                    <img width="100%" th:src="*{listImages[0].thumbsUrl[0]}">
+                </a>
             </form>
         </div>
     </section>
