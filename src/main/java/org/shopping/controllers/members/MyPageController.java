@@ -54,11 +54,11 @@ public class MyPageController {
         return "myPage/myPage_QnA";
     }
 
-    @GetMapping("/support/inquire")
+/*    @GetMapping("/support/inquire")
     public String myPage_inquire() {
 
         return "support/inquire";
-    }
+    }*/
 
     /*@GetMapping("/order/view/{orderNo}")
     public String orderInfo() {
