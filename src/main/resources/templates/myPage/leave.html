@@ -5,7 +5,7 @@
 
 <main layout:fragment="content">
     <div th:insert="~{/myPage/index::FragmentMyPage}"></div>
-    <form name="frmleave" method="get" th:action="@{/myPage/leave}" autocomplete="off">
+    <form name="frmleave" method="get" th:action="@{/myPage/leave}" autocomplete="off" th:object="${joinForm}">
         <div class="text-warning">
             <p style="color: #980000;">**경고: 회원탈퇴를 진행하시겠습니까?**
                 회원탈퇴를 진행하시면 다음과 같은 사항이 적용됩니다:</p>
@@ -20,7 +20,7 @@
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault" th:text="#{member.leave}"></label>
             </div>
-            <button type="button" th:text="#{member.goodbye}"></button>
+            <button type="submit" th:text="#{member.goodbye}"></button>
             <p>계정을 영구적으로 삭제하고 모든 데이터를 잃게 되니 신중하게 결정하시기 바랍니다.</p>
         </div>
     </form>

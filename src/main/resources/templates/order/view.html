@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
-<main layout:fragment="content" style="background: #fff;" th:object="${data}">
+<main layout:fragment="content" style="background: #121922;" th:object="${data}">
         <style>*  { color: #000; }</style>
-        <h1 th:text="${pageTitle}"></h1>
+        <h1 th:text="${pageTitle}" ></h1>
         <h2>주문 상품</h2>
         <th:block th:replace="~{order/_items::items}"></th:block>
 

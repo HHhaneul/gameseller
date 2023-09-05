@@ -86,6 +86,8 @@ public class OrderController implements CommonProcess, ScriptExceptionProcess {
 
         OrderInfo data = infoService.get(orderNo);
 
+        System.out.println("확인------------------------"+data);
+
         model.addAttribute("data", data);
 
         return "order/view";

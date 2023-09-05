@@ -4,12 +4,13 @@
       layout:decorate="~{layouts/front/main}">
 
 <main layout:fragment="content" >
-    <form class="frmMyPage" name="frmMyPage" method="get" th:action="@{/myPage/index}" autocomplete="off" th:fragment="FragmentMyPage">
+    <form class="frmMyPage" name="frmMyPage" th:action="@{/myPage/index}" autocomplete="off" th:fragment="FragmentMyPage">
             <h1 style="color: #fff;">마이페이지</h1>
         <div class="myPageBox">
             <ul class="nav nav-underline">
                 <li class="nav-item" style="font-size: 16px;">
-                    <a class="nav-link" aria-current="page" th:href="@{/order/view}">쇼핑정보</a>
+                    <a class="nav-link" aria-current="page" th:href="@{/order}">쇼핑정보</a>
+                    [[${data}]]
                 </li>
                 <li class="nav-item" style="font-size: 16px;">
                     <a class="nav-link" aria-current="page" th:href="@{/myPage/update}">정보수정</a>
