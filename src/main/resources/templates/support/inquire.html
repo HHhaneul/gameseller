@@ -8,9 +8,9 @@
         <h1 th:text="${pageTitle}"></h1>
         <form id="frmSave" name="frmSave" method="POST" th:action="@{/admin/support}" target="ifrmProcess" autocomplete="off">
             <input type="hidden" name="mode" value="add">
-            <table class="table-cols">
-                <tr>
-                    <th>질문</th>
+            <table class="custom-list">
+                <tr class="custom-list-item question">
+                    <th class="question" >|       질문하기       |</th>
                     <td width="800">
                         <input type="text" name="question">
                     </td>
