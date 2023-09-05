@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
+<head>
+</head>
 <main layout:fragment="content" th:object="${data}">
     <section class="product_top">
         <div class="product_images dn">
@@ -15,21 +17,21 @@
                 <input type="hidden" name="gameNo" th:value="*{gameNo}">
                 <dl th:if="*{category != null}">
                     <dt>게임분류</dt>
-                    <dd th:text="*{category.cateNm}"></dd>
+                    <dd class="game1" th:text="*{category.cateNm}" ></dd>
                 </dl>
                 <dl>
                     <dt>게임명</dt>
-                    <dd th:text="*{gameNm}"></dd>
+                    <dd class="game1" th:text="*{gameNm}"></dd>
                 </dl>
                 <dl>
                     <dt>판매가</dt>
-                    <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
-                    <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                    <dd class="game1" th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                    <dd class="game1" th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
                 </dl>
                 <dl>
                     <dt>재고</dt>
-                    <dd th:if="*{stock < 1000}" th:text="*{stock + '개'}"></dd>
-                    <dd th:if="*{stock >= 1000}" th:text="*{#numbers.formatInteger(stock, 3, 'COMMA') + '개'}"></dd>
+                    <dd class="game1" th:if="*{stock < 1000}" th:text="*{stock + '개'}"></dd>
+                    <dd class="game1" th:if="*{stock >= 1000}" th:text="*{#numbers.formatInteger(stock, 3, 'COMMA') + '개'}"></dd>
                 </dl>
                 <dl>
                     <dt>구매수량</dt>

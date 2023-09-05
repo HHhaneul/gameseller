@@ -15,10 +15,10 @@
                     <input type="checkbox" class="checkall" data-target-name="chkNo" id="checkall" checked>
                     <label for="checkall" class="standalone"></label>
                 </th>
-                <th colspan="2">상품정보</th>
-                <th>수량</th>
-                <th>판매가</th>
-                <th>합계</th>
+                <th class="basket1" colspan="2">상품정보</th>
+                <th class="basket1">수량</th>
+                <th class="basket1">판매가</th>
+                <th class="basket1">합계</th>
             </tr>
             </thead>
             <tbody>
@@ -36,17 +36,17 @@
 
                         </th:block>
                     </td>
-                    <td>
+                    <td class="basket1">
                         <th:block th:if="*{game != null}" th:text="*{game.gameNm}"></th:block>
                     </td>
                     <td>
-                        <input type="number" th:name="${'ea_' + status.index}" th:value="*{ea}" min="1">개
+                        <input type="number" th:name="${'ea_' + status.index}" th:value="*{ea}" min="1"><a class="basket1">개</a>
                     </td>
-                    <td>
+                    <td class="basket1">
                         <th:block th:if="*{game != null && game.price < 1000}" th:text="*{game.price + '원'}"></th:block>
                         <th:block th:if="*{game != null && game.price >= 1000}" th:text="*{#numbers.formatInteger(game.price, 3, 'COMMA') + '원'}"></th:block>
                     </td>
-                    <td>
+                    <td class="basket1">
                         <th:block th:if="*{game != null}" th:text="*{#strings.concat(game.price * ea, '원')}"></th:block>
                     </td>
                 </tr>
@@ -55,9 +55,9 @@
                 </tr>
             </tbody>
         </table>
-        <button type="button" class="action_button order" data-mode="order" style="color:black;">선택상품 주문하기</button>
-        <button type="button" class="action_button edit" data-mode="edit" style="color:black;">선택상품 수정하기</button>
-        <button type="button" class="action_button delete" data-mode="delete" style="color:black;">선택상품 삭제하기</button>
+        <button type="button" class="action_button order" data-mode="order" style="color:white; background:#2f3032;">선택상품 주문하기</button>
+        <button type="button" class="action_button edit" data-mode="edit" style="color:white; background:#2f3032;">선택상품 수정하기</button>
+        <button type="button" class="action_button delete" data-mode="delete" style="color:white; background:#2f3032;">선택상품 삭제하기</button>
     </form>
 
 </main>
