@@ -1,19 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
-* { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: black; outline: none; }
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+* { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: white; outline: none; }
 html { font-size: 13px; }
 ul, ol { list-style: none; margin:0; padding:0; }
 dl, dt, dd { margin:0; padding: 0; }
 a { text-decoration: none; }
-body {
-    font-family: 'Noto Sans KR', sans-serif;
-    margin: 0;
-    padding: 0;
-    max-width: 1152px;
-    min-width: 1000px;
-    margin: 0 auto;
-    background-color: #121922;
-    color: #ffffff;
-    }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            max-width: 1152px;
+            min-width: 1000px;
+            margin: 0 auto;
+            background-color: #121922;
+            color: #ffffff;
+        }
 
 
 /** 기준 너비 */
@@ -500,15 +501,85 @@ label {
 .prduct_info input[type="number"]{
     background:black;
 }
-.game1{
-    background:white;
-}
-.btns button[type="button"] {
-    background:#fff;
-}
+/* 게임 클릭 시 주문 목록 */
+
+/* 장바구니 목록*/
 .basket1 {
     color:white;
+    border:0.5px solid white;
 }
-.action_button order {
-    background:#2f3032;
+.basket2 {
+    border:0.5px solid white;
 }
+
+
+/* 메인화면 상품*/
+.font {
+ font-family: 'Abril Fatface', cursive;
+
+}
+        /* 게임 정보 */
+        /* 상품 상단 섹션 스타일 설정 */
+                           .product_top {
+                               background-color: #121922;
+                               color: #ffffff;
+                               padding: 20px; /* 내용과 여백 설정 */
+                           }
+
+                           /* 제목 스타일 설정 */
+                           .product_top h1 {
+                               font-size: 30px;
+                               font-weight: bold;
+                               margin: 0;
+                               margin-bottom: 20px; /* 아래 여백 추가 */
+                               line-height: 1;
+                           }
+
+                           /* 상품 정보 스타일 설정 */
+                           .product_info dl {
+                               margin-bottom: 20px; /* 아래 여백 추가 */
+                           }
+
+                           .product_info dt {
+                               font-weight: bold;
+                               margin-bottom: 5px;
+                           }
+
+                           .product_info dd {
+                               margin-left: 20px;
+                           }
+
+                           /* 구매수량 입력 필드 스타일 설정 */
+                           .product_info input[type="number"] {
+                               width: 60px; /* 너비 설정 */
+                               height: 30px; /* 높이 설정 */
+                               padding: 5px; /* 안쪽 여백 설정 */
+                               border: 1px solid #ffffff; /* 테두리 설정 */
+                               border-radius: 3px; /* 테두리 둥글게 설정 */
+                               color: #000000; /* 글자색 설정 */
+                           }
+
+                           /* 구매 버튼 스타일 설정 */
+                           .action_button {
+                               background-color: #ff6600; /* 배경색 설정 */
+                               color: #ffffff; /* 글자색 설정 */
+                               padding: 10px 20px; /* 안쪽 여백 설정 */
+                               border: none; /* 테두리 제거 */
+                               border-radius: 3px; /* 테두리 둥글게 설정 */
+                               cursor: pointer;
+                           }
+
+                           /* 상품 하단 섹션 스타일 설정 */
+                           .product_bottom {
+                               padding: 20px; /* 내용과 여백 설정 */
+                           }
+
+                           /* 상품 설명 스타일 설정 */
+                           .product_bottom .description {
+                               font-size: 16px; /* 글자 크기 설정 */
+                               line-height: 1.5; /* 줄간격 설정 */
+                           }
+
+                           .btns button[type="button"] {
+                               background:#fff;
+                           }

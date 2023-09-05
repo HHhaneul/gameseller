@@ -64,9 +64,9 @@
                                                 <div class="card-body">
                                                     <a th:href="@{/game/view/{no}(no=*{gameNo})}">
                                                         <ul>
-                                                            <li th:text="*{gameNm}"></li>
-                                                            <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
-                                                            <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                            <li class="font" th:text="*{gameNm}"></li>
+                                                            <dd class="font" th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                            <dd class="font" th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
                                                             <img th:src="@{/images/베스트.gif}">
                                                             <img th:src="@{/images/인기.gif}">
                                                             <img th:src="@{/images/주문폭주.gif}">
@@ -94,9 +94,9 @@
                                                 <div class="card-body">
                                                     <a th:href="@{/game/view/{no}(no=*{gameNo})}">
                                                         <ul>
-                                                            <li th:text="*{gameNm}"></li>
-                                                            <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
-                                                            <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                            <li class="font" th:text="*{gameNm}"></li>
+                                                            <dd class="font" th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                            <dd class="font" th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
                                                             <img th:src="@{/images/베스트.gif}">
                                                             <img th:src="@{/images/인기.gif}">
                                                             <img th:src="@{/images/주문폭주.gif}">
@@ -124,9 +124,9 @@
                                                 <div class="card-body">
                                                     <a th:href="@{/game/view/{no}(no=*{gameNo})}">
                                                         <ul>
-                                                            <li th:text="*{gameNm}"></li>
-                                                            <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
-                                                            <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                            <li class="font" th:text="*{gameNm}"></li>
+                                                            <dd class="font" th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                            <dd class="font" th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
                                                             <img th:src="@{/images/베스트.gif}">
                                                             <img th:src="@{/images/인기.gif}">
                                                             <img th:src="@{/images/주문폭주.gif}">
