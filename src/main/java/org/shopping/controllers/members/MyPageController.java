@@ -11,11 +11,15 @@ import org.shopping.models.member.MemberSaveService;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.Set;
 
 @Controller
 @RequestMapping
@@ -30,19 +34,12 @@ public class MyPageController {
     private final PasswordEncoder passwordEncoder;
     private final Utils utils;
 
-    /*@GetMapping("/order/view/{orderNo}")
-    public String cart_index() {
-
-        return "order/view";
-    }*/
 
     @GetMapping("/myPage/leave")
     public String myPage_leave() {
 
         return "myPage/leave";
     }
-
-
 
 
     @GetMapping("/myPage/index")
@@ -63,12 +60,6 @@ public class MyPageController {
         return "support/inquire";
     }
 
-    /*@GetMapping("/order/view/{orderNo}")
-    public String orderInfo() {
-
-        return "myPage/myPage_order";
-    }*/
-
 
     @GetMapping("/myPage/update")
     public String showUpdateForm(String userId, Model model) {
@@ -76,12 +67,7 @@ public class MyPageController {
         System.out.println(memberInfo);
         model.addAttribute("member", memberInfo);
 
-        /* Member member = saveService.findById(userId);
-        if (member == null) {
-            return "redirect:/";
-        }
 
-        model.addAttribute("userId", userId);*/
 
         return "myPage/update";
     }
@@ -97,11 +83,7 @@ public class MyPageController {
         if (memberInfo == null) {
             return "redirect:/";
         }
-        /*
-        member.setUserNm(updatedMember.getUserNm());
-        member.setEmail(updatedMember.getEmail());
-        member.setMobile(updatedMember.getMobile());
-        */
+
         ((MemberInfo) session.getAttribute("memberInfo")).setEmail(utils.getParam("email_"));
         ((MemberInfo) session.getAttribute("memberInfo")).setUserNm(utils.getParam("userNm_"));
         ((MemberInfo) session.getAttribute("memberInfo")).setMobile(utils.getParam("mobile_"));
