@@ -69,8 +69,8 @@ h2 { font-size: 18px; font-weight: bold; margin: 25px 0 10px; line-height: 1; co
 
 /** 기본 테이블 스타일 */
 .table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
-.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; }
-.table-cols td { background: #fff; padding: 10px 15px; }
+.table-cols th { background: #1e2a38; width: 160px; padding: 10px 20px; text-align: left; }
+.table-cols td { background: #35404e; padding: 10px 15px; }
 .table-cols th,
 .table-cols td { border-bottom: 1px solid #d5d5d5; }
 
@@ -85,6 +85,7 @@ form {
     border: 1px solid #555;
     padding: 20px;
     border-radius: 5px;
+    color: black;
 }
 
 dl {
@@ -197,7 +198,7 @@ button[type="reset"] {
 
 /* 검색 폼 스타일 */
 form[name="frmSearch"] {
-    background-color: #f8f9fa;
+    background-color: #1e2a38;
         padding: 10px;
         border-radius: 5px;
         margin-top: 10px;
@@ -206,7 +207,6 @@ form[name="frmSearch"] {
 /* 검색 버튼 스타일 */
 form[name="frmSearch"] button[type="submit"] {
     background-color: #000000;
-    color: white;
     padding: 6px 12px;
     border: none;
     border-radius: 5px;
@@ -215,7 +215,6 @@ form[name="frmSearch"] button[type="submit"] {
  /* 폼 안의 글씨 색상 */
  form[name="frmSearch"] input[type="text"],
  form[name="frmSearch"] select {
- color: #000000;
  }
 
 /* 게시판 리스트 테이블 스타일 */
@@ -237,7 +236,7 @@ div.table-action {
 
 button.sbtn {
 
-    background-color: #1b2838;
+    background-color: #1e2a38;
     color: white;
     padding: 6px 12px;
     border: none;
@@ -411,8 +410,8 @@ span {
     display: inline-block;
 }
 
-.h1, .h2, .form {
-    color: #ffffff;
+.h1, .h2 {
+    color: black;
 }
 
 .nav {
@@ -440,16 +439,16 @@ span {
 }
 
 .frmList {
-    background-color: #f8f9fa;
+    background-color: #1e2a38;
 }
 
 form[name="frmleave"] {
-    background-color: #1f344e;
+    background-color: #1e2a38;
     padding: 10px;
     border-radius: 5px;
     margin-top: 10px;
     border: 1px solid #ccc;
-    color: #fff;
+    color: #black;
     text-align: center;
 }
 
