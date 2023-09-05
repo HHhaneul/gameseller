@@ -9,13 +9,13 @@ import org.shopping.models.member.MemberInfoService;
 import org.shopping.models.member.MemberNotFoundException;
 import org.shopping.models.member.MemberSaveService;
 import org.shopping.repositories.member.MemberRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
@@ -30,17 +30,20 @@ public class MyPageController {
     private final PasswordEncoder passwordEncoder;
     private final Utils utils;
 
-    @GetMapping("/cart/index")
+    /*@GetMapping("/order/view/{orderNo}")
     public String cart_index() {
 
-        return "cart/index";
-    }
+        return "order/view";
+    }*/
 
     @GetMapping("/myPage/leave")
     public String myPage_leave() {
-        
+
         return "myPage/leave";
     }
+
+
+
 
     @GetMapping("/myPage/index")
     public String myPage_index() {
