@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping
+@RequestMapping("/templates")
 @RequiredArgsConstructor
 public class MyPageController {
 
@@ -36,10 +36,10 @@ public class MyPageController {
         return "cart/index";
     }
 
-    @GetMapping("/myPage/main")
-    public String myPage_main() {
+    @GetMapping("/order/view")
+    public String view() {
 
-        return "order/cart";
+        return "myPage/myPage_order";
     }
 
     @GetMapping("/member/support/inquire")

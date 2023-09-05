@@ -19,10 +19,10 @@
             <div class="head-right">
                 <div class="login">
                     <a class="btn btn-default btn-sm" th:href="@{/member/logout}" th:text="#{member.logout}"></a>
-                    <a class="btn btn-default btn-sm" th:href="@{/order/cart}" th:text="#{member.myInfo}"></a>
+                    <a class="btn btn-default btn-sm" th:href="@{/order/view}" th:text="#{member.myInfo}"></a>
                 </div>
                 <div class="cart">
-                    <a class="xi-cart xi-2x" th:href="@{/cart/index}"></a>
+                    <a class="xi-cart xi-2x" th:href="@{/order/cart}"></a>
                 </div>
             </div>
             <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}" th:text="#{adminPage}" style="height: 16px;"></a>
@@ -38,7 +38,7 @@
                     <a class="btn btn-default btn-sm" th:href="@{/member/join}" th:text="#{member.join}"></a>
                 </div>
                 <div class="cart">
-                    <a class="xi-cart xi-2x" th:href="@{/cart/index}"></a>
+                    <a class="xi-cart xi-2x" th:href="@{/order/cart}"></a>
                 </div>
             </div>
         </th:block>
