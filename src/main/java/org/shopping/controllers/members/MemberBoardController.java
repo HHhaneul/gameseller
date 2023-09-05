@@ -15,7 +15,7 @@ import org.shopping.models.member.board.MemberBoardDeleteService;
 import org.shopping.models.member.board.MemberBoardInfoService;
 import org.shopping.models.member.board.MemberBoardListService;
 import org.shopping.models.member.board.MemberBoardSaveService;
-import org.shopping.repositories.member.BoardDataRepository;
+import org.shopping.repositories.BoardRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,12 +35,15 @@ public class MemberBoardController {
     private final MemberBoardSaveService saveService;
     private final MemberBoardInfoService infoService;
     private final MemberBoardListService listService;
+
     private final BoardConfigInfoService configInfoService;
+
     private final MemberBoardDeleteService deleteService;
     private final MemberUtil memberUtil;
     private final HttpServletRequest request;
-    private final BoardDataRepository repository;
+
     private final BoardSaveValidator saveValidator;
+    private final BoardRepository boardRepository;
     private Board board;
 
     /* 게시글 작성 양식 */
@@ -49,6 +52,7 @@ public class MemberBoardController {
         commonProcess(bId, "write", model);
 
         memberBoardForm.setBId(board.getBId());
+        memberBoardForm.setPoster(memberUtil.getMember().getUserNm());
 
         return "board/write";
     }
@@ -109,6 +113,10 @@ public class MemberBoardController {
     public String list(@ModelAttribute MemberBoardSearch memberBoardSearch, @PathVariable String bId, Model model) {
 
         search(model, bId);
+
+        String pageTitle = boardRepository.findBybId(bId).getBName();
+
+        model.addAttribute("pageTitle", pageTitle);
 
         ListData<MemberBoardData> data = listService.gets(memberBoardSearch, bId);
         model.addAttribute("items", data.getContent());
