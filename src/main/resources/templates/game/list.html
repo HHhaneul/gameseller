@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/front/main}">
+<section layout:fragment="content">
+    <h1 th:text="${pageTitle}"></h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <form method="get" th:action="@{/admin/game}" th:object="${gameSearch}">
+        <table class="table-cols">
+            <tr>
+                <th>게임분류</th>
+                <td colspan="3">
+                    <span th:each="category, status : ${categories}">
+                        <input type="checkbox" name="cateCds" th:value="${category.cateCd}" th:field="*{cateCds}" th:id="${'cateCds_' + status.index}">
+                        <label th:for="${'cateCds_' + status.index}" th:text="${category.cateNm}"></label>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <th>판매상태</th>
+                <td colspan="3">
+                    <span th:each="s, status : ${statusList}">
+                        <input type="checkbox" name="statuses" th:value="${s[0]}" th:field="*{statuses}" th:id="${'statuses_' + status.index}">
+                        <label th:for="${'statuses_' + status.index}" th:text="${s[1]}"></label>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <th>게임번호</th>
+                <td>
+                    <input type="text" name="gameNo" th:field="*{gameNo}">
+                </td>
+                <th>키워드검색</th>
+                <td>
+                    <div class="input_grp">
+                        <select name="sopt" th:field="*{sopt}">
+                            <option value="all">통합검색</option>
+                            <option value="gameNm">게임명</option>
+                            <option value="gameNo">게임번호</option>
+                        </select>
+                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색어 입력">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="search_btn">
+            <button type="submit">검색하기</button>
+        </div>
+    </form>
+
+
+    <h2>게임 목록</h2>
+    <div class="t3-content col col-xs-12 col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
+        <div class="wrap t3-content-mast-bottom">
+            <div class="container">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">인기게임</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">최신게임</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">한글화게임</button>
+                    </li>
+                </ul>
+                <br>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        <br>
+                        <div class="tab-content">
+                            <div class="vmgroup grid-group-item">
+                                <div class="row">
+                                    <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
+                                        <div class="card" style="width: 18rem; height: 200px;">
+                                            <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
+                                            </a>
+                                            <div class="card-body">
+                                                <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                    <ul>
+                                                        <li th:text="*{gameNm}"></li>
+                                                        <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                        <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                        <img th:src="@{/images/베스트.gif}">
+                                                        <img th:src="@{/images/인기.gif}">
+                                                        <img th:src="@{/images/주문폭주.gif}">
+                                                        <img th:src="@{/images/최다판매.gif}">
+                                                        <img th:src="@{/images/추천.gif}">
+                                                    </ul>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <br>
+                        <div class="tab-content">
+                            <div class="vmgroup grid-group-item">
+                                <div class="row">
+                                    <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
+                                        <div class="card" style="width: 18rem; height: 200px;">
+                                            <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
+                                            </a>
+                                            <div class="card-body">
+                                                <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                    <ul>
+                                                        <li th:text="*{gameNm}"></li>
+                                                        <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                        <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                        <img th:src="@{/images/베스트.gif}">
+                                                        <img th:src="@{/images/인기.gif}">
+                                                        <img th:src="@{/images/주문폭주.gif}">
+                                                        <img th:src="@{/images/최다판매.gif}">
+                                                        <img th:src="@{/images/추천.gif}">
+                                                    </ul>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                        <br>
+                        <div class="tab-content">
+                            <div class="vmgroup grid-group-item">
+                                <div class="row">
+                                    <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
+                                        <div class="card" style="width: 18rem; height: 200px;">
+                                            <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
+                                            </a>
+                                            <div class="card-body">
+                                                <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                    <ul>
+                                                        <li th:text="*{gameNm}"></li>
+                                                        <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                        <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                        <img th:src="@{/images/베스트.gif}">
+                                                        <img th:src="@{/images/인기.gif}">
+                                                        <img th:src="@{/images/주문폭주.gif}">
+                                                        <img th:src="@{/images/최다판매.gif}">
+                                                        <img th:src="@{/images/추천.gif}">
+                                                    </ul>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:if="${pagination != null}" th:replace="~{commons/_pagination::pagination}"></th:block>
+</section>
+</html>

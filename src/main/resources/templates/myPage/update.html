@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/front/main}">
+
+<main layout:fragment="content">
+    <div class="frmMyPage" th:insert="~{/myPage/index :: FragmentMyPage}"></div>
+    <h1 th:text="${pageTitle}"></h1>
+    <h2 th:text="#{update}"></h2>
+    <form action="#" th:action="@{/myPage/update}" th:object="${member}" method="post">
+        <input type="hidden" th:field="*{userNo}">
+        <span>아이디 : </span><span th:text="@{{userId}(userId=${session.memberInfo.userId})}"></span>
+        <br>
+        <input type="hidden" th:field="*{userId}">
+        <br>
+        <label for="userNm" th:text="#{userNm}"></label>
+        <input type="text" th:name="${'userNm_'}" th:value="*{userNm}">
+        <br>
+        <label for="email" th:text="#{email}"></label>
+        <input type="email" th:name="${'email_'}" th:value="*{email}">
+        <br>
+        <label for="mobile" th:text="#{mobile}"></label>
+        <input type="text" th:name="${'mobile_'}" th:value="*{mobile}">
+        <br><br>
+        <a th:href="@{/member/changePassword}" th:text="#{member.change.password}"></a>
+        <br>
+        <br>
+        <button type="submit" th:text="#{member.submit}"></button>
+    </form>
+</main>
+</html>

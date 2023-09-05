@@ -1,11 +1,19 @@
 package org.shopping.controllers.members;
 
-import jakarta.validation.constraints.*;
-import lombok.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class JoinForm {
+    private String mode;
     @NotBlank
     @Size(min=6, max=20)
     private String userId;
@@ -25,4 +33,6 @@ public class JoinForm {
     private String mobile;
 
     private boolean[] agrees;
+
+
 }

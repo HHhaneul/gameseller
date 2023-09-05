@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" th:href="@{/front/style.css}">
+</head>
 <header th:fragment="common" class="main-header">
     <div class="header">
         <a href="/">
@@ -9,36 +12,33 @@
             </div>
         </a>
         <th:block sec:authorize="isAuthenticated()">
-            <span class="user-Info" th:text="${#messages.msg('member.login.msg', session.memberInfo.userNm, session.memberInfo.userId)}"></span>
-            <div class="search">
-                <input type="text">
-                <button class="xi-search"></button>
+            <div class="gameSearch">
+                <input type="text" class="searchValue">
+                <button type="submit" class="xi-search"></button>
             </div>
             <div class="head-right">
                 <div class="login">
                     <a class="btn btn-default btn-sm" th:href="@{/member/logout}" th:text="#{member.logout}"></a>
-                    <a class="btn btn-default btn-sm" th:href="@{/member/edit}" th:text="#{member.myInfo}"></a>
+                    <a class="btn btn-default btn-sm" th:href="@{/myPage/index}" th:text="#{member.myInfo}"></a>
                 </div>
                 <div class="cart">
-                    <a class="xi-cart xi-2x" th:href="@{/cart/index}"></a>
+                    <a class="xi-cart xi-2x" th:href="@{/order/cart}"></a>
                 </div>
             </div>
-            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}" th:text="#{adminPage}"></a>
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}" th:text="#{adminPage}" style="height: 16px;"></a>
         </th:block>
         <th:block sec:authorize="isAnonymous()">
-            <div class="search">
-                <input type="text">
-                <button class="xi-search"></button>
+            <div class="gameSearch">
+                <input type="text" class="searchValue">
+                <button type="submit" class="xi-search"></button>
             </div>
             <div class="head-right">
                 <div class="login">
-                    <a class="btn btn-default btn-sm" th:href="@{/member/join}" th:text="#{member.join}"></a>
                     <a class="btn btn-default btn-sm" th:href="@{/member/login}" th:text="#{member.login}"></a>
+                    <a class="btn btn-default btn-sm" th:href="@{/member/join}" th:text="#{member.join}"></a>
                 </div>
                 <div class="cart">
-                    <a th:href="@{/cart/index}">
-                        <i class="xi-cart xi-2x"></i>
-                    </a>
+                    <a class="xi-cart xi-2x" th:href="@{/order/cart}"></a>
                 </div>
             </div>
         </th:block>

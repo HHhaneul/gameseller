@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
 import org.shopping.commons.AlertBackException;
 import org.shopping.commons.CommonException;
+import org.shopping.commons.ListData;
 import org.shopping.commons.ScriptExceptionProcess;
 import org.shopping.entities.Game;
 import org.shopping.models.games.GameInfoService;
+import org.shopping.models.games.GameSearch;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,11 +23,42 @@ import java.util.List;
 @RequestMapping("/game")
 @RequiredArgsConstructor
 public class GameController implements CommonProcess, ScriptExceptionProcess {
-    private final GameInfoService infoService;
+    private final GameInfoService gameInfoService;
+
+    @GetMapping("/list")
+    public String list(@ModelAttribute GameSearch gameSearch, Model model) {
+        commonProcess(model, "list");
+
+        /* 최신게임 */
+        commonProcess(model, "list");
+        ListData<Game> data2 = gameInfoService.getList(gameSearch);
+        model.addAttribute("items2", data2.getContent());
+        model.addAttribute("pagination", data2.getPagination());
+
+        /* 인기게임 */
+        ListData<Game> data3 = gameInfoService.getList(gameSearch);
+        model.addAttribute("items3", data3.getContent());
+        model.addAttribute("pagination", data3.getPagination());
+
+        /* 한글화 게임 */
+        ListData<Game> data4 = gameInfoService.getList(gameSearch);
+        model.addAttribute("items4", data4.getContent());
+        model.addAttribute("pagination", data4.getPagination());
+
+        List<String> icons = new ArrayList<>();
+        icons.add("베스트");
+        icons.add("인기");
+        icons.add("주문폭주");
+        icons.add("최다판매");
+        icons.add("추천");
+        model.addAttribute("icons", icons);
+
+        return "game/list";
+    }
     @GetMapping("/view/{gameNo}")
     public String view(@PathVariable Long gameNo, Model model) {
         try {
-            Game data = infoService.get(gameNo);
+            Game data = gameInfoService.get(gameNo);
             commonProcess(model, "view", data.getGameNm());
 
             model.addAttribute("data", data);
@@ -54,7 +88,6 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
 
         if (mode.equals("view")) {
             addScript.add("game/view");
-            addScript.add("order/cart");
         }
 
 

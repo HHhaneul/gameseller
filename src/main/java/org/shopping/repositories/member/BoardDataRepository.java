@@ -10,4 +10,5 @@ public interface BoardDataRepository extends JpaRepository<MemberBoardData, Long
         QMemberBoardData memberBoardData = QMemberBoardData.memberBoardData;
         return exists(memberBoardData.id.eq(id));
     }
+
 }

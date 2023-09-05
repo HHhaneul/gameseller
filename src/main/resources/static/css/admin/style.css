@@ -55,8 +55,8 @@ main { min-width: 1100px; min-height: 800px; display: flex; }
 main > aside { width: 208px; background: #596b99; }
 main > section { flex-grow: 1; margin: 50px; }
 
-aside li > a { display: block; height: 71px; line-height: 71px; border-top: 1px solid #61729e; color: #dddee4; font-size: 18px; text-align: center; position: relative; }
-aside li > a * { color: #dddee4; font-size: 18px; }
+aside li > a { display: block; height: 71px; line-height: 71px; border-top: 1px solid #61729e; color: #000000; font-size: 18px; text-align: center; position: relative; }
+aside li > a * { color: #000000; font-size: 18px; }
 aside li > a:hover,
 aside li > a.on { background: #3c4e7a; font-weight: bold; }
 aside li > a:hover:after,
@@ -77,7 +77,7 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 
 
 /** 기본 메세지 상자 스타일 */
-.message { box-shadow: 2px 2px 5px #36466d; padding: 15px 25px; text-align: center; background: #fff; font-size: 18px; color: #36466d; margin-bottom: 10px; border-radius: 5px; }
+.message { box-shadow: 2px 2px 5px #36466d; padding: 15px 25px; text-align: center; background: #fff; font-size: 18px; color: #000000; margin-bottom: 10px; border-radius: 5px; }
 
 /** 기본 제목 스타일 */
 h1 { font-size: 30px; font-weight: bold; margin: 0; margin-bottom: 35px; line-height: 1; padding: 0; }
@@ -110,3 +110,8 @@ nav.submenus a { line-height: 60px; padding: 0 40px; font-size: 18px; }
 
 /** 조회 데이터 없음 */
 .no_data { height: 200px; text-align: center; font-weight: bold; font-size: 16px; }
+
+/** 페이징 공통 */
+.pagination { text-align: center; margin: 15px 0; }
+.pagination a { display: inline-block; padding: 5px 10px; border: 1px solid #d5d5d5; border-radius: 5px; margin: 0 2px; font-size: 0.9rem; }
+.pagination a.on { background-color: #727272; color: #ffffff; border-color: #727272; }

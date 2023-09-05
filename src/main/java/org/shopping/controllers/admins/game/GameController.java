@@ -90,7 +90,6 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
             throw new AlertException(e.getMessage()); // 자바스크립트 alert 형태로 에러 출력
         }
 
-
         String script = "parent.location.reload();";
         model.addAttribute("script", script);
         return "commons/_execute_script";
@@ -126,7 +125,6 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         gameForm.setDescription(game.getDescription());
         gameForm.setMainImages(game.getMainImages());
         gameForm.setEditorImages(game.getEditorImages());
-
 
         model.addAttribute("gameForm", gameForm);
 
@@ -177,11 +175,11 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
             if (mode.equals("add")) {
                 System.out.println("추가");
                 categorySaveService.save(form);
-            /* 수정 */
+                /* 수정 */
             } else if (mode.equals("edit")) {
                 System.out.println("수정");
                 categorySaveService.saveList(form);
-            /* 삭제 */
+                /* 삭제 */
             } else if (mode.equals("delete")) {
                 System.out.println("삭제");
                 categoryDeleteService.deleteList(form);

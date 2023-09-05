@@ -1,17 +1,19 @@
 package org.shopping.controllers.members;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.shopping.CommonProcess;
+import org.shopping.commons.AlertBackException;
 import org.shopping.commons.CommonException;
 import org.shopping.commons.Utils;
+import org.shopping.commons.menus.GameMenus;
+import org.shopping.commons.menus.MenuDetail;
 import org.shopping.controllers.admins.logins.FindIdForm;
 import org.shopping.entities.Member;
-import org.shopping.models.member.MemberInfo;
-import org.shopping.models.member.MemberInfoService;
-import org.shopping.models.member.MemberNotFoundException;
-import org.shopping.models.member.MemberSaveService;
+import org.shopping.models.member.*;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -21,15 +23,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
-public class MemberController {
+public class MemberController implements CommonProcess {
 
 
     private final MemberSaveService saveService;
@@ -39,6 +41,7 @@ public class MemberController {
     private final HttpSession session;
     private final PasswordEncoder passwordEncoder;
     private final Utils utils;
+    private final MemberDeleteService memberDeleteService;
 
     @GetMapping("/join")
     public String join(@ModelAttribute JoinForm joinForm, Model model) {
@@ -56,6 +59,7 @@ public class MemberController {
             return "member/join";
         }
 
+        saveService.save(joinForm);
 
         return "redirect:/member/login";
     }
@@ -99,7 +103,7 @@ public class MemberController {
     }
 
     @GetMapping("/edit")
-    public String showUpdateForm(String userId, Model model) {
+    public String showUpdateForm( Model model) {
         MemberInfo memberInfo = (MemberInfo) session.getAttribute("memberInfo");
         System.out.println(memberInfo);
         model.addAttribute("member", memberInfo);
@@ -191,4 +195,5 @@ public class MemberController {
         }
         return null;
     }
+
 }

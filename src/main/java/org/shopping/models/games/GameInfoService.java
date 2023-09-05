@@ -37,12 +37,12 @@ public class GameInfoService{
     private final ConfigInfoService configInfoService;
 
     /**
-     * 도서 개별 조회
+     * 게임 개별 조회
      *
      * @param gameNo
      * @return
      */
-    public Game get(Long gameNo) {
+    public org.shopping.entities.Game get(Long gameNo) {
         Game game = gameRepository.findById(gameNo).orElseThrow(GameNotFoundException::new);
         addFileInfo(game);
 
@@ -50,7 +50,7 @@ public class GameInfoService{
     }
 
     /**
-     * 도서 엔티티를 도서 양식으로 반환
+     * 게임 엔티티를 게임 양식으로 반환
      *
      * @param gameNo
      * @return
@@ -162,6 +162,7 @@ public class GameInfoService{
                 .orderBy(orderSpecifier.toArray(OrderSpecifier[]::new))
                 .fetch();
 
+        items.stream().forEach(this::addFileInfo);
         ListData<Game> data = new ListData<>();
         data.setContent(items);
 
@@ -186,5 +187,7 @@ public class GameInfoService{
         game.setMainImages(mainImages);
         game.setListImages(listImages);
         game.setEditorImages(editorImages);
+        System.out.println("여기?");
+        System.out.println(game);
     }
 }

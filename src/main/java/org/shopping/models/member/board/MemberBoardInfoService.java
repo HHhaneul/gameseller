@@ -36,4 +36,11 @@ public class MemberBoardInfoService {
         }
         return boardData;
     }
+
+/*    public MemberBoardData get(String gameNm){
+
+        MemberBoardData memberBoardData = boardDataRepository.findByGameNm(gameNm);
+
+        return boardData;
+    }*/
 }

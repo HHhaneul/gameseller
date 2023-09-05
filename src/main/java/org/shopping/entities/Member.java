@@ -1,10 +1,13 @@
 package org.shopping.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.shopping.commons.constants.Role;
 
-import java.util.UUID;
+import java.util.List;
 
 @Entity @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
@@ -18,9 +21,6 @@ public class Member extends BaseEntity {
 
     @Column(length=40, nullable = false, unique = true)
     private String userId;
-
-    @Column(length = 40, nullable = false ,unique = true)
-    private String gId = UUID.randomUUID().toString();
 
     @Column(length=65, nullable = false)
     private String userPw;
@@ -41,5 +41,6 @@ public class Member extends BaseEntity {
     @Column(length=10, nullable = false)
     private Role roles = Role.USER;
 
+    private List<Integer> chkNo;
 
 }

@@ -1,11 +1,151 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:top="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layouts/front/main}">
 
-<main layout:fragment="content">
-    <h1 th:text="${pageTitle}"></h1>
-    <aside th:replace="~{outlines/front/side::menu}"></aside>
-    메인!
-</main>
+<body layout:fragment="content">
+<h1 th:text="${pageTitle}"></h1>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<div class="container text-center">
+    <div class="row">
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" style="height: 500; margin-bottom: 20px;">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000" >
+                            <img width="1120.5px" th:src="@{/images/item_3.jpg}">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000" th:each="item2 : ${items2}" th:object="${item2}">
+                    <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                        <img th:src="*{listImages[0].thumbsUrl[0]}" class="d-block w-100" alt="...">
+                    </a>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="t3-sidebar t3-sidebar-left col col-xs-12 col-sm-4 col-sm-pull-8 col-md-3 col-md-pull-9  hidden-xs" style="min-height: 1750px;">
+            <div class="sidemenu">
+                <aside th:replace="~{outlines/front/side::menu}"></aside>
+            </div>
+        </div>
+        <div class="t3-content col col-xs-12 col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
+            <div class="wrap t3-content-mast-bottom">
+                <div class="container">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">인기게임</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">최신게임</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">한글화게임</button>
+                        </li>
+                    </ul>
+                    <br>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                            <br>
+                            <div class="tab-content">
+                                <div class="vmgroup grid-group-item">
+                                    <div class="row">
+                                        <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
+                                            <div class="card" style="width: 18rem; height: 200px;">
+                                                <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                    <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
+                                                </a>
+                                                <div class="card-body">
+                                                    <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                        <ul>
+                                                            <li th:text="*{gameNm}"></li>
+                                                            <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                            <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                            <img th:src="@{/images/베스트.gif}">
+                                                            <img th:src="@{/images/인기.gif}">
+                                                            <img th:src="@{/images/주문폭주.gif}">
+                                                            <img th:src="@{/images/최다판매.gif}">
+                                                            <img th:src="@{/images/추천.gif}">
+                                                        </ul>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                            <br>
+                            <div class="tab-content">
+                                <div class="vmgroup grid-group-item">
+                                    <div class="row">
+                                        <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
+                                            <div class="card" style="width: 18rem; height: 200px;">
+                                                <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                    <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
+                                                </a>
+                                                <div class="card-body">
+                                                    <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                        <ul>
+                                                            <li th:text="*{gameNm}"></li>
+                                                            <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                            <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                            <img th:src="@{/images/베스트.gif}">
+                                                            <img th:src="@{/images/인기.gif}">
+                                                            <img th:src="@{/images/주문폭주.gif}">
+                                                            <img th:src="@{/images/최다판매.gif}">
+                                                            <img th:src="@{/images/추천.gif}">
+                                                        </ul>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                            <br>
+                            <div class="tab-content">
+                                <div class="vmgroup grid-group-item">
+                                    <div class="row">
+                                        <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
+                                            <div class="card" style="width: 18rem; height: 200px;">
+                                                <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                    <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
+                                                </a>
+                                                <div class="card-body">
+                                                    <a th:href="@{/game/view/{no}(no=*{gameNo})}">
+                                                        <ul>
+                                                            <li th:text="*{gameNm}"></li>
+                                                            <dd th:if="*{price < 1000}" th:text="*{price + '원'}"></dd>
+                                                            <dd th:if="*{price >= 1000}" th:text="*{#numbers.formatInteger(price, 3, 'COMMA') + '원'}"></dd>
+                                                            <img th:src="@{/images/베스트.gif}">
+                                                            <img th:src="@{/images/인기.gif}">
+                                                            <img th:src="@{/images/주문폭주.gif}">
+                                                            <img th:src="@{/images/최다판매.gif}">
+                                                            <img th:src="@{/images/추천.gif}">
+                                                        </ul>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>

@@ -4,22 +4,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.shopping.CommonProcess;
-import org.shopping.commons.AlertBackException;
-import org.shopping.commons.CommonException;
-import org.shopping.commons.MemberUtil;
-import org.shopping.commons.ScriptExceptionProcess;
+import org.shopping.commons.*;
 import org.shopping.entities.CartInfo;
+import org.shopping.entities.OrderInfo;
 import org.shopping.models.member.MemberInfo;
-import org.shopping.models.order.CartInfoService;
-import org.shopping.models.order.CartItemNotFoundException;
-import org.shopping.models.order.OrderSaveService;
+import org.shopping.models.order.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +24,9 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class OrderController implements CommonProcess, ScriptExceptionProcess {
     private final CartInfoService cartInfoService;
+    private final CartInfoDeleteService cartInfoDeleteService;
     private final OrderSaveService saveService;
+    private final OrderInfoService infoService;
     private final MemberUtil memberUtil;
 
     @GetMapping
@@ -54,10 +49,46 @@ public class OrderController implements CommonProcess, ScriptExceptionProcess {
         }
 
         saveService.save(form);
+        //PaymentType type = PaymentType.valueOf(form.getPaymentType());
+        //if (type == PaymentType.LBT) { // 무통장 입금 -> 주문 완료
+            cartInfoDeleteService.delete(form.getCartNo()); // 주문완료된 장바구니 정보 삭제
 
-        // 결제 진행
-        model.addAttribute("script", "processPay()");
-        return "order/index";
+            return "redirect:/order/end?orderNo=" + form.getOrderNo();
+       // } else { // PG사를 통한 결제
+
+        //}
+
+        //return "order/index";
+    }
+
+    @GetMapping("/end")
+    public String orderEnd(Long orderNo, Model model) {
+        commonProcess(model, "end");
+
+        if (orderNo == null) {
+            throw new BadRequestException();
+        }
+
+        OrderInfo data = infoService.get(orderNo);
+
+        model.addAttribute("data", data);
+
+        return "order/end";
+    }
+
+    @GetMapping("/view/{orderNo}")
+    public String view(@PathVariable Long orderNo, Model model) {
+        commonProcess(model, "view");
+
+        if (orderNo == null) {
+            throw new BadRequestException();
+        }
+
+        OrderInfo data = infoService.get(orderNo);
+
+        model.addAttribute("data", data);
+
+        return "order/view";
     }
 
     public void commonProcess(Model model, String mode) {
@@ -66,6 +97,9 @@ public class OrderController implements CommonProcess, ScriptExceptionProcess {
 
     public void commonProcess(Model model, String mode, OrderForm form) {
         String pageTitle = "주문서 작성";
+        if (mode.equals("end")) pageTitle = "주문 완료";
+        else if (mode.equals("view")) pageTitle = "주문서 확인";
+
         CommonProcess.super.commonProcess(model, pageTitle);
 
         List<String> addScript = new ArrayList<>();

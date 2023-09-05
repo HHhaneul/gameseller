@@ -23,19 +23,10 @@ public class GameMenus {
             menus.add(new MenuDetail("board", "게시판 목록", "/admin/board"));
             menus.add(new MenuDetail("register", "게시판 등록/수정", "/admin/board/register"));
             menus.add(new MenuDetail("posts", "게시글 관리", "/admin/board/posts"));
-        } else if (code.equals("main")) {// 메인페이지 하위 목록
-            menus.add(new MenuDetail("game", "게임", "/game_thumb"));
-            menus.add(new MenuDetail("promotion", "프로모션", "/promotion"));
-            menus.add(new MenuDetail("notice", "공지사항", "/notice"));
-            menus.add(new MenuDetail("support", "고객지원", "/support"));
-            menus.add(new MenuDetail("mypage", "마이페이지", "/mypage"));
-            menus.add(new MenuDetail("basket", "장바구니", "/basket"));
-        } else if (code.equals("game")) { // 게임 하위 목록
-            menus.add(new MenuDetail("steam", "스팀", "/steam"));
-        } else if (code.equals("support")){
-            menus.add(new MenuDetail("inquire", "문의하기", "/inquire"));
-            menus.add(new MenuDetail("repeatedly", "자주묻는질문", "/repeatedly"));
+        } else if (code.equals("order")) {
+            menus.add(new MenuDetail("order", "주문 목록", "/admin/order"));
         }
+
         return menus;
     }
 

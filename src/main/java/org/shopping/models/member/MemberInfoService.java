@@ -5,14 +5,15 @@ import lombok.RequiredArgsConstructor;
 import org.shopping.controllers.members.JoinForm;
 import org.shopping.entities.Member;
 import org.shopping.repositories.member.MemberRepository;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +35,6 @@ public class MemberInfoService implements UserDetailsService {
         return MemberInfo.builder()
                 .userNo(member.getUserNo())
                 .userId(member.getUserId())
-                .gId(member.getGId())
                 .userPw(member.getUserPw())
                 .userNm(member.getUserNm())
                 .email(member.getEmail())

@@ -27,7 +27,13 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/admin/buyer/list}" th:classappend="${menuCode} == 'buyer' ? 'on'">
+            <a th:href="@{/admin/support}" th:classappend="${menuCode} == 'support' ? 'on'">
+                <i class="xi-view-list"></i>
+                고객관리
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/admin/order}" th:classappend="${menuCode} == 'order' ? 'on'">
                 <i class="xi-view-list"></i>
                 주문 관리
             </a>
