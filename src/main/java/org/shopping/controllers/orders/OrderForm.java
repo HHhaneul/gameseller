@@ -2,6 +2,7 @@ package org.shopping.controllers.orders;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.shopping.entities.OrderItem;
 
 import java.util.List;
 
@@ -32,8 +33,16 @@ public class OrderForm {
     @NotBlank
     private String addressSub;
 
-    @NotBlank
     private String paymentType = "LBT";
 
     private int totalPrice;
+
+    private int payPrice;
+
+    private String deliveryCompany;
+    private String invoice;
+
+    private List<OrderItem> orderItems;
+
+    private List<Long> itemId;
 }

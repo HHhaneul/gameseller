@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.shopping.CommonProcess;
 import org.shopping.commons.*;
-import org.shopping.commons.constants.PaymentType;
 import org.shopping.entities.CartInfo;
 import org.shopping.entities.OrderInfo;
 import org.shopping.models.member.MemberInfo;
@@ -50,16 +49,16 @@ public class OrderController implements CommonProcess, ScriptExceptionProcess {
         }
 
         saveService.save(form);
-        PaymentType type = PaymentType.valueOf(form.getPaymentType());
-        if (type == PaymentType.LBT) { // 무통장 입금 -> 주문 완료
+        //PaymentType type = PaymentType.valueOf(form.getPaymentType());
+        //if (type == PaymentType.LBT) { // 무통장 입금 -> 주문 완료
             cartInfoDeleteService.delete(form.getCartNo()); // 주문완료된 장바구니 정보 삭제
 
             return "redirect:/order/end?orderNo=" + form.getOrderNo();
-        } else { // PG사를 통한 결제
+       // } else { // PG사를 통한 결제
 
-        }
+        //}
 
-        return "order/index";
+        //return "order/index";
     }
 
     @GetMapping("/end")

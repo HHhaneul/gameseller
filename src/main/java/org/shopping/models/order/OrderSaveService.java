@@ -2,6 +2,7 @@ package org.shopping.models.order;
 
 import lombok.RequiredArgsConstructor;
 import org.shopping.commons.MemberUtil;
+import org.shopping.commons.Utils;
 import org.shopping.commons.constants.OrderStatus;
 import org.shopping.commons.constants.PaymentType;
 import org.shopping.controllers.orders.OrderForm;
@@ -22,6 +23,7 @@ public class OrderSaveService {
     private final OrderInfoRepository infoRepository;
     private final OrderItemRepository itemRepository;
     private final MemberUtil memberUtil;
+    private final Utils utils;
 
     public void save(OrderForm form) {
         List<Long> cartNos = form.getCartNo();
@@ -72,5 +74,42 @@ public class OrderSaveService {
         itemRepository.saveAllAndFlush(items);
         /** 주문 상품 정보 저장 E */
         form.setOrderNo(orderInfo.getOrderNo());
+    }
+
+    public void update(OrderForm form) {
+        QOrderInfo orderInfo = QOrderInfo.orderInfo;
+        QOrderItem orderItem = QOrderItem.orderItem;
+        Long orderNo = form.getOrderNo();
+
+        /** 주문상품 수정 S */
+        List<Long> itemIds = form.getItemId();
+        if (itemIds != null && !itemIds.isEmpty()) {
+            List<OrderItem> items = (List<OrderItem>)itemRepository.findAll(orderItem.id.in(itemIds));
+            for (OrderItem item : items) {
+                Long id = item.getId();
+                item.setDeliveryCompany(utils.getParam("deliveryCompany_" + id));
+                item.setInvoice(utils.getParam("invoice_" + id));
+                String status = utils.getParam("status_" + id);
+                if (status != null && !status.isBlank()) {
+                    item.setStatus(OrderStatus.valueOf(status));
+                }
+            }
+            itemRepository.flush();
+        }
+        /** 주문상품 수정 E */
+        /** 주문정보 수정 S */
+        OrderInfo data = infoRepository.findById(orderNo).orElseThrow(OrderNotFoundException::new);
+        data.setOrderName(form.getOrderName());
+        data.setOrderEmail(form.getOrderEmail());
+        data.setOrderMobile(form.getOrderMobile());
+        data.setReceiverName(form.getReceiverName());
+        data.setReceiverMobile(form.getReceiverMobile());
+        data.setAddress(form.getAddress());
+        data.setZonecode(form.getZonecode());
+        data.setAddressSub(form.getAddressSub());
+        data.setDeliveryCompany(form.getDeliveryCompany());
+        data.setInvoice(form.getInvoice());
+        infoRepository.flush();
+        /** 주문정보 수정 E */
     }
 }
