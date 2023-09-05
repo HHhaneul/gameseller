@@ -9,10 +9,12 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.shopping.commons.ListData;
 import org.shopping.commons.Pagination;
 import org.shopping.commons.Utils;
 import org.shopping.commons.constants.OrderStatus;
+import org.shopping.controllers.orders.OrderForm;
 import org.shopping.controllers.orders.OrderSearch;
 import org.shopping.entities.OrderInfo;
 import org.shopping.entities.OrderItem;
@@ -20,6 +22,7 @@ import org.shopping.entities.QOrderInfo;
 import org.shopping.entities.QOrderItem;
 import org.shopping.models.games.GameInfoService;
 import org.shopping.repositories.order.OrderInfoRepository;
+import org.shopping.repositories.order.OrderItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ public class OrderInfoService {
     private final EntityManager em;
     private final OrderInfoRepository repository;
     private final GameInfoService gameInfoService;
+    private final OrderItemRepository itemRepository;
     private final HttpServletRequest request;
 
     public OrderInfo get(Long orderNo) {
@@ -48,6 +52,14 @@ public class OrderInfoService {
         }
 
         return data;
+    }
+
+    public OrderForm getForm(Long orderNo) {
+        OrderInfo data = get(orderNo);
+
+        OrderForm form = new ModelMapper().map(data, OrderForm.class);
+        form.setPaymentType(data.getPaymentType().getTitle());
+        return form;
     }
 
     public ListData<OrderInfo> getList(OrderSearch search) {
@@ -172,5 +184,15 @@ public class OrderInfoService {
         if (items == null || items.isEmpty()) return;
 
         items.stream().forEach(i -> gameInfoService.addFileInfo(i.getGame()));
+    }
+
+    public void updateInfo(OrderForm orderForm) {
+        Long orderNo = orderForm.getOrderNo();
+        QOrderItem orderItem = QOrderItem.orderItem;
+        List<OrderItem> items = (List<OrderItem>)itemRepository.findAll(orderItem.orderInfo.orderNo.eq(orderNo));
+
+        items.stream().forEach(i -> gameInfoService.addFileInfo(i.getGame()));
+        orderForm.setOrderItems(items);
+        
     }
 }

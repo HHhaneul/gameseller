@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/admin/main}">
-<section layout:fragment="content" th:object="${data}">
+<section layout:fragment="content" th:object="${orderForm}">
     <h1>주문번호 : <th:block th:text="*{orderNo}"></th:block></h1>
     <h2>주문 상품</h2>
-    <form name="frmSave" method="post" th:action="@{/admin/order}" target="ifrmProcess" autocomplete="off">
+    <form name="frmSave" method="post" th:action="@{/admin/order}" autocomplete="off">
+        <div class="errors global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
         <input type="hidden" name="orderNo" th:value="*{orderNo}">
         <table class="table-rows">
             <thead>
@@ -14,7 +15,7 @@
                     <th width="100">판매가</th>
                     <th width="100">주문수량</th>
                     <th width="150">합계</th>
-                    <th width="200">운송장번호</th>
+                    <th width="250">운송장번호</th>
                     <th>주문상태</th>
                 </tr>
             </thead>
@@ -38,10 +39,13 @@
                         <th:block th:if="*{totalPrice >= 1000}" th:text="*{#numbers.formatInteger(totalPrice, 3, 'COMMA')}"></th:block>원
                     </td>
                     <td>
-                        <input type="text" th:name="*{'invoice_' + id}" th:value="*{invoice}">
+                        <div class="input_grp">
+                            <input type="text" th:name="*{'deliveryCompany_' + id}" th:value="*{deliveryCompany}" placeholder="택배사">
+                            <input type="text" th:name="*{'invoice_' + id}" th:value="*{invoice}" placeholder="운송장">
+                        </div>
                     </td>
                     <td>
-                        <select th:name="${'status_' + id}">
+                        <select th:name="*{'status_' + id}">
                             <option th:each="s : ${orderStatuses}" th:value="${s[0]}" th:text="${s[1]}" th:selected="${s[0] == item.status}"></option>
                         </select>
 
@@ -61,18 +65,21 @@
             <dt>주문자명</dt>
             <dd>
                 <input type="text" name="orderName" th:field="*{orderName}">
+                <div class="error" th:each="err : ${#fields.errors('orderName')}" th:text="${err}"></div>
             </dd>
         </dl>
         <dl>
             <dt>이메일</dt>
             <dd>
                 <input type="text" name="orderEmail" th:field="*{orderEmail}">
+                <div class="error" th:each="err : ${#fields.errors('orderEmail')}" th:text="${err}"></div>
             </dd>
         </dl>
         <dl>
             <dt>휴대전화번호</dt>
             <dd>
                 <input type="text" name="orderMobile" th:field="*{orderMobile}">
+                <div class="error" th:each="err : ${#fields.errors('orderMobile')}" th:text="${err}"></div>
             </dd>
         </dl>
 
@@ -81,35 +88,44 @@
             <dt>받는분</dt>
             <dd>
                 <input type="text" name="receiverName" th:field="*{receiverName}">
+                <div class="error" th:each="err : ${#fields.errors('receiverName')}" th:text="${err}"></div>
             </dd>
         </dl>
         <dl>
             <dt>휴대전화번호</dt>
             <dd>
                 <input type="text" name="receiverMobile" th:field="*{receiverMobile}">
+                <div class="error" th:each="err : ${#fields.errors('receiverMobile')}" th:text="${err}"></div>
             </dd>
         </dl>
         <dl>
             <dt>주소</dt>
             <dd>
-                <th:block th:text="*{zonecode}"></th:block>
-                <th:block th:text="*{address}"></th:block>
-                <th:block th:text="*{addressSub}"></th:block>
+                <div class="address_rows">
+                    <input type="text" name="zonecode" th:field="*{zonecode}" readonly>
+                    <button type="button" class="search_address" data-zipcode-name="zonecode" data-address-name="address">주소검색</button>
+                </div>
+                <div class="address_rows">
+                    <input type="text" name="address" th:field="*{address}" readonly>
+                </div>
+                <div class="address_rows">
+                    <input type="text" name="addressSub" th:field="*{addressSub}">
+                </div>
+                <div class="error" th:each="err : ${#fields.errors('zonecode')}" th:text="${err}"></div>
+                <div class="error" th:each="err : ${#fields.errors('address')}" th:text="${err}"></div>
+                <div class="error" th:each="err : ${#fields.errors('addressSub')}" th:text="${err}"></div>
             </dd>
         </dl>
-        <dl th:if="*{deliveryCompany != null && invoice != null}">
+        <dl>
             <dt>운송장정보</dt>
             <dd>
-                <th:block th:text="*{deliveryComapny}"></th:block>
-                <th:block th:text="*{invoice}"></th:block>
-                <button type="button" th:data-delivery-company="*{deliveryCompany}" th:data-invoice="*{invoice}" class="trace_delivery">배송조회</button>
+                <div class="input_grp">
+                    <input type="text" name="deliveryCompany" th:field="*{deliveryCompany}" placeholder="택배사">
+                    <input type="text" name="invoice" th:field="*{invoice}" placeholder="운송장">
+                </div>
             </dd>
         </dl>
         <h2>결제 정보</h2>
-        <dl>
-            <dt>배송비</dt>
-            <dd>3,000원</dd>
-        </dl>
         <dl>
             <dt>결제금액</dt>
             <dd>
@@ -119,7 +135,7 @@
         </dl>
         <dl>
             <dt>결제방법</dt>
-            <dd th:text="*{paymentType.title}"></dd>
+            <dd th:text="*{paymentType}"></dd>
         </dl>
         <div class="submit_btn">
             <button type="submit" onclick="return confirm('정말 수정하시겠습니까?');">수정하기</button>
