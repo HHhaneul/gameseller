@@ -51,9 +51,9 @@
 - 전체 질문 게시판 및 간편하게 질문 등록 가능
 - 테스트 질문 넣어놓기
 <h3>상단 메뉴 마이페이지<h3>
- ![image](https://github.com/HHhaneul/gameseller/assets/137499822/97fca358-aac1-4f77-b362-69e4eeae7f4a)
+![image](https://github.com/HHhaneul/gameseller/assets/137499822/97fca358-aac1-4f77-b362-69e4eeae7f4a)
 - 쇼핑정보 본인 주문 목록
- ![image](https://github.com/HHhaneul/gameseller/assets/137499822/d668fcdc-6b81-49f0-baab-8c6bc994110d)
+![image](https://github.com/HHhaneul/gameseller/assets/137499822/d668fcdc-6b81-49f0-baab-8c6bc994110d)
 - 정보수정
  ![image](https://github.com/HHhaneul/gameseller/assets/137499822/7177adb0-ece6-47dd-841e-2c62cf9d2386)
 - 문의내역
