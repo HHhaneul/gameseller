@@ -30,7 +30,8 @@
  - 휴대전화번호 양식 체크
 
 <h3>로그인 시 사이트 관리 페이지 상단 노출 </h3>
-![img_3.png](img_3.png)
+![image](https://github.com/HHhaneul/gameseller/assets/137499822/655c2df8-8653-4f1b-bcbd-e5063f78e9d5)
+
 
 <h3>상단 메뉴 게임 페이지</h3>
 ![img_4.png](img_4.png)
