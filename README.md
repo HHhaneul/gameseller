@@ -21,9 +21,9 @@
 >
 ![마인드맵](https://github.com/HHhaneul/gameseller/assets/140957195/a4fb7e67-ac0f-45cb-8d94-234a761d33b5)
 
-![img.png](img.png) 
+<img width="929" alt="0001" src="https://github.com/HHhaneul/gameseller/assets/137499822/d58082ef-df2f-40d4-8663-f8a961e2b232">
  - 메인페이지 회원가입 및 로그인 시 상단 메뉴 마이페이지 및 장바구니 생성
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/96bf10e9-ac30-427a-803f-61602cdbb842)
+<img width="911" alt="0002" src="https://github.com/HHhaneul/gameseller/assets/137499822/8e3ba6a0-5e80-4347-993f-cf5b08f48d7d">
  - 아이디 중복 체크
  - 비밀번호, 비밀번호 확인 동일성 체크
  - 이메일 필수항목 및 이메일 양식 체크
