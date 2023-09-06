@@ -21,56 +21,52 @@
 >
 ![마인드맵](https://github.com/HHhaneul/gameseller/assets/140957195/a4fb7e67-ac0f-45cb-8d94-234a761d33b5)
 
-![img.png](img.png) 
+<img width="929" alt="0001" src="https://github.com/HHhaneul/gameseller/assets/137499822/d58082ef-df2f-40d4-8663-f8a961e2b232">
  - 메인페이지 회원가입 및 로그인 시 상단 메뉴 마이페이지 및 장바구니 생성
-![img_2.png](img_2.png)
+<img width="911" alt="0002" src="https://github.com/HHhaneul/gameseller/assets/137499822/8e3ba6a0-5e80-4347-993f-cf5b08f48d7d">
  - 아이디 중복 체크
  - 비밀번호, 비밀번호 확인 동일성 체크
  - 이메일 필수항목 및 이메일 양식 체크
  - 휴대전화번호 양식 체크
 
 <h3>로그인 시 사이트 관리 페이지 상단 노출 </h3>
-![img_3.png](img_3.png)
+<img width="627" alt="0003" src="https://github.com/HHhaneul/gameseller/assets/137499822/849d2005-5bdd-4360-b4ae-cfd661803b53">
 
 <h3>상단 메뉴 게임 페이지</h3>
-![img_4.png](img_4.png)
+<img width="1015" alt="0004" src="https://github.com/HHhaneul/gameseller/assets/137499822/60b1c5a0-235b-4232-bd85-c736924384a8">
 - 게임 페이지 검색 및 리스트
-![img_5.png](img_5.png)
+<img width="911" alt="0005" src="https://github.com/HHhaneul/gameseller/assets/137499822/1852c5c2-4ed9-4d3d-8b19-b1a63e295747">
 - 게시판 이름과 맞게 게시판 설정
 <h4>글쓰기<h4>
-![img_6.png](img_6.png)
+<img width="965" alt="0006" src="https://github.com/HHhaneul/gameseller/assets/137499822/31cb4ba4-6a43-4840-9f95-5d5059c26150">
 - 회원 로그인 시 작성자는 사용자명
-![img_7.png](img_7.png)
+<img width="937" alt="0007" src="https://github.com/HHhaneul/gameseller/assets/137499822/cd19d44a-65d2-4f81-bc00-c8c44e646775">
 - 사진 첨부 테스트
-![img_8.png](img_8.png)
 - 조회수 및 IP, 댓글 기능 구현중
 - 프론트 진행중
 <h3>상단메뉴 고객센터<h3>
-![img_9.png](img_9.png)
+<img width="968" alt="0008" src="https://github.com/HHhaneul/gameseller/assets/137499822/5b8312f6-868a-4378-8206-c0412561bdfc">
 - 고객센터 자주 묻는 질문
-![img_10.png](img_10.png)
 - 클릭 시 답변
-![img_11.png](img_11.png)
+<img width="917" alt="0009" src="https://github.com/HHhaneul/gameseller/assets/137499822/1e9feedd-fc7c-4f01-ace2-f12453fef4c8">
 - 전체 질문 게시판 및 간편하게 질문 등록 가능
-![img_12.png](img_12.png)
 - 테스트 질문 넣어놓기
 <h3>상단 메뉴 마이페이지<h3>
-![img_13.png](img_13.png)
+<img width="941" alt="0010" src="https://github.com/HHhaneul/gameseller/assets/137499822/60fc4d17-de94-4f52-b7d7-8e1f3b7fcb43">
 - 쇼핑정보 본인 주문 목록
+<img width="943" alt="0011" src="https://github.com/HHhaneul/gameseller/assets/137499822/195f4c44-0d50-402d-8759-5079cc9495c8">
 - 정보수정
-![img_14.png](img_14.png)
+<img width="938" alt="0012" src="https://github.com/HHhaneul/gameseller/assets/137499822/0d85ebe1-50a3-4535-9d20-573fada7e8f6">
 - 문의내역
-![img_15.png](img_15.png)
+<img width="919" alt="0013" src="https://github.com/HHhaneul/gameseller/assets/137499822/751a472f-25a7-4c9a-bda2-74d80345ffce">
 - 회원 탈퇴
-![img_16.png](img_16.png)
+<img width="971" alt="0014" src="https://github.com/HHhaneul/gameseller/assets/137499822/86e9a25b-2bd8-41b6-84fe-b486d27774aa">
 - 장바구니
-![img_17.png](img_17.png)
+<img width="901" alt="0015" src="https://github.com/HHhaneul/gameseller/assets/137499822/be0068f4-5ba2-4dad-99ff-d0da88ea2322">
 - 주문하기
-![img_18.png](img_18.png)
+<img width="953" alt="0016" src="https://github.com/HHhaneul/gameseller/assets/137499822/ec7fdbf3-a3f6-4819-9e4b-81d3be3b25d2">
 - 주문 완료 페이지
-![img_19.png](img_19.png)
+<img width="919" alt="0017" src="https://github.com/HHhaneul/gameseller/assets/137499822/2ba69b5b-3fb6-49bd-be43-7b1d339a2803">
 - 주문서 확인
-![img_20.png](img_20.png)
-## **MindMap(ADMIN)**
 >
 ![마인드맵2](https://github.com/HHhaneul/gameseller/assets/140957195/78b505f2-a8b3-44ac-bd31-6796dafdfb0c)
