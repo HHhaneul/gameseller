@@ -19,7 +19,7 @@
 
 ## **MindMap**
 >
-![마인드맵](https://github.com/HHhaneul/gameseller/assets/140957195/a4fb7e67-ac0f-45cb-8d94-234a761d33b5)
+![마인드맵](https://github.com/HHhaneul/gameseller/assets/137499822/b506e557-ebcb-4e78-8371-60230d2884a0)
 
 <img width="929" alt="0001" src="https://github.com/HHhaneul/gameseller/assets/137499822/d58082ef-df2f-40d4-8663-f8a961e2b232">
 
@@ -104,4 +104,59 @@
 
 - 주문서 확인
 >
-![마인드맵2](https://github.com/HHhaneul/gameseller/assets/140957195/78b505f2-a8b3-44ac-bd31-6796dafdfb0c)
+![마인드맵2](https://github.com/HHhaneul/gameseller/assets/137499822/f8174cc2-8829-4ecb-9ab7-946a22a8da7f)
+
+<h1>관리자 메인 페이지</h1>
+
+<img width="1271" alt="1" src="https://github.com/HHhaneul/gameseller/assets/137499822/6ff6cdb6-4ec4-4968-9b83-fba625cc6148">
+
+<h3>사이트 설정 사이드 메뉴</h3>
+
+<img width="1269" alt="0001" src="https://github.com/HHhaneul/gameseller/assets/137499822/65b2b2f9-03d4-4c42-9542-a0699d5db00c">
+
+<h3>게시판 관리 사이드 메뉴</h3>
+
+<img width="1271" alt="0002" src="https://github.com/HHhaneul/gameseller/assets/137499822/1db64769-4e5c-4b59-a63d-f0cd409f43d0">
+
+- 게시판 등록/수정
+
+<img width="923" alt="0003" src="https://github.com/HHhaneul/gameseller/assets/137499822/82a8acfa-f83d-401d-8df1-fe1797a7215b">
+
+- 전체 게시판 관리
+
+<img width="1265" alt="0004" src="https://github.com/HHhaneul/gameseller/assets/137499822/b15385b7-94d0-4d2d-af33-aa3803d9fc91">
+
+<h3>회원 관리 사이드 메뉴</h3>
+
+<img width="1269" alt="0005" src="https://github.com/HHhaneul/gameseller/assets/137499822/923e21e7-6655-485e-b398-e742df40f9ae">
+
+- 회원 수정
+
+<img width="1257" alt="0006" src="https://github.com/HHhaneul/gameseller/assets/137499822/f4137714-2295-49c7-96af-e37c0bc1b42f">
+
+<h3>게인 관리 사이드 메뉴</h3>
+
+<img width="1253" alt="0007" src="https://github.com/HHhaneul/gameseller/assets/137499822/1c851695-d6e4-4054-bc20-60dee3c979e4">
+
+- 게임 등록
+
+<img width="897" alt="0008" src="https://github.com/HHhaneul/gameseller/assets/137499822/eaaa6b34-9d97-41b7-abca-af9e7df9c746">
+
+- 게임 분류(카테고리)
+
+<img width="1271" alt="0009" src="https://github.com/HHhaneul/gameseller/assets/137499822/6f4f1ad0-e02d-4f75-8c1c-e04ad1ad541f">
+
+<h3>고객 관리 사이드 메뉴</h3>
+
+<img width="952" alt="0010" src="https://github.com/HHhaneul/gameseller/assets/137499822/40d72904-213c-48a5-aeca-0826cb99684c">
+
+- 질문 등록 및 자주 묻는 질문으로 등록 가능
+
+<h3>주문 관리 사이드 메뉴</h3>
+
+<img width="1272" alt="0011" src="https://github.com/HHhaneul/gameseller/assets/137499822/957d5f7b-6234-4455-8b37-f139a24474bb">
+
+- 주문 목록
+
+<img width="1272" alt="0012" src="https://github.com/HHhaneul/gameseller/assets/137499822/92fe4bc8-fa12-450f-9fc3-5fbb6e0ad144">
+
