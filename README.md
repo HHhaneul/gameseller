@@ -52,23 +52,21 @@
 - 전체 질문 게시판 및 간편하게 질문 등록 가능
 - 테스트 질문 넣어놓기
 <h3>상단 메뉴 마이페이지<h3>
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/97fca358-aac1-4f77-b362-69e4eeae7f4a)
+<img width="941" alt="0010" src="https://github.com/HHhaneul/gameseller/assets/137499822/60fc4d17-de94-4f52-b7d7-8e1f3b7fcb43">
 - 쇼핑정보 본인 주문 목록
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/d668fcdc-6b81-49f0-baab-8c6bc994110d)
+<img width="943" alt="0011" src="https://github.com/HHhaneul/gameseller/assets/137499822/195f4c44-0d50-402d-8759-5079cc9495c8">
 - 정보수정
- ![image](https://github.com/HHhaneul/gameseller/assets/137499822/7177adb0-ece6-47dd-841e-2c62cf9d2386)
+<img width="938" alt="0012" src="https://github.com/HHhaneul/gameseller/assets/137499822/0d85ebe1-50a3-4535-9d20-573fada7e8f6">
 - 문의내역
- ![image](https://github.com/HHhaneul/gameseller/assets/137499822/284c0276-80ff-45df-92fb-313bf5e15bea)
+<img width="919" alt="0013" src="https://github.com/HHhaneul/gameseller/assets/137499822/751a472f-25a7-4c9a-bda2-74d80345ffce">
 - 회원 탈퇴
- ![image](https://github.com/HHhaneul/gameseller/assets/137499822/11c608fc-8105-4592-91ac-e04d04239b2f)
+<img width="971" alt="0014" src="https://github.com/HHhaneul/gameseller/assets/137499822/86e9a25b-2bd8-41b6-84fe-b486d27774aa">
 - 장바구니
- ![image](https://github.com/HHhaneul/gameseller/assets/137499822/eb2b11c6-6891-43d7-87df-5ca744c5541c)
+<img width="901" alt="0015" src="https://github.com/HHhaneul/gameseller/assets/137499822/be0068f4-5ba2-4dad-99ff-d0da88ea2322">
 - 주문하기
-- ![image](https://github.com/HHhaneul/gameseller/assets/137499822/2073264a-f48c-423c-b312-2e9f4429b232)
+<img width="953" alt="0016" src="https://github.com/HHhaneul/gameseller/assets/137499822/ec7fdbf3-a3f6-4819-9e4b-81d3be3b25d2">
 - 주문 완료 페이지
-- ![image](https://github.com/HHhaneul/gameseller/assets/137499822/d79f0870-4d1a-42b1-8179-b5b858b0b2f7)
+<img width="919" alt="0017" src="https://github.com/HHhaneul/gameseller/assets/137499822/2ba69b5b-3fb6-49bd-be43-7b1d339a2803">
 - 주문서 확인
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/ad2d0d43-444a-4999-9f2b-ba027f32f9f3)
-## **MindMap(ADMIN)**
 >
 ![마인드맵2](https://github.com/HHhaneul/gameseller/assets/140957195/78b505f2-a8b3-44ac-bd31-6796dafdfb0c)
