@@ -30,24 +30,25 @@
  - 휴대전화번호 양식 체크
 
 <h3>로그인 시 사이트 관리 페이지 상단 노출 </h3>
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/265cbce2-626f-431a-b930-1384ede3803f)
+<img width="627" alt="0003" src="https://github.com/HHhaneul/gameseller/assets/137499822/849d2005-5bdd-4360-b4ae-cfd661803b53">
+
 <h3>상단 메뉴 게임 페이지</h3>
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/5262d084-41c2-4bb2-9f34-4731e1da6d6a)
+<img width="1015" alt="0004" src="https://github.com/HHhaneul/gameseller/assets/137499822/60b1c5a0-235b-4232-bd85-c736924384a8">
 - 게임 페이지 검색 및 리스트
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/2e7ec7ce-b512-497c-bef4-e731c16ca3a8)
+<img width="911" alt="0005" src="https://github.com/HHhaneul/gameseller/assets/137499822/1852c5c2-4ed9-4d3d-8b19-b1a63e295747">
 - 게시판 이름과 맞게 게시판 설정
 <h4>글쓰기<h4>
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/7651698d-76da-4afc-b707-4020cfc39150)
+<img width="965" alt="0006" src="https://github.com/HHhaneul/gameseller/assets/137499822/31cb4ba4-6a43-4840-9f95-5d5059c26150">
 - 회원 로그인 시 작성자는 사용자명
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/947a7916-077e-4007-a5fc-ca415a2e6962)
+<img width="937" alt="0007" src="https://github.com/HHhaneul/gameseller/assets/137499822/cd19d44a-65d2-4f81-bc00-c8c44e646775">
 - 사진 첨부 테스트
 - 조회수 및 IP, 댓글 기능 구현중
 - 프론트 진행중
 <h3>상단메뉴 고객센터<h3>
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/ee006cdc-8ee5-4174-af82-37ada57c6966)
+<img width="968" alt="0008" src="https://github.com/HHhaneul/gameseller/assets/137499822/5b8312f6-868a-4378-8206-c0412561bdfc">
 - 고객센터 자주 묻는 질문
 - 클릭 시 답변
-![image](https://github.com/HHhaneul/gameseller/assets/137499822/13a60383-b9ea-4f77-9cd6-aec7ff53ae99)
+<img width="917" alt="0009" src="https://github.com/HHhaneul/gameseller/assets/137499822/1e9feedd-fc7c-4f01-ace2-f12453fef4c8">
 - 전체 질문 게시판 및 간편하게 질문 등록 가능
 - 테스트 질문 넣어놓기
 <h3>상단 메뉴 마이페이지<h3>
