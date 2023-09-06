@@ -40,7 +40,7 @@
                         <th:block th:if="*{game != null}" th:text="*{game.gameNm}"></th:block>
                     </td>
                     <td>
-                        <input type="number" th:name="${'ea_' + status.index}" th:value="*{ea}" min="1">개
+                        <input type="number" th:name="${'ea_' + status.index}" th:value="*{ea}" min="1" style="color: black;">개
                     </td>
                     <td>
                         <th:block th:if="*{game != null && game.price < 1000}" th:text="*{game.price + '원'}"></th:block>
@@ -55,9 +55,9 @@
                 </tr>
             </tbody>
         </table>
-        <button type="button" class="action_button order" data-mode="order" style="color:black;">선택상품 주문하기</button>
-        <button type="button" class="action_button edit" data-mode="edit" style="color:black;">선택상품 수정하기</button>
-        <button type="button" class="action_button delete" data-mode="delete" style="color:black;">선택상품 삭제하기</button>
+        <button type="button" class="action_button order" data-mode="order" style="color:white;">선택상품 주문하기</button>
+        <button type="button" class="action_button edit" data-mode="edit" style="color:white;">선택상품 수정하기</button>
+        <button type="button" class="action_button delete" data-mode="delete" style="color:white;">선택상품 삭제하기</button>
     </form>
 
 </main>

@@ -8,37 +8,19 @@
     <form method="get" th:action="@{/game/list}" th:object="${gameSearch}">
         <table class="table-cols">
             <tr>
-                <th>게임분류</th>
-                <td colspan="3">
-                    <span th:each="category, status : ${categories}">
-                        <input type="checkbox" name="cateCds" th:value="${category.cateCd}" th:field="*{cateCds}" th:id="${'cateCds_' + status.index}">
-                        <label th:for="${'cateCds_' + status.index}" th:text="${category.cateNm}"></label>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <th>판매상태</th>
-                <td colspan="3">
-                    <span th:each="s, status : ${statusList}">
-                        <input type="checkbox" name="statuses" th:value="${s[0]}" th:field="*{statuses}" th:id="${'statuses_' + status.index}">
-                        <label th:for="${'statuses_' + status.index}" th:text="${s[1]}"></label>
-                    </span>
-                </td>
-            </tr>
-            <tr>
                 <th>게임번호</th>
                 <td>
-                    <input type="text" name="gameNo" th:field="*{gameNo}">
+                    <input type="text" name="gameNo" th:field="*{gameNo}" style="color: black;">
                 </td>
                 <th>키워드검색</th>
                 <td>
                     <div class="input_grp">
-                        <select name="sopt" th:field="*{sopt}">
-                            <option value="all">통합검색</option>
-                            <option value="gameNm">게임명</option>
-                            <option value="gameNo">게임번호</option>
+                        <select name="sopt" th:field="*{sopt}" style="color: black;">
+                            <option value="all" style="color: black;">통합검색</option>
+                            <option value="gameNm" style="color: black;">게임명</option>
+                            <option value="gameNo" style="color: black;">게임번호</option>
                         </select>
-                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색어 입력">
+                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색어 입력" style="color: black;">
                     </div>
                 </td>
             </tr>
@@ -69,8 +51,8 @@
                         <div class="tab-content">
                             <div class="vmgroup grid-group-item">
                                 <div class="row">
-                                    <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
-                                        <div class="card" style="width: 18rem; height: 200px;">
+                                    <div th:each="item2 : ${items2}" th:object="${item2}" class="col" >
+                                        <div class="card" style="width: 18rem; height: 200px;  background-color: #1e2a38;">
                                             <a th:href="@{/game/view/{no}(no=*{gameNo})}">
                                                 <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
                                             </a>
@@ -100,7 +82,7 @@
                             <div class="vmgroup grid-group-item">
                                 <div class="row">
                                     <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
-                                        <div class="card" style="width: 18rem; height: 200px;">
+                                        <div class="card" style="width: 18rem; height: 200px; background-color: #1e2a38;">
                                             <a th:href="@{/game/view/{no}(no=*{gameNo})}">
                                                 <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
                                             </a>
@@ -130,7 +112,7 @@
                             <div class="vmgroup grid-group-item">
                                 <div class="row">
                                     <div th:each="item2 : ${items2}" th:object="${item2}" class="col">
-                                        <div class="card" style="width: 18rem; height: 200px;">
+                                        <div class="card" style="width: 18rem; height: 200px; background-color: #1e2a38;">
                                             <a th:href="@{/game/view/{no}(no=*{gameNo})}">
                                                 <img width="230" th:src="*{listImages[0].thumbsUrl[0]}">
                                             </a>

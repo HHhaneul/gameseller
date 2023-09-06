@@ -10,12 +10,12 @@
                 <th>검색어</th>
                 <td>
                     <div class="input_grp">
-                        <select name="sopt" th:field="*{sopt}">
-                            <option value="all">통합검색</option>
-                            <option value="subject">제목</option>
-                            <option value="poster">작성자</option>
+                        <select name="sopt" th:field="*{sopt}" style="color:black;">
+                            <option value="all" style="color:black;">통합검색</option>
+                            <option value="subject" style="color:black;">제목</option>
+                            <option value="poster" style="color:black;">작성자</option>
                         </select>
-                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색어 입력...">
+                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색어 입력..." style="color:black;">
                     </div>
                 </td>
             </tr>

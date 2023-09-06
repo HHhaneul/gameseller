@@ -3,8 +3,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/front/main}">
 <main layout:fragment="content" style="background: #fff;" th:object="${data}">
-    <style>*  { color: #000; }</style>
-    <h1 th:text="${pageTitle}"></h1>
+    <style>*  { color: black; }</style>
+    <h1 th:text="${pageTitle}" style="color: black;"></h1>
 
     <div class="order_no">
         주문번호 :
