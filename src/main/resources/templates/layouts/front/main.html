@@ -22,7 +22,6 @@
     <script th:each="jsFile : ${addScript}"
             th:src="@{/js/front/{jsFile}.js?v={v}(jsFile=${jsFile}, v=${@siteConf.get('cssJsVersion')})}"></script>
     <!--<script th:src="@{/js/front/form.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>-->
-    [[${addScript}]]
     <th:block layout:fragment="addScript"></th:block>
 </head>
 <body>
