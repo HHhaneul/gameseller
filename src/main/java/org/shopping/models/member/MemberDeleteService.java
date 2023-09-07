@@ -3,10 +3,8 @@ package org.shopping.models.member;
 import lombok.RequiredArgsConstructor;
 import org.shopping.commons.Utils;
 import org.shopping.commons.validators.RequiredValidator;
-import org.shopping.controllers.members.JoinForm;
 import org.shopping.entities.Member;
 import org.shopping.entities.QMember;
-import org.shopping.repositories.MemberListRepository;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,26 +15,26 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberDeleteService implements RequiredValidator {
 
-    private final MemberListRepository memberListRepository;
+    private final MemberRepository memberRepository;
     private final Utils utils;
 
     public void delete(Long userNo) {
-        Member member = memberListRepository.findById(userNo)
+        Member member = memberRepository.findById(userNo)
                 .orElseThrow(MemberNotFoundException::new);
-        memberListRepository.delete(member);
-        memberListRepository.flush();
+        memberRepository.delete(member);
+        memberRepository.flush();
     }
 
     public void delete(Long[] userNo) {
         QMember member = QMember.member;
         if (userNo == null || userNo.length == 0) return;
 
-        List<Member> items = (List<Member>) memberListRepository.findByUserNo(userNo);
+        List<Member> items = (List<Member>) memberRepository.findByUserNo(userNo);
 
         if (items == null || items.isEmpty()) return;
 
-        memberListRepository.deleteAll(items);
-        memberListRepository.flush();
+        memberRepository.deleteAll(items);
+        memberRepository.flush();
     }
 
     public void delete(Member member) {
@@ -47,12 +45,12 @@ public class MemberDeleteService implements RequiredValidator {
         for (Integer chk : chks) {
             Long userNo = Long.valueOf(utils.getParam("userNo" + chk));
             // findById 메소드 사용 및 예외 처리 추가
-            Member item = memberListRepository.findById(userNo)
+            Member item = memberRepository.findById(userNo)
                     .orElse(null);
             if (item == null) continue;
             items.add(item);
         }
-        memberListRepository.deleteAll(items);
-        memberListRepository.flush();
+        memberRepository.deleteAll(items);
+        memberRepository.flush();
     }
 }
