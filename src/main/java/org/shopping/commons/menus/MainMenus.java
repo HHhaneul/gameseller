@@ -1,6 +1,7 @@
-package org.shopping.commons;
+package org.shopping.commons.menus;
 
 
+import org.shopping.commons.PageDetails;
 import org.springframework.security.core.parameters.P;
 
 import java.util.ArrayList;

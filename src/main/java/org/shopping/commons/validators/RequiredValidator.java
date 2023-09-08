@@ -1,6 +1,6 @@
 package org.shopping.commons.validators;
 
-import org.shopping.commons.BadRequestException;
+import org.shopping.commons.exception.BadRequestException;
 
 /**
  * 필수항목 체크

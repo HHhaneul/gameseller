@@ -1,7 +1,7 @@
 package org.shopping.models.files;
 
 import lombok.RequiredArgsConstructor;
-import org.shopping.commons.AuthorizationException;
+import org.shopping.commons.exception.AuthorizationException;
 import org.shopping.commons.MemberUtil;
 import org.shopping.entities.FileInfo;
 import org.shopping.models.member.MemberInfo;

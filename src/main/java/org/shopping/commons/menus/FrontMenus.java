@@ -1,5 +1,7 @@
 package org.shopping.commons.menus;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.util.*;
 
 public class FrontMenus {
@@ -7,7 +9,7 @@ public class FrontMenus {
         List<MenuDetail> menus = new ArrayList<>();
         if (code.equals("notice")){
 
-        } else if (code.equals("basket")) {
+        } else if (code.equals("cart")) {
 
         } else if (code.equals("game")) { // 게임 목록 하위 메뉴
             menus.add(new MenuDetail("list", "최신게임", "/game/list"));
@@ -26,5 +28,10 @@ public class FrontMenus {
 
 
         return menus;
+    }
+    public static String getSubMenuCode(HttpServletRequest request) {
+        String URI = request.getRequestURI();
+
+        return URI.substring(URI.lastIndexOf('/') + 1);
     }
 }

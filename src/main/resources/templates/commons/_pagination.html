@@ -1,6 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="pagination" th:object="${pagination}">
+    <style>
+.pagination {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border: 1px solid #121922;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #121922;
+    background-color: #fff;
+}
+
+.pagination a:hover {
+    background-color: #121922;
+    color: #fff;
+}
+
+.pagination .on {
+    background-color: #121922;
+    color: #fff;
+    font-weight: bold;
+}
+
+.pagination a:first-child,
+.pagination a:last-child {
+    margin-left: 0;
+    margin-right: 0;
+}
+    </style>
     <div class="pagination" th:if="${pagination != null}">
         <a th:if="*{prevFirstPage > 0}" th:href="*{#strings.concat(baseUrl,  '1')}">&lt;&lt;</a>
         <a th:if="*{prevFirstPage > 0}" th:href="*{#strings.concat(baseUrl, prevFirstPage)}">&lt;</a>

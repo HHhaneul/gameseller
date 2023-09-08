@@ -1,10 +1,16 @@
 package org.shopping.controllers.orders;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.shopping.CommonProcess;
 import org.shopping.commons.*;
+import org.shopping.commons.exception.AlertBackException;
+import org.shopping.commons.exception.BadRequestException;
+import org.shopping.commons.exception.CommonException;
+import org.shopping.commons.menus.FrontMenus;
+import org.shopping.commons.menus.MenuDetail;
 import org.shopping.entities.CartInfo;
 import org.shopping.entities.OrderInfo;
 import org.shopping.models.member.MemberInfo;
@@ -28,6 +34,7 @@ public class OrderController implements CommonProcess, ScriptExceptionProcess {
     private final OrderSaveService saveService;
     private final OrderInfoService infoService;
     private final MemberUtil memberUtil;
+    private final HttpServletRequest request;
 
     @GetMapping
     public String index(@ModelAttribute OrderForm form, Model model) {
@@ -138,5 +145,17 @@ public class OrderController implements CommonProcess, ScriptExceptionProcess {
         }
         model.addAttribute("addCommonScript", addCommonScript);
         model.addAttribute("addScript", addScript);
+
+        String menuCode = FrontMenus.getSubMenuCode(request);
+        model.addAttribute("menuCode", "cart");
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
+
+        // 서브 메뉴 처리
+        model.addAttribute("subMenuCode", menuCode);
+
+        // 서브 메뉴 조회
+        List<MenuDetail> submenus = FrontMenus.gets(menuCode);
+        model.addAttribute("submenus", submenus);
     }
 }

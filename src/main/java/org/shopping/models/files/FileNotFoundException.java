@@ -1,6 +1,6 @@
 package org.shopping.models.files;
 
-import org.shopping.commons.CommonException;
+import org.shopping.commons.exception.CommonException;
 import org.springframework.http.HttpStatus;
 
 public class FileNotFoundException extends CommonException {

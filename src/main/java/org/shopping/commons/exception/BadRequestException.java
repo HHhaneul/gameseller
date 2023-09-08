@@ -1,4 +1,4 @@
-package org.shopping.commons;
+package org.shopping.commons.exception;
 
 public class BadRequestException extends AlertBackException {
     public BadRequestException(String message) {

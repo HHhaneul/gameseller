@@ -1,6 +1,6 @@
 package org.shopping.models.member.board;
 
-import org.shopping.commons.CommonException;
+import org.shopping.commons.exception.CommonException;
 import org.springframework.http.HttpStatus;
 
 public class GuestPasswordNotCheckedException extends CommonException {

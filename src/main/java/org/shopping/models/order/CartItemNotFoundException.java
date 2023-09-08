@@ -1,6 +1,6 @@
 package org.shopping.models.order;
 
-import org.shopping.commons.CommonException;
+import org.shopping.commons.exception.CommonException;
 import org.springframework.http.HttpStatus;
 
 public class CartItemNotFoundException extends CommonException {

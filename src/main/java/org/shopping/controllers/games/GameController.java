@@ -1,11 +1,14 @@
 package org.shopping.controllers.games;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
-import org.shopping.commons.AlertBackException;
-import org.shopping.commons.CommonException;
+import org.shopping.commons.exception.AlertBackException;
+import org.shopping.commons.exception.CommonException;
 import org.shopping.commons.ListData;
 import org.shopping.commons.ScriptExceptionProcess;
+import org.shopping.commons.menus.FrontMenus;
+import org.shopping.commons.menus.MenuDetail;
 import org.shopping.entities.Game;
 import org.shopping.models.games.GameInfoService;
 import org.shopping.models.games.GameSearch;
@@ -23,7 +26,9 @@ import java.util.List;
 @RequestMapping("/game")
 @RequiredArgsConstructor
 public class GameController implements CommonProcess, ScriptExceptionProcess {
+
     private final GameInfoService gameInfoService;
+    private final HttpServletRequest request;
 
     @GetMapping("/list")
     public String list(@ModelAttribute GameSearch gameSearch, Model model) {
@@ -74,8 +79,9 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
         commonProcess(model, mode, null);
     }
 
+
     public void commonProcess(Model model, String mode, String addTitle) {
-        String pageTitle = "";
+        String pageTitle = "전체 게임";
         if (mode.equals("view")) {
             if (addTitle != null && !addTitle.isBlank()) addTitle += "|";
             pageTitle = addTitle;
@@ -85,13 +91,25 @@ public class GameController implements CommonProcess, ScriptExceptionProcess {
 
         List<String> addScript = new ArrayList<>();
         List<String> addCss = new ArrayList<>();
+        List<String> addCommonScript = new ArrayList<>();
 
         if (mode.equals("view")) {
             addScript.add("game/view");
         }
 
-
         model.addAttribute("addScript", addScript);
         model.addAttribute("addCss", addCss);
+
+        String menuCode = FrontMenus.getSubMenuCode(request);
+        model.addAttribute("menuCode", "game");
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
+
+        // 서브 메뉴 처리
+        model.addAttribute("subMenuCode", menuCode);
+
+        // 서브 메뉴 조회
+        List<MenuDetail> submenus = FrontMenus.gets(menuCode);
+        model.addAttribute("submenus", submenus);
     }
 }

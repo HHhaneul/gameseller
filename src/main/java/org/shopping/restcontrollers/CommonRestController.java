@@ -1,7 +1,7 @@
 package org.shopping.restcontrollers;
 
 
-import org.shopping.commons.CommonException;
+import org.shopping.commons.exception.CommonException;
 import org.shopping.commons.rests.JSONData;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;

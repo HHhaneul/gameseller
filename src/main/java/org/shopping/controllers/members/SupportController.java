@@ -3,7 +3,7 @@ package org.shopping.controllers.members;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
-import org.shopping.commons.menus.GameMenus;
+import org.shopping.commons.menus.FrontMenus;
 import org.shopping.commons.menus.MenuDetail;
 import org.shopping.entities.RepeatedQnA;
 import org.shopping.models.support.RepeatQnAInfoService;
@@ -62,16 +62,16 @@ public class SupportController implements CommonProcess {
         addScript.add("support");
 
 
-        model.addAttribute("menuCode", "game");
+        String menuCode = FrontMenus.getSubMenuCode(request);
+        model.addAttribute("menuCode", "support");
         model.addAttribute("addCommonScript", addCommonScript);
         model.addAttribute("addScript", addScript);
 
         // 서브 메뉴 처리
-        String subMenuCode = GameMenus.getSubMenuCode(request);
-        model.addAttribute("subMenuCode", subMenuCode);
+        model.addAttribute("subMenuCode", menuCode);
 
         // 서브 메뉴 조회
-        List<MenuDetail> submenus = GameMenus.gets("adminGame");
+        List<MenuDetail> submenus = FrontMenus.gets("support");
         model.addAttribute("submenus", submenus);
 
         CommonProcess.super.commonProcess(model, pageTitle);

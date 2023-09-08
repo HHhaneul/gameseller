@@ -28,7 +28,6 @@ public class GameMenus {
         } else if (code.equals("support")) {
             menus.add(new MenuDetail("support", "QnA", "/admin/support"));
             menus.add(new MenuDetail("repeat", "자주 묻는 질문", "/admin/support/repeat"));
-            
         }
 
         return menus;

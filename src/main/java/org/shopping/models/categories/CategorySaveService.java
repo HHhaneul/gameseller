@@ -1,7 +1,7 @@
 package org.shopping.models.categories;
 
 import lombok.RequiredArgsConstructor;
-import org.shopping.commons.BadRequestException;
+import org.shopping.commons.exception.BadRequestException;
 import org.shopping.commons.Utils;
 import org.shopping.commons.validators.RequiredValidator;
 import org.shopping.controllers.admins.game.CategoryForm;

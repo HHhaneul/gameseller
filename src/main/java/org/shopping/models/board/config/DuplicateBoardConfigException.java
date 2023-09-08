@@ -1,7 +1,7 @@
 package org.shopping.models.board.config;
 
 
-import org.shopping.commons.CommonException;
+import org.shopping.commons.exception.CommonException;
 import org.springframework.http.HttpStatus;
 
 public class DuplicateBoardConfigException extends CommonException {

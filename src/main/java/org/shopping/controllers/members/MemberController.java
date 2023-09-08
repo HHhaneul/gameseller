@@ -1,16 +1,12 @@
 package org.shopping.controllers.members;
 
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
-import org.shopping.commons.AlertBackException;
-import org.shopping.commons.CommonException;
+import org.shopping.commons.exception.CommonException;
 import org.shopping.commons.Utils;
-import org.shopping.commons.menus.GameMenus;
-import org.shopping.commons.menus.MenuDetail;
 import org.shopping.controllers.admins.logins.FindIdForm;
 import org.shopping.entities.Member;
 import org.shopping.models.member.*;
@@ -24,9 +20,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/member")

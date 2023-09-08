@@ -1,4 +1,6 @@
-package org.shopping.commons;
+package org.shopping.commons.menus;
+
+import org.shopping.commons.PageDetails;
 
 import java.util.ArrayList;
 import java.util.List;

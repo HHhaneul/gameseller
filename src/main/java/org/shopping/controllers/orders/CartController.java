@@ -1,11 +1,14 @@
 package org.shopping.controllers.orders;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.shopping.CommonProcess;
-import org.shopping.commons.AlertException;
-import org.shopping.commons.CommonException;
+import org.shopping.commons.exception.AlertException;
+import org.shopping.commons.exception.CommonException;
 import org.shopping.commons.ScriptExceptionProcess;
+import org.shopping.commons.menus.FrontMenus;
+import org.shopping.commons.menus.MenuDetail;
 import org.shopping.entities.CartInfo;
 import org.shopping.models.order.CartInfoSaveService;
 import org.shopping.models.order.CartInfoService;
@@ -26,6 +29,7 @@ public class CartController implements CommonProcess, ScriptExceptionProcess {
 
     private final CartInfoSaveService saveService;
     private final CartInfoService infoService;
+    private final HttpServletRequest request;
 
 
     @GetMapping
@@ -68,7 +72,24 @@ public class CartController implements CommonProcess, ScriptExceptionProcess {
         if (mode.equals("cart")) {
             addScript.add("order/cart");
         }
+        List<String> addCss = new ArrayList<>();
+        List<String> addCommonScript = new ArrayList<>();
 
         model.addAttribute("addScript", addScript);
+
+        String menuCode = FrontMenus.getSubMenuCode(request);
+
+        model.addAttribute("menuCode", "cart");
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
+
+        // 서브 메뉴 처리
+        model.addAttribute("subMenuCode", menuCode);
+
+        // 서브 메뉴 조회
+        List<MenuDetail> submenus = FrontMenus.gets(menuCode);
+        model.addAttribute("submenus", submenus);
+
+        CommonProcess.super.commonProcess(model, pageTitle);
     }
 }

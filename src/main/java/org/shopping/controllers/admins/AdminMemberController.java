@@ -1,20 +1,19 @@
 package org.shopping.controllers.admins;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.shopping.commons.AlertBackException;
-import org.shopping.commons.CommonException;
-import org.shopping.commons.Utils;
-import org.shopping.commons.configs.ConfigInfoService;
-import org.shopping.commons.configs.ConfigSaveService;
+import org.shopping.CommonProcess;
+import org.shopping.commons.exception.AlertBackException;
+import org.shopping.commons.exception.CommonException;
 import org.shopping.commons.menus.GameMenus;
 import org.shopping.commons.menus.MenuDetail;
 import org.shopping.controllers.members.JoinForm;
-import org.shopping.controllers.members.JoinValidator;
 import org.shopping.entities.Member;
-import org.shopping.models.member.*;
+import org.shopping.models.member.MemberDeleteService;
+import org.shopping.models.member.MemberListService;
+import org.shopping.models.member.MemberNotFoundException;
+import org.shopping.models.member.MemberSaveService;
 import org.shopping.repositories.member.MemberRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,28 +22,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller("AdminMemberController")
 @RequestMapping("/admin/member")
 @RequiredArgsConstructor
-public class AdminMemberController {
+public class AdminMemberController implements CommonProcess {
 
     private final HttpServletRequest request;
-    private final MemberInfoService memberInfoService;
     private final MemberSaveService memberSaveService;
     private final MemberListService memberListService;
-    private final JoinValidator joinValidator;
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
-    private final HttpSession session;
-    private final Utils utils;
     private final MemberDeleteService memberDeleteService;
-
-
-    private final ConfigSaveService configSaveService;
-    private final ConfigInfoService configInfoService;
 
     /**
      * 회원 목록
@@ -63,9 +53,10 @@ public class AdminMemberController {
     }
 
 
-    private void commonProcess(Model model, String title) {
+    public void commonProcess(Model model, String title) {
         String URI = request.getRequestURI();
 
+        model.addAttribute("menuCode", "member");
         // 서브 메뉴 처리
         String subMenuCode = GameMenus.getSubMenuCode(request);
         model.addAttribute("subMenuCode", subMenuCode);

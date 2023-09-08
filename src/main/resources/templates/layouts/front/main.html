@@ -26,7 +26,7 @@
 </head>
 <body>
 <header th:replace="~{outlines/front/header::common}"></header>
-<th:block th:replace="~{outlines/front/menu::frontMenu}"></th:block>
+<th:block th:replace="~{outlines/front/_menu::menu}"></th:block>
 <main layout:fragment="content">
     <th:block th:replace="~{outlines/front/submenu::menus}"></th:block>
 </main>

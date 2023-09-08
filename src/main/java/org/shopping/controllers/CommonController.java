@@ -1,7 +1,7 @@
 package org.shopping.controllers;
 
 import jakarta.servlet.http.*;
-import org.shopping.commons.CommonException;
+import org.shopping.commons.exception.CommonException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
