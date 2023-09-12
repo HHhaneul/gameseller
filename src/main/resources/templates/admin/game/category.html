@@ -6,33 +6,33 @@
     <h1 th:text="${pageTitle}"></h1>
     <form id="frmSave" name="frmSave" method="POST" th:action="@{/admin/game/category}" target="ifrmProcess" autocomplete="off">
         <input type="hidden" name="mode" value="add">
-        <table class="table-cols">
+        <table class="table-rows">
             <tr>
-                <th>분류코드</th>
+                <th width="100">분류코드</th>
                 <td width="200">
                     <input type="text" name="cateCd">
                 </td>
-                <th>분류명</th>
+                <th width="100">분류명</th>
                 <td width="250">
                     <input type="text" name="cateNm">
                 </td>
-                <th>사용여부</th>
-                <td>
+                <th width="100">사용여부</th>
+                <td width="180">
                     <input type="radio" name="use" value="true" id="use_true">
                     <label for="use_true">사용</label>
                     <input type="radio" name="use" value="false" id="use_false" checked>
                     <label for="use_false">미사용</label>
                 </td>
+                <td width="80">
+                    <button type="submit" class="sbtn">등록하기</button>
+                </td>
             </tr>
         </table>
-        <div class="submit_btn">
-            <button type="submit">등록하기</button>
-        </div>
     </form>
     <h2>게임 분류목록</h2>
     <form id="frmList" name="frmList" method="post" th:action="@{/admin/game/category}" target="ifrmProcess" autocomplete="off">
         <input type="hidden" name="mode" value="edit">
-        <table class=WK"table-rows">
+        <table class="table-rows">
             <thead>
                 <tr>
                     <th width="50">
@@ -41,8 +41,8 @@
                     </th>
                     <th width="200">분류코드</th>
                     <th width="250">분류명</th>
-                    <th width="300">사용여부</th>
-                    <th>진열가중치</th>
+                    <th width="100">사용여부</th>
+                    <th width="150">진열가중치</th>
                 </tr>
             </thead>
             <tbody>

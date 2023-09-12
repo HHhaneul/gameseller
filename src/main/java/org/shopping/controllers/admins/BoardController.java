@@ -82,7 +82,7 @@ public class BoardController implements CommonProcess, ScriptExceptionProcess {
 
     @GetMapping("/{bId}/update")
     public String update(@PathVariable String bId, Model model) {
-        commonProcess(model, "update");
+        commonProcess(model, "edit");
 
         Board board = boardConfigInfoService.get(bId, true);
         BoardForm boardForm = new ModelMapper().map(board, BoardForm.class);
