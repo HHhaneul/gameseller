@@ -30,11 +30,9 @@ public class MemberController implements CommonProcess {
     private final MemberSaveService saveService;
     private final JoinValidator joinValidator;
     private final MemberRepository memberRepository;
-    private final MemberInfoService infoService;
     private final HttpSession session;
     private final PasswordEncoder passwordEncoder;
     private final Utils utils;
-    private final MemberDeleteService memberDeleteService;
 
     @GetMapping("/join")
     public String join(@ModelAttribute JoinForm joinForm, Model model) {
@@ -188,5 +186,4 @@ public class MemberController implements CommonProcess {
         }
         return null;
     }
-
 }

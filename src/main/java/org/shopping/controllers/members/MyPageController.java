@@ -137,7 +137,7 @@ public class MyPageController implements CommonProcess {
         model.addAttribute("addScript", addScript);
 
         // 서브 메뉴 처리
-        model.addAttribute("subMenuCode", menuCode);
+        model.addAttribute("menuCode", menuCode);
 
         // 서브 메뉴 조회
         List<MenuDetail> submenus = FrontMenus.gets("myPage");
