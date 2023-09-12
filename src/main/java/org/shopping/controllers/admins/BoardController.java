@@ -155,7 +155,18 @@ public class BoardController implements CommonProcess, ScriptExceptionProcess {
 
         MemberBoardData memberboardData = memberBoardInfoService.get(id);
         model.addAttribute("memberBoardData", memberboardData);
-        model.addAttribute("pageTitle", memberboardData.getBoard().getBId());
+        model.addAttribute("pageTitle", memberboardData.getBoard().getBName());
+
+        String menuCode = GameMenus.getSubMenuCode(request);
+        System.out.println("메뉴코드" + menuCode);
+
+        model.addAttribute("menuCode", "board");
+        // 서브 메뉴 처리
+        model.addAttribute("subMenuCode", "posts");
+
+        // 서브 메뉴 조회
+        List<MenuDetail> submenus = GameMenus.gets("board");
+        model.addAttribute("submenus", submenus);
 
 
         return "admin/board/view";

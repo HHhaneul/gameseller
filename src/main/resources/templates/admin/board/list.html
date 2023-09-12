@@ -27,7 +27,7 @@
     <h1 th:text="${title}"></h1>
     <form name='frmList' method="post" th:action="@{/front/board}" autocomplete="off" target="ifrmProcess">
         <input type="hidden" name="_method" value="patch">
-        <table class="table-rows" th:each="item : ${items}">
+        <table class="table-rows" >
             <thead>
                 <tr>
                     <th>게시판명</th>
@@ -38,17 +38,15 @@
                     <th>IP</th>
                 </tr>
             </thead>
-            <tbody>
-                <th>
-                    <td>
-                        <a th:href="@{/admin/board/view/{id}(id=${item.id})}" th:text="${item.subject}"></a>
-                        <div class="post_info">
-                            <span th:text="${item.poster}"></span>
-                            <span th:text="${#temporals.format(item.createdAt, 'MM/dd')}"></span>
-                            <span th:text="${item.hit}"></span>
-                        </div>
-                    </td>
+            <tbody th:each="item : ${items}">
+                <td th:text="${item.board.bName}"></td>
+                <td width="500" th:href="@{/admin/board/view/{id}(id=${item.id})}" >
+                    <a th:href="@{/admin/board/view/{id}(id=${item.id})}" th:text="${item.subject}"></a>
                 </td>
+                <td th:text="${item.poster}"></td>
+                <td th:text="${#temporals.format(item.createdAt, 'MM/dd')}"></td>
+                <td th:text="${item.hit}"></td>
+                <td width="130" th:text="${item.ip}"></td>
             </tbody>
         </table>
         <div class="table-action">

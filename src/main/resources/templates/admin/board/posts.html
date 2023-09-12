@@ -40,26 +40,28 @@
                 <th width="300">제목</th>
                 <th width="300">글쓴이</th>
                 <th width="150">작성일</th>
-                <th></th>
+                <th>삭제일자</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item, status : ${items}">
-                <td align="center">
+            <tr th:each="item, status : ${items}" th:object="${item}">
+                <td >
                     <input type="checkbox" name="id" th:value="*{id}" th:id="${'id_' + status.index}">
                     <label th:for="${'id_' + status.index}"></label>
                 </td>
-                <td align="center" th:text="${item.board != null ? item.board.bId : ''}"></td>
-                <td align="center" th:text="${item.id}"></td>
-                <td align="center" th:text="${item.subject}"></td>
-                <td align="center" th:text="${item.poster}"></td>
-                <td align="center" th:text="${#temporals.format(item.createdAt, 'MM/dd')}"></td>
+                <td th:text="${item.board != null ? item.board.bId : ''}"></td>
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.subject}" th:if="${item.deletedAt == null}"></td>
+                <td th:text="${item.subject}" th:unless="${item.deletedAt == null}" th:attr="style='text-decoration: line-through;'"></td>
+                <td th:text="${item.poster}"></td>
+                <td th:text="${#temporals.format(item.createdAt, 'MM/dd')}"></td>
+                <td th:text="${item.deletedAt}"></td>
             </tr>
             </tbody>
         </table>
         <div class="table-action">
-            <button type="button" class="sbtn"> 수정하기</button>
             <button type="button" class="sbtn blue"> 삭제하기</button>
+            <button type="button" class="sbtn blue"> 완전삭제하기</button>
         </div>
     </form>
     <th:block th:replace="~{commons/_pagination::pagination}"></th:block>

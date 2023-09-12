@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 * { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: #fff; outline: none; }
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
-* { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; color: white; outline: none; }
 html { font-size: 13px; }
 ul, ol { list-style: none; margin:0; padding:0; }
 dl, dt, dd { margin:0; padding: 0; }
